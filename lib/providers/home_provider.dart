@@ -93,6 +93,7 @@ class HomeProvider extends ChangeNotifier {
     // TODO: Check not to be less than remaining amount
 
     monthList.salaryAmount = double.parse(value);
+    saveList(isPlan: true);
     notifyListeners();
   }
 
@@ -110,13 +111,14 @@ class HomeProvider extends ChangeNotifier {
     // TODO: Check not to be grater than remaining amount
 
     monthList.saveAmount = double.parse(value);
+    saveList(isPlan: true);
     notifyListeners();
   }
 
   changeExpensesAmount(String value, int i) {
     // TODO: Check not to be grater than remaining amount
     monthList.expences[i].amount = double.parse(value);
-
+    saveList(isPlan: true);
     reCalcExpSum();
     notifyListeners();
   }
@@ -124,12 +126,13 @@ class HomeProvider extends ChangeNotifier {
   changeExpensesType(String value, int i) {
     // TODO: Check not to be grater than remaining amount
     monthList.expences[i].type = value;
-
+    saveList(isPlan: true);
     notifyListeners();
   }
   changeCashAmount(value) {
     // TODO: Check not to be Less than remaining amount
     monthList.cashAmount = double.parse(value);
+    saveList(isPlan: true);
     notifyListeners();
   }
 
@@ -179,7 +182,7 @@ class HomeProvider extends ChangeNotifier {
     monthList.mounthlyAmount = 0.0;
     monthList.totalSave = 0.0;
     monthList.saveAmount = 0.0;
-
+    saveList(isPlan: true);
     reCalcExpSum();
     notifyListeners();
   }
@@ -305,7 +308,7 @@ class HomeProvider extends ChangeNotifier {
 
   removeExpense() {
     monthList.expences.removeWhere((element) => element.isSelect);
-
+    saveList(isPlan: true);
     reCalcExpSum();
     notifyListeners();
   }
@@ -475,6 +478,7 @@ class HomeProvider extends ChangeNotifier {
         element.id = id;
       }
     });
+    reCalcExpSum();
     notifyListeners();
   }
   // void saveNewToDB() async{

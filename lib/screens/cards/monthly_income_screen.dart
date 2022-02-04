@@ -57,7 +57,11 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
     // for (final controller in _textCont) {
     //   controller.dispose();
     // }
-    initialFileds();
+    if(Provider.of<HomeProvider>(context).monthList == null){
+
+    }else{
+      initialFileds();
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.Back_Ground_COLOR,
@@ -140,6 +144,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
       body: (Provider.of<HomeProvider>(context).monthList == null) ?
       CircularProgressIndicator()
           : Consumer<HomeProvider>(builder: (context, provider, x) {
+
         return Container(
           // height: MediaQuery.of(context).size.height,
           child: Column(
