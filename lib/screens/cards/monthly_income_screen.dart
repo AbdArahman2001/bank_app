@@ -91,9 +91,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                         provider.monthList.saveAmount +=
                             provider.getRemainingAmount();
                         Provider.of<HomeProvider>(context, listen: false)
-                            .saveList();
-                        Provider.of<HomeProvider>(context, listen: false)
-                            .savePlanList();
+                            .saveList(isPlan: true);
                         UserPreferences.instance.saveRoutName(TableOfSaralyScreen.routeName);
                         Navigator.pushReplacementNamed(
                             context, TableOfSaralyScreen.routeName);
@@ -102,9 +100,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                     });
                   } else {
                     Provider.of<HomeProvider>(context, listen: false)
-                        .saveList();
-                    Provider.of<HomeProvider>(context, listen: false)
-                        .savePlanList();
+                        .saveList(isPlan: true);
                     UserPreferences.instance
                         .saveRoutName(TableOfSaralyScreen.routeName);
                     UserPreferences.instance.saveRoutName(TableOfSaralyScreen.routeName);
@@ -141,7 +137,9 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
               // Navigator.pop(context);
             }),
       ),
-      body: Consumer<HomeProvider>(builder: (context, provider, x) {
+      body: (Provider.of<HomeProvider>(context).monthList == null) ?
+      CircularProgressIndicator()
+          : Consumer<HomeProvider>(builder: (context, provider, x) {
         return Container(
           // height: MediaQuery.of(context).size.height,
           child: Column(

@@ -29,13 +29,22 @@ class HomeProvider extends ChangeNotifier {
   void initDataBase() async{
     var dbM = await _dbController.read();
     var exs = await _dbEController.read();
-    exs.forEach((element) {
+
+    dbM.forEach((element) {
+      print("ids monthly");
       print(element.id);
+      // print(element.salaryDate);
+    });
+    exs.forEach((element) {
+      print("initialises expenses");
+      print(element.init);
       // print(element.salaryDate);
     });
     print('read monthList');
     if(dbM.length > 0){
+
       print('monthList exist');
+      print(dbM[0].totalCash);
       monthList = dbM[0];
       monthList.expences = exs;
     }else{
@@ -57,6 +66,7 @@ class HomeProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   SingingCharacter character = SingingCharacter.Arabic;
   // DateTime salaryDate;
   MonthList monthList;
@@ -151,6 +161,7 @@ class HomeProvider extends ChangeNotifier {
     reverse = {"type": "cash", "index": 0, "old_value": monthList.totalCash};
     monthList.totalCash += double.parse(value);
     saveList();
+
     notifyListeners();
   }
 
@@ -184,7 +195,7 @@ class HomeProvider extends ChangeNotifier {
     reCalcExpSum();
     notifyListeners();
   }
-  newMonth() {
+  Future newMonth() async{
     // monthList.expences.forEach((element) {
     //   element.total = 0.0;
     // });
@@ -194,8 +205,9 @@ class HomeProvider extends ChangeNotifier {
     // monthList.totalSave = 0.0;
 
     // reCalcExpSum();
-    monthList = UserPreferences.instance.getPlanList();
-    resetTotalValues();
+    await resetTotalValues();
+    // monthList = UserPreferences.instance.getPlanList();
+    saveList(isNew: true);
     notifyListeners();
   }
 
@@ -379,17 +391,20 @@ class HomeProvider extends ChangeNotifier {
       "lang": "ar",
       "salaryDate": null,
       "salaryAmount": 0.0,
+      "salaryInit": 0.0,
       "totalCash": 0.0,
       "cashAmount": 0.0,
+      "cashInit": 0.0,
       "sumExpencesAmount": 0.0,
       "sumTotalExpences": 0.0,
       "totalMonthly": 0.0,
       "mounthlyAmount": 0.0,
       "totalSave": 0.0,
       "saveAmount": 0.0,
+      "saveInit": 0.0,
       "expences": [
-        {"id": 1, "type": null, "amount": 0.0, "total": 0.0, "isSelect": false},
-        {"id": 2, "type": null, "amount": 0.0, "total": 0.0, "isSelect": false}
+        {"id": 1, "type": null, "init": 0.0, "amount": 0.0, "total": 0.0, "isSelect": false},
+        {"id": 2, "type": null, "init": 0.0,"amount": 0.0, "total": 0.0, "isSelect": false}
       ]
     });
   }
@@ -398,26 +413,101 @@ class HomeProvider extends ChangeNotifier {
    * save list
    *
    */
-  void saveList() async{
+  void saveList({bool isNew = false, bool isPlan = false}) async{
     /// TODO: save language to shared pref
     // UserPreferences.instance.saveList(monthList);
     /// TODO: save monthlost to DB
-    saveToDB();
+    if(isPlan){
+      savePlanToDB();
+    }else if(isNew) {
+      saveNewToDB();
+    }else{
+      saveToDB();
+    }
+
   }
   void saveToDB() async{
+    print("regular save start");
+    print(monthList.totalCash);
     bool updated = await _dbController.update(monthList);
-    if(updated){
+    if (updated) {
       print("monthlist updated");
     }
-    monthList.expences.forEach((element) async{
+    await _dbEController.deleteAll();
+    monthList.expences.forEach((element) async {
       updated = await _dbEController.update(element);
-      if(updated){
-
-      }else{
+      if (updated) {
+      } else {
         var id = await _dbEController.create(element);
         element.id = id;
       }
     });
+
+    var dbM = await _dbController.read();
+
+    print('read monthList');
+    if(dbM.length > 0){
+      print("from saveToDB id");
+      print(dbM[0].id);
+      dbM.forEach((element) {
+
+        print("from loop id");
+        print(element.id);
+      });
+    }
+  }
+  void saveNewToDB() async{
+    print("New month save start");
+      monthList.salaryAmount = monthList.salaryInit;
+      monthList.saveAmount = monthList.saveInit;
+      monthList.cashAmount = monthList.cashInit;
+    bool updated = await _dbController.update(monthList);
+    if (updated) {
+      print("monthlist updated");
+    }
+    await _dbEController.deleteAll();
+    monthList.expences.forEach((element) async {
+            element.amount = element.init;
+      updated = await _dbEController.update(element);
+      if (updated) {
+      } else {
+        var id = await _dbEController.create(element);
+        element.id = id;
+      }
+    });
+    notifyListeners();
+  }
+  // void saveNewToDB() async{
+  //   await _dbController.deleteAll();
+  //   await _dbEController.deleteAll();
+  //   monthList.salaryAmount = monthList.salaryInit;
+  //   monthList.saveAmount = monthList.saveInit;
+  //   monthList.cashAmount = monthList.cashInit;
+  //   int newId = await _dbController.create(monthList);
+  //   if (newId != 0) {
+  //     monthList.expences.forEach((element) async {
+  //       element.amount = element.init;
+  //         var id = await _dbEController.create(element);
+  //         element.id = id;
+  //     });
+  //   }
+  // }
+  void savePlanToDB() async{
+    print("plan save start");
+    await _dbController.deleteAll();
+    await _dbEController.deleteAll();
+    monthList.salaryInit = monthList.salaryAmount;
+    monthList.saveInit = monthList.saveAmount;
+    monthList.cashInit = monthList.cashAmount;
+    int newId = await _dbController.create(monthList);
+    if (newId != 0) {
+      monthList.id = newId;
+      monthList.expences.forEach((element) async {
+        element.init = element.amount;
+          var id = await _dbEController.create(element);
+          element.id = id;
+      });
+    }
   }
   void savePlanList() async {
     await resetTotalValues();
@@ -444,7 +534,7 @@ class HomeProvider extends ChangeNotifier {
     return (to.difference(from).inHours / 24).round();
   }
 
-  void addAdditionalValue(double addedValue, int currentItemSelected1) {
+  void addAdditionalValue(double addedValue, int currentItemSelected1, {bool save = true}) {
     if (currentItemSelected1 == 0) {
       monthList.saveAmount += addedValue;
     } else if (currentItemSelected1 == 1) {
@@ -453,6 +543,8 @@ class HomeProvider extends ChangeNotifier {
       monthList.expences[currentItemSelected1 - 2].amount += addedValue;
       reCalcExpSum();
     }
+    if(save)
+      saveList();
     notifyListeners();
   }
 
@@ -472,8 +564,9 @@ class HomeProvider extends ChangeNotifier {
 
   void transfareAmount(
       int fromCurrentItemSelected, int toCurrentItemSelected, double value) {
-    addAdditionalValue(value * -1, fromCurrentItemSelected);
-    addAdditionalValue(value, toCurrentItemSelected);
+    addAdditionalValue(value * -1, fromCurrentItemSelected,save: false);
+    addAdditionalValue(value, toCurrentItemSelected,save: false);
+    saveList();
     notifyListeners();
   }
 

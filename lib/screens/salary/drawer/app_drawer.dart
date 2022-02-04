@@ -87,7 +87,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             }).then((value) async {
                           if (value is bool && value) {
                             await provider.newMonth();
-                            provider.saveList();
                             UserPreferences.instance
                                 .saveRoutName(MonthlyIncomeScreen.routeName);
                             Navigator.pushReplacementNamed(

@@ -20,6 +20,8 @@ class MonthListDbController extends DbOperations<MonthList> {
     // TODO: implement update
     int countOfUpdatedRows = await _database.update(MonthList.TABLE_NAME, data.toMap(),
         where: 'id = ?', whereArgs: [data.id]);
+    print("from update id");
+    print(data.id);
     return countOfUpdatedRows > 0;
   }
 
@@ -41,6 +43,12 @@ class MonthListDbController extends DbOperations<MonthList> {
     return deleteRowsCount != 0;
   }
 
+  Future<void> deleteAll() async {
+    // TODO: implement delete
+    await _database
+        .execute("delete from monthList");
+    return true;
+  }
   @override
   Future<MonthList> show(int id) async {
     // TODO: implement show

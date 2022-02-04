@@ -1,17 +1,21 @@
 import 'package:bank_app_flutter/model/db_table.dart';
+import 'package:flutter/material.dart';
 class MonthList extends DbTable{
   int id;
   String lang;
   String salaryDate;
   double salaryAmount;
+  double salaryInit = 0;
   double totalCash;
   double cashAmount;
+  double cashInit = 0;
   double sumExpencesAmount;
   double sumTotalExpences;
   double totalMonthly;
   double mounthlyAmount;
   double totalSave;
   double saveAmount;
+  double saveInit = 0;
   int expencessId;
   static const TABLE_NAME = 'monthList';
   List<Expences> expences;
@@ -33,14 +37,17 @@ class MonthList extends DbTable{
     lang = json['lang'];
     salaryDate = json['salaryDate'];
     salaryAmount = json['salaryAmount'];
+    salaryInit = json['salaryInit'];
     totalCash = json['totalCash'];
     cashAmount = json['cashAmount'];
+    cashInit = json['cashInit'];
     sumExpencesAmount = json['sumExpencesAmount'];
     sumTotalExpences = json['sumTotalExpences'];
     totalMonthly = json['totalMonthly'];
     mounthlyAmount = json['mounthlyAmount'];
     totalSave = json['totalSave'];
     saveAmount = json['saveAmount'];
+    saveInit = json['saveInit'];
     if (json['expences'] != null) {
       expences = new List<Expences>();
       json['expences'].forEach((v) {
@@ -54,14 +61,17 @@ class MonthList extends DbTable{
     data['lang'] = this.lang;
     data['salaryDate'] = this.salaryDate;
     data['salaryAmount'] = this.salaryAmount;
+    data['salaryInit'] = this.salaryInit;
     data['totalCash'] = this.totalCash;
     data['cashAmount'] = this.cashAmount;
+    data['cashInit'] = this.cashInit;
     data['sumExpencesAmount'] = this.sumExpencesAmount;
     data['sumTotalExpences'] = this.sumTotalExpences;
     data['totalMonthly'] = this.totalMonthly;
     data['mounthlyAmount'] = this.mounthlyAmount;
     data['totalSave'] = this.totalSave;
     data['saveAmount'] = this.saveAmount;
+    data['saveInit'] = this.saveInit;
     if (this.expences != null) {
       data['expences'] = this.expences.map((v) => v.toJson()).toList();
     }
@@ -79,14 +89,17 @@ class MonthList extends DbTable{
     lang = rowMap['lang'];
     salaryDate = rowMap['salaryDate'];
     salaryAmount = rowMap['salaryAmount'].toDouble();
+    salaryInit = rowMap['salaryInit'].toDouble();
     totalCash = rowMap['totalCash'].toDouble();
     cashAmount = rowMap['cashAmount'].toDouble();
+    cashInit = rowMap['cashInit'].toDouble();
     sumExpencesAmount = rowMap['sumExpencesAmount'].toDouble();
     sumTotalExpences = rowMap['sumTotalExpences'].toDouble();
     totalMonthly = rowMap['totalMonthly'].toDouble();
     mounthlyAmount = rowMap['mounthlyAmount'].toDouble();
     totalSave = rowMap['totalSave'].toDouble();
     saveAmount = rowMap['saveAmount'].toDouble();
+    saveInit = rowMap['saveInit'].toDouble();
     expencessId = rowMap['expences_Id'];
     id = rowMap['id'];
 
@@ -97,14 +110,17 @@ class MonthList extends DbTable{
    map['lang'] = lang;
    map['salaryDate'] = salaryDate;
    map['salaryAmount'] = salaryAmount;
+   map['salaryInit'] = salaryInit;
    map['totalCash'] = totalCash;
    map['cashAmount'] = cashAmount;
+   map['cashInit'] = cashInit;
    map['sumExpencesAmount'] = sumExpencesAmount;
    map['sumTotalExpences'] = sumTotalExpences;
    map['totalMonthly'] = totalMonthly;
    map['mounthlyAmount'] = mounthlyAmount;
    map['totalSave'] = totalSave;
    map['saveAmount'] = saveAmount;
+   map['saveInit'] = saveInit;
    map['expences_Id'] = expencessId;
 
    return map;
@@ -114,6 +130,7 @@ class MonthList extends DbTable{
 class Expences  extends DbTable{
   int id;
   String type;
+  double init = 0;
   double amount;
   double total;
   bool isSelect=false;
@@ -125,6 +142,7 @@ class Expences  extends DbTable{
     id = json['id'];
     type = json['type'];
     amount = json['amount'];
+    init = json['init'];
     total = json['total'];
     isSelect = json['isSelect'];
   }
@@ -134,6 +152,7 @@ class Expences  extends DbTable{
     data['id'] = this.id;
     data['type'] = this.type;
     data['amount'] = this.amount;
+    data['init'] = this.init;
     data['total'] = this.total;
     data['isSelect'] = this.isSelect;
     return data;
@@ -142,6 +161,7 @@ Expences.fromMap(Map<String, dynamic> rowMap) : super.fromMap(rowMap)  {
     id = rowMap['id'];
     type = rowMap['type'];
     amount = rowMap['amount'].toDouble();
+    init = rowMap['init'].toDouble();
     total = rowMap['total'].toDouble();
     // isSelect = rowMap['isSelect'];
   }
@@ -150,6 +170,7 @@ Expences.fromMap(Map<String, dynamic> rowMap) : super.fromMap(rowMap)  {
     final Map<String, dynamic> data =  Map<String, dynamic>();
     data['type'] = type;
     data['amount'] = amount;
+    data['init'] = init;
     data['total'] = total;
     // data['isSelect'] = isSelect;
     return data;

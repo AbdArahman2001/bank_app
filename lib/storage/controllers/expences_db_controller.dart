@@ -48,6 +48,12 @@ class ExpencesDbController extends DbOperations<Expences> {
         .delete(Expences.TABLE_NAME, where: 'id = ?', whereArgs: [id]);
     return deleteRowsCount != 0;
   }
+  Future<void> deleteAll() async {
+    // TODO: implement delete
+    await _database
+        .execute("delete from Expences");
+    return true;
+  }
 
   @override
   Future<Expences> show(int id) {

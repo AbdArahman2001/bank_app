@@ -74,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Consumer<HomeProvider>(builder: (context, provider, x) {
+      body: (Provider.of<HomeProvider>(context).monthList == null) ?
+      CircularProgressIndicator()
+          : Consumer<HomeProvider>(builder: (context, provider, x) {
         return Container(
           padding: EdgeInsets.only(left: 16, right: 16, top: 22),
           width: MediaQuery.of(context).size.width,
