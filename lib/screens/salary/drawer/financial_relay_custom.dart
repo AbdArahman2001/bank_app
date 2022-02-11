@@ -31,7 +31,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
         .monthList
         .expences
         .forEach((e) {
-      expences.add([e.id.toString(), e.type]);
+      expences.add([e.sirial.toString(), e.type]);
     });
     // expences = Provider.of<HomeProvider>(context,listen: false).monthList.expences.map((e) => [e.id,e.type]).toList();
     _currencies.addAll(expences);

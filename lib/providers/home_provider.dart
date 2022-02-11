@@ -30,14 +30,14 @@ class HomeProvider extends ChangeNotifier {
     var dbM = await _dbController.read();
     var exs = await _dbEController.read();
 
+    print("ids monthly");
     dbM.forEach((element) {
-      print("ids monthly");
       print(element.id);
       // print(element.salaryDate);
     });
+    print("initialises expenses");
     exs.forEach((element) {
-      print("initialises expenses");
-      print(element.init);
+      print(element.toString());
       // print(element.salaryDate);
     });
     print('read monthList');
@@ -54,8 +54,10 @@ class HomeProvider extends ChangeNotifier {
         print('create monthList');
         monthList.id = newId;
         int newEId = 0;
+
+        print('create expenses');
         monthList.expences.forEach((expences) async{
-          
+          print(expences.toString());
           newEId = await _dbEController.create(expences);
           if (newEId != 0) {
             // TODO: is it gurantee monthList.expences[?].id changed?????
@@ -64,6 +66,7 @@ class HomeProvider extends ChangeNotifier {
         });
       }
     }
+    reCalcExpSum();
     notifyListeners();
   }
 
@@ -438,6 +441,8 @@ class HomeProvider extends ChangeNotifier {
     }
     await _dbEController.deleteAll();
     monthList.expences.forEach((element) async {
+
+      print(element.toString());
       updated = await _dbEController.update(element);
       if (updated) {
       } else {
@@ -470,6 +475,7 @@ class HomeProvider extends ChangeNotifier {
     }
     await _dbEController.deleteAll();
     monthList.expences.forEach((element) async {
+      print(element.toString() );
             element.amount = element.init;
       updated = await _dbEController.update(element);
       if (updated) {
@@ -507,6 +513,7 @@ class HomeProvider extends ChangeNotifier {
     if (newId != 0) {
       monthList.id = newId;
       monthList.expences.forEach((element) async {
+        print(element.toString());
         element.init = element.amount;
           var id = await _dbEController.create(element);
           element.id = id;

@@ -128,6 +128,8 @@ class MonthList extends DbTable{
 }
 
 class Expences  extends DbTable{
+  static int count = 1;
+  int sirial;
   int id;
   String type;
   double init = 0;
@@ -136,8 +138,7 @@ class Expences  extends DbTable{
   bool isSelect=false;
   static const TABLE_NAME = 'Expences';
 
-  Expences({this.id, this.type, this.amount, this.total,this.isSelect});
-
+  Expences({this.id, this.type, this.amount, this.total,this.isSelect}) ;
   Expences.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
@@ -158,6 +159,8 @@ class Expences  extends DbTable{
     return data;
   }
 Expences.fromMap(Map<String, dynamic> rowMap) : super.fromMap(rowMap)  {
+    sirial = count;
+    count++;
     id = rowMap['id'];
     type = rowMap['type'];
     amount = rowMap['amount'].toDouble();
@@ -175,5 +178,9 @@ Expences.fromMap(Map<String, dynamic> rowMap) : super.fromMap(rowMap)  {
     // data['isSelect'] = isSelect;
     return data;
   }
-
+@override
+  String toString() {
+    // TODO: implement toString
+    return 'type: ${this.type} init: ${this.init} amount:${this.amount}';
+  }
 }
