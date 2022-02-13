@@ -11,7 +11,6 @@ enum SingingCharacter { Arabic, English }
 
 class HomeProvider extends ChangeNotifier {
 
-
   HomeProvider() {
 
     print("provider initilized");
@@ -232,6 +231,7 @@ class HomeProvider extends ChangeNotifier {
         monthList.totalCash = reverse["old_value"];
         break;
     }
+    saveList();
     notifyListeners();
   }
 
