@@ -64,10 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
               }else {
                 Provider.of<HomeProvider>(context, listen: false).saveList();
                 UserPreferences.instance.saveRoutName(MonthlyIncomeScreen.routeName);
-                Navigator.push(
+                Navigator.pushReplacementNamed(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => MonthlyIncomeScreen()),
+                    MonthlyIncomeScreen.routeName
                 );
               }
             },

@@ -132,12 +132,14 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  HomeScreen.routeName,
-                  (route) => route.isCurrent &&
-                          route.settings.name == HomeScreen.routeName
-                      ? false
-                      : true);
+              Navigator.pushReplacementNamed(
+                  context, HomeScreen.routeName);
+              // Navigator.of(context).pushNamedAndRemoveUntil(
+              //     HomeScreen.routeName,
+              //     (route) => route.isCurrent &&
+              //             route.settings.name == HomeScreen.routeName
+              //         ? false
+              //         : true);
               // Navigator.pop(context);
             }),
       ),
