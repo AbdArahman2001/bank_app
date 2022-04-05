@@ -1,11 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:bank_app_flutter/prefs/UserPreferences.dart';
-import 'package:bank_app_flutter/screens/cards/cards_screen.dart';
-import 'package:bank_app_flutter/screens/cards/custom/delete_custom_dialog.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/custom/reminder_custom_dialog.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/star_red_custom.dart';
 import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -13,9 +12,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'dart:math' as math;
 
 import '../home_screen.dart';
+import 'custom/delete_custom_dialog.dart';
 
 enum SelectedRow { yes, no }
 
@@ -63,35 +62,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
     "3- بطاقة بنكية",
     "أخرى"
   ];
-List arabicExpenses = [
 
-  "Clothes",
-  "Hair cut salon",
-  "Female player",
-  "Restaurants",
-  "Coffee shop",
-  "Sued",
-  "Rent",
-  "Internet",
-  "Electricity",
-  "Water",
- "Mobile bill",
- "School expenses",
-  "School supplies",
-  "Petrol",
-  "Oil",
-  "Laundry",
-  "Spare parts",
-  "Maintenance",
-  "Irregularities",
-  "Club subscription",
-  "Entertainment",
-  "Taxi",
-  "1- A bank card",
-  "2- A bank card",
-  "3- A bank card",
-  "Other"
-];
 
   @override
   void initState() {
@@ -249,8 +220,14 @@ List arabicExpenses = [
                                       onTap: () {
                                         showDialog(
                                             context: context,
+
                                             builder: (BuildContext context) {
-                                              return CalculateScreen();
+                                              return CalculateScreen("Salary".tr(),
+                                                  provider
+                                                      .monthList
+                                                      .salaryAmount,
+                                                  0,
+                                                  false);
                                             }).then((value) {
                                           // TODO: show error message if amount not correct
                                           if (value == null) {
@@ -515,6 +492,7 @@ List arabicExpenses = [
                           SizedBox(
                             height: 3,
                           ),
+
                           /// devider ///
                           // Container(
                           //   height: 1.0,
@@ -636,17 +614,13 @@ List arabicExpenses = [
                                                 child: Text(
                                                   "Enter the value \n of the savings"
                                                       .tr(),
-                                                  textAlign:
-                                                  TextAlign.center,
+                                                  textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
-                                                      FontWeight
-                                                          .w500,
-                                                      fontFamily:
-                                                      'Tajawal',
-                                                      color:
-                                                      Colors.white),
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Tajawal',
+                                                      color: Colors.white),
                                                 ),
                                               ),
                                             ),
@@ -711,7 +685,16 @@ List arabicExpenses = [
                                                     context: context,
                                                     builder:
                                                         (BuildContext context) {
-                                                      return CalculateScreen();
+                                                      return CalculateScreen("Save".tr(),provider
+                                                          .getRemainingAmount() +
+                                                          provider.monthList
+                                                              .saveAmount,provider
+                                                          .getRemainingAmount() +
+                                                          provider.monthList
+                                                              .saveAmount-provider
+                                                          .getRemainingAmount() +
+                                                          provider.monthList
+                                                              .totalSave,false);
                                                     }).then((value) {
                                                   // TODO: show error message if amount not correct
                                                   if (value == null) {
@@ -758,19 +741,34 @@ List arabicExpenses = [
                                                                   10)),
                                                 ),
                                                 child: Center(
-                                                  child: Text(
-                                                    NumberFormat('###,##0.00')
-                                                        .format(provider
-                                                            .monthList
-                                                            .saveAmount),
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontFamily: "Segoe UI",
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
+                                                  child: provider.monthList
+                                                              .saveAmount ==
+                                                          0
+                                                      ? Text("أدخل القيمة +",
+                                                          style: TextStyle(
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  'Tajawal',
+                                                              color:
+                                                                  Colors.red))
+                                                      : Text(
+                                                          NumberFormat(
+                                                                  '###,##0.00')
+                                                              .format(provider
+                                                                  .monthList
+                                                                  .saveAmount),
+                                                          style: TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontFamily:
+                                                                "Segoe UI",
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
                                                 ),
                                               ),
                                             ),
@@ -812,7 +810,9 @@ List arabicExpenses = [
                               ),
                             ),
                           ),
-                          SizedBox(height: 3,),
+                          SizedBox(
+                            height: 3,
+                          ),
                           Row(children: [
                             // GestureDetector(
                             //     child: Container(
@@ -928,8 +928,7 @@ List arabicExpenses = [
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontSize: 13,
-                                                  fontWeight:
-                                                  FontWeight.w500,
+                                                  fontWeight: FontWeight.w500,
                                                   fontFamily: 'Tajawal',
                                                   color: Colors.white),
                                             ),
@@ -1024,7 +1023,9 @@ List arabicExpenses = [
                                                           ? 0
                                                           : 10),
                                                     ),
-                                                    color: i %2 == 0 ?  AppColors.bg1_COLOR: AppColors.bg_COLOR,
+                                                    color: i % 2 == 0
+                                                        ? AppColors.bg1_COLOR
+                                                        : AppColors.bg_COLOR,
                                                   ),
                                                   children: [
                                                     SizedBox(
@@ -1102,14 +1103,15 @@ List arabicExpenses = [
                                                                     value, i);
                                                         });
                                                       },
-                                                      child:  Container(
+                                                      child: Container(
                                                         height: 40,
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
-                                                          BorderRadius.only(
-                                                              bottomLeft:
-                                                              Radius.circular(
-                                                                  10)),
+                                                              BorderRadius.only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          10)),
                                                         ),
                                                         child: Center(
                                                           child: Text(
@@ -1118,7 +1120,12 @@ List arabicExpenses = [
                                                                         .expences[
                                                                             i]
                                                                         .type ==
-                                                                    null)
+                                                                    null || provider
+                                                                .monthList
+                                                                .expences[
+                                                            i]
+                                                                .type ==
+                                                                "")
                                                                 ? "Enter the item name"
                                                                     .tr()
                                                                 : provider
@@ -1139,7 +1146,12 @@ List arabicExpenses = [
                                                                             .expences[
                                                                                 i]
                                                                             .type ==
-                                                                        null)
+                                                                        null|| provider
+                                                                    .monthList
+                                                                    .expences[
+                                                                i]
+                                                                    .type ==
+                                                                    "")
                                                                     ? Colors.red
                                                                     : AppColors
                                                                         .Text_Table_COLOR),
@@ -1174,7 +1186,26 @@ List arabicExpenses = [
                                                               builder:
                                                                   (BuildContext
                                                                       context) {
-                                                                return CalculateScreen();
+                                                                return CalculateScreen(provider
+                                                                    .monthList
+                                                                    .expences[
+                                                                i]
+                                                                    .type,
+                                                                    provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                    i]
+                                                                        .amount,
+                                                                    provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                    i]
+                                                                        .amount - provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                    i]
+                                                                        .total,
+                                                                false);
                                                               }).then((value) {
                                                             // TODO: show error message if amount not correct
                                                             if (value == null) {
@@ -1220,39 +1251,58 @@ List arabicExpenses = [
                                                           });
                                                         },
                                                         child: Container(
-                                                          decoration: BoxDecoration(
+                                                          decoration:
+                                                              BoxDecoration(
                                                             borderRadius:
-                                                            BorderRadius.only(
-                                                                bottomLeft:
-                                                                Radius.circular(
-                                                                    10)),
+                                                                BorderRadius.only(
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            10)),
                                                           ),
                                                           child: Center(
-                                                            child: Text(
-                                                              //"أدخل القيم +",
-                                                              NumberFormat(
-                                                                      '###,##0.00')
-                                                                  .format(provider
-                                                                      .monthList
-                                                                      .expences[
-                                                                          i]
-                                                                      .amount),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: TextStyle(
-                                                                  fontSize: 13,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontFamily:
-                                                                      'Tajawal',
-                                                                 // color: provider.monthList.expences[i].amount == null ? Colors.red : Colors.black,
+                                                            child: provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                            i]
+                                                                        .amount ==
+                                                                    0
+                                                                ? Text(
+                                                                    "أدخل القيمة +",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            13,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w500,
+                                                                        fontFamily:
+                                                                            'Tajawal',
+                                                                        color: Colors
+                                                                            .red))
+                                                                : Text(
+                                                                    //"أدخل القيم +",
+                                                                    NumberFormat('###,##0.00').format(provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                            i]
+                                                                        .amount),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontFamily:
+                                                                          'Tajawal',
+                                                                      // color: provider.monthList.expences[i].amount == null ? Colors.red : Colors.black,
 
-                                                                  color: AppColors
-                                                                      .Text_Table_COLOR,
-                                                              ),
-                                                            ),
+                                                                      color: AppColors
+                                                                          .Text_Table_COLOR,
+                                                                    ),
+                                                                  ),
                                                           ),
                                                         ),
                                                       ),
@@ -1274,6 +1324,7 @@ List arabicExpenses = [
                                                       .size
                                                       .width /
                                                   10,
+
                                               /// close ///
                                               // GestureDetector(
                                               //                                                     //   onTap: () {
@@ -1316,51 +1367,34 @@ List arabicExpenses = [
                                               //                                                     //   ),
                                               //                                                     // ),
                                               child: Center(
-                                                child:  Checkbox(
-                                                  shape: CircleBorder(),
-                                                  tristate: false,
-                                                  // splashRadius: 30,
-                                                  checkColor: Colors.white,
-                                                  activeColor:
-                                                  AppColors.MAIN_COLOR,
-                                                  value: provider.monthList
-                                                      .expences[i].isSelect,
-                                                  onChanged: (value) {
-                                                    provider
-                                                        .monthList
-                                                        .expences[i]
-                                                        .isSelect =
-                                                    !provider
-                                                        .monthList
-                                                        .expences[i]
-                                                        .isSelect;
-                                                    provider.printList();
-                                                    provider
-                                                        .notifyListeners();
+                                                child: GestureDetector(
+                                                  onTap: () {
                                                     showDialog(
                                                         context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                        context) {
+                                                        builder: (BuildContext
+                                                            context) {
                                                           return DeleteCustomDialog();
                                                         }).then((value) async {
                                                       if (value is bool &&
                                                           value) {
                                                         provider
-                                                            .changeDeleteEnable();
-
+                                                            .monthList
+                                                            .expences[i]
+                                                            .isSelect = true;
                                                         await provider
                                                             .removeExpense();
                                                         initialFileds();
                                                       }
-                                                      ;
                                                     });
                                                   },
-                                                  // controlAffinity: ListTileControlAffinity
-                                                  //     .leading, //  <-- leading Checkbox
+                                                  child: Image(
+                                                    image: AssetImage(
+                                                        "assets/images/close.png"),
+                                                  ),
                                                 ),
                                               ),
                                             ),
+
                                         ]),
                                       ],
                                     ),

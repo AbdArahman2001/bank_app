@@ -24,7 +24,7 @@ class AllNumbersCustom extends StatelessWidget {
               SizedBox(width: 5,),
               Expanded(child: Numbers_Custom("3", () => provider.setNumber("3"))),
               SizedBox(width: 5,),
-              Expanded(child: Numbers_Custom("=", () => provider.setNumber("="))),
+              Expanded(child: Numbers_Custom("=", () => provider.evalEquation())),
               SizedBox(width: 5,),
 
 
@@ -74,7 +74,7 @@ class AllNumbersCustom extends StatelessWidget {
               SizedBox(width: 5,),
               Expanded(child: Numbers_Custom("6", () => provider.setNumber("6"))),
               SizedBox(width: 5,),
-              Expanded(child: Numbers_Custom("+", () => provider.setNumber("+"))),
+              Expanded(child: Numbers_Custom("+", () => provider.addOp("+"))),
               SizedBox(width: 5,),
             ],
           ),
@@ -91,7 +91,7 @@ class AllNumbersCustom extends StatelessWidget {
               SizedBox(width: 5,),
               Expanded(child: Numbers_Custom("9", () => provider.setNumber("9"))),
               SizedBox(width: 5,),
-              Expanded(child: Numbers_Custom("-", () => provider.setNumber("-"))),
+              Expanded(child: Numbers_Custom("-", () => provider.addOp("-"))),
               SizedBox(width: 5,),
             ],
           ),
@@ -106,7 +106,7 @@ class AllNumbersCustom extends StatelessWidget {
               SizedBox(width: 5,),
               Expanded(child: Numbers_Custom("0", () => provider.setNumber("0"))),
               SizedBox(width: 5,),
-              Expanded(child: Numbers_Custom("C", () => provider.setNumber("C"))),
+              Expanded(child: Numbers_Custom("C", () => provider.clearNumber())),
               SizedBox(width: 5,),
               Expanded(
                 child: GestureDetector(

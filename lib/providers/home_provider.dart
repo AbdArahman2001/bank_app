@@ -6,6 +6,7 @@ import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 enum SingingCharacter { Arabic, English }
 
@@ -337,17 +338,45 @@ class HomeProvider extends ChangeNotifier {
    *
    */
   String result = "0";
+  String tNumber = "0";
+  String equation = "0";
   setNumber(String number) {
-    var after = result.split(".");
-    if (result == "0" && number != ".") {
-      result = number;
+    var after = tNumber.split(".");
+    if (equation == "0" && number != ".") {
+      tNumber = number;
+      equation = number;
+      evalEquation();
     } else if ((after.length < 2 && number != "." && after[0].length > 7) ||
         (after.length > 1 && (after[1].length > 1 || number == "."))) {
     } else {
-      result = result + number;
+      tNumber = tNumber + number;
+      equation = equation + number;
+      evalEquation();
     }
-
     notifyListeners();
+  }
+  // setNumber(String number) {
+  //   var after = result.split(".");
+  //   if (result == "0" && number != ".") {
+  //     result = number;
+  //     equation = number;
+  //   } else if ((after.length < 2 && number != "." && after[0].length > 7) ||
+  //       (after.length > 1 && (after[1].length > 1 || number == "."))) {
+  //   } else {
+  //     result = result + number;
+  //     equation = equation + number;
+  //     evalEquation();
+  //  }
+  //  notifyListeners();
+  // }
+  evalEquation(){
+    Parser p = Parser();
+    ContextModel cm = ContextModel();
+    Expression exp = p.parse(equation);
+    tNumber = "0";
+    result = exp.evaluate(EvaluationType.REAL, cm).toString();
+    print(exp);
+    print(exp.evaluate(EvaluationType.REAL, cm));
   }
 
   getClacResult() {
@@ -362,14 +391,38 @@ class HomeProvider extends ChangeNotifier {
 
   clearNumber() {
     result = "0";
+    equation = "0";
+    tNumber = "0";
     notifyListeners();
   }
 
   clearOnesNumber() {
-    result = result.substring(0, result.length - 1);
+    Parser p = Parser();
+    ContextModel cm = ContextModel();
+
+    equation = equation.substring(0, equation.length - 1);
+    if(equation.length == 0){
+      equation = "0";
+      tNumber = "0";
+      result = "0";
+    }else if(equation[equation.length -1] == '+' || equation[equation.length -1] == '-' || equation[equation.length -1] == '.'){
+      Expression exp = p.parse(equation.substring(0, equation.length - 1));
+      result = exp.evaluate(EvaluationType.REAL, cm).toString();
+    }else{
+      evalEquation();
+    }
     notifyListeners();
   }
+  addOp(String op){
+    if(equation == "0"){
 
+    }else if(equation[equation.length -1] == '+' || equation[equation.length -1] == '-'){
+
+    }else{
+      equation = equation + op;
+    }
+    notifyListeners();
+  }
   /*
    * Languages
    *

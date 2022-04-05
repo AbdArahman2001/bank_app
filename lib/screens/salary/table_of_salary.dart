@@ -501,7 +501,16 @@ return Scaffold(
                                         maxWidth:  MediaQuery.of(context).size.width,
                                       ),
                                       builder: (BuildContext context) {
-                                        return CalculateScreen();
+                                        return CalculateScreen("Save".tr(),provider
+                                            .getRemainingAmount() +
+                                            provider.monthList
+                                                .saveAmount,provider
+                                            .getRemainingAmount() +
+                                            provider.monthList
+                                                .saveAmount-provider
+                                            .getRemainingAmount() +
+                                            provider.monthList
+                                                .totalSave,true);
                                       }).then((value) {
                                     //TODO: show yes no to add reminder amount to save amount
                                     if (value == null) {
@@ -545,7 +554,21 @@ return Scaffold(
                                             10)),
                                   ),
                                   child: Center(
-                                    child: Text(
+                                    child: provider.monthList.totalSave ==
+                                        0
+                                        ? Text(
+                                        "أدخل القيمة +",
+                                        style: TextStyle(
+                                            fontSize:
+                                            13,
+                                            fontWeight:
+                                            FontWeight
+                                                .w500,
+                                            fontFamily:
+                                            'Tajawal',
+                                            color: Colors
+                                                .red))
+                                        : Text(
                                       NumberFormat('###,##0.00').format(
                                           provider.monthList.totalSave),
                                       textAlign: TextAlign.center,
@@ -903,7 +926,26 @@ return Scaffold(
                                         showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
-                                              return CalculateScreen();
+                                              return CalculateScreen(provider
+                                                  .monthList
+                                                  .expences[
+                                              i]
+                                                  .type,
+                                                  provider
+                                                      .monthList
+                                                      .expences[
+                                                  i]
+                                                      .amount,
+                                                  provider
+                                                      .monthList
+                                                      .expences[
+                                                  i]
+                                                      .amount - provider
+                                                      .monthList
+                                                      .expences[
+                                                  i]
+                                                      .total,
+                                                  true);
                                             }).then((value) {
                                           //TODO: show yes no to add reminder amount to save amount
                                           if (value == null) {
@@ -944,7 +986,22 @@ return Scaffold(
                                                   10)),
                                         ),
                                         child: Center(
-                                          child: Text(
+                                          child: provider.monthList.expences[i]
+                                              .total ==
+                                              0
+                                              ? Text(
+                                              "أدخل القيمة +",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                  13,
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w500,
+                                                  fontFamily:
+                                                  'Tajawal',
+                                                  color: Colors
+                                                      .red))
+                                              :  Text(
                                             NumberFormat('###,##0.00').format(
                                                 provider.monthList.expences[i]
                                                     .total),

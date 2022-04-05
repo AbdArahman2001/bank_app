@@ -203,7 +203,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return CalculateScreen();
+                          return CalculateScreen("القيمة المرحلة",0,0,false);
                         }).then((value) {
                       if (value == null) {
                       } else if (double.parse(value) >

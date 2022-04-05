@@ -98,7 +98,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen();
+                        return CalculateScreen("مبلغ إضافي",0,0,false);
                       }).then((value) {
                     _addedValue = double.parse(value);
                     // provider.availbeCash = double.parse(value);
