@@ -17,9 +17,10 @@ class MoneyCashDialog extends StatefulWidget {
 class _MoneyCashDialogState extends State<MoneyCashDialog> {
   List<String> expences;
 
-  List<String> _currencies = ['Saver'.tr(), 'Cash amount'.tr()];
+  List<String> _currencies = ['Saver'.tr(),];
   double _addedValue = 0.0;
   int _currentItemSelected1 = 0;
+  double _value = 0.0;
   @override
   initState(){
     super.initState();
@@ -28,8 +29,6 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
   }
   @override
   Widget build(BuildContext context) {
-
-
     return Consumer<HomeProvider>(builder: (context, provider, x) {
       return Dialog(
         backgroundColor: Colors.transparent,
@@ -39,12 +38,12 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
             borderRadius: BorderRadius.circular(8),
             color: Colors.white,
           ),
-          padding: EdgeInsets.only(left: 16, top: 3, right: 16),
+          padding: EdgeInsets.only(left: 8, top: 8,right: 16),
           width: 343,
-          height: 270,
+          height: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-             // crossAxisAlignment: CrossAxisAlignment.center,
+             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -93,6 +92,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
               SizedBox(
                 height: 16,
               ),
+
               GestureDetector(
                 onTap: () {
                   showDialog(
@@ -105,30 +105,105 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                     provider.notifyListeners();
                   });
                 },
-                child: Container(
-                  margin: EdgeInsets.only(left: 60,right: 60),
-                  child: Center(
-                    child: Text(
-                      NumberFormat('###,##0.00').format(_addedValue),
-                      // provider.availbeSalary.toStringAsFixed(2),
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontFamily: "Segoe UI",
-                        fontWeight: FontWeight.w900,
-                        color: AppColors.MAIN_COLOR,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 45,
+                      width: 148,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.Drawer_COLOR, spreadRadius: 1),
+                        ],
+                      ),
+                      child: Center(
+                        child:  Text(
+                          _addedValue == 0
+                              ?  "أدخل القيمة".tr()
+                              : NumberFormat('###,##0.00').format(_addedValue),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontFamily: "Segoe UI",
+                            fontWeight: FontWeight.w900,
+                            color: _addedValue == 0 ? Colors.red : AppColors.MAIN_COLOR,
+                          ),
+                        ),
+                        // Text(
+                        //   _value == 0
+                        //       ? "Example: Enter the phase value".tr()
+                        //       : NumberFormat('###,##0.00').format(_value),
+                        //   textAlign: TextAlign.center,
+                        //   style: TextStyle(
+                        //     fontSize: 13,
+                        //     fontFamily: "Segoe UI",
+                        //     fontWeight: FontWeight.w900,
+                        //     color: AppColors.MAIN_COLOR,
+                        //   ),
+                        // ),
                       ),
                     ),
-                  ),
-                  height: 35,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppColors.MAIN_COLOR, spreadRadius: 1),
-                    ],
-                  ),
+                    SizedBox(width: 5,),
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                              "assets/images/addadd.png"),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Expanded(
+                //       child: Container(
+                //         margin: EdgeInsets.only(left: 10,right: 60),
+                //         child: Center(
+                //           child: Text(
+                //             _value == 0
+                //                 ?  "أدخل القيمة".tr()
+                //                 : NumberFormat('###,##0.00').format(_value),
+                //             textAlign: TextAlign.center,
+                //             style: TextStyle(
+                //               fontSize: 13,
+                //               fontFamily: "Segoe UI",
+                //               fontWeight: FontWeight.w900,
+                //               color: _value == 0.0 ? Colors.red : AppColors.MAIN_COLOR,
+                //             ),
+                //           ),
+                //         ),
+                //         height: 35,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(8),
+                //           color: Colors.white,
+                //           boxShadow: [
+                //             BoxShadow(
+                //                 color: AppColors.MAIN_COLOR, spreadRadius: 1),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //     Container(
+                //       height: 30,
+                //       width: 30,
+                //       decoration: BoxDecoration(
+                //         image: DecorationImage(
+                //           image: AssetImage(
+                //               "assets/images/addadd.png"),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ),
               SizedBox(
                 height: 16,
@@ -169,7 +244,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                               value: i.toString(),
                               child: Row(
                                   children: [
-                                    Text((i < 2 ? 0 : i-1).toString(),style: TextStyle(
+                                    Text((i < 1 ? 0 : i).toString(),style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: "Segoe UI",
                                       fontWeight: FontWeight.w600,

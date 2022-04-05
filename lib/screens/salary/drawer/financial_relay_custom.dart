@@ -18,7 +18,6 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
   List<List<String>> expences = [];
   List<List<String>> _currencies = [
     ['0', 'Saver'],
-    ['0', 'Cash amount']
   ];
   double _value = 0.0;
   int _fromCurrentItemSelected = 0;
@@ -48,7 +47,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
-        padding: EdgeInsets.only(left: 8, top: 3, right: 4),
+        padding: EdgeInsets.only(left: 8, top: 8, right: 16),
         //width: 343,
         height: 350,
         child: Column(
@@ -63,14 +62,11 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                StarRedCustom(
-                  isHidden: true,
-                ),
                 Row(
                   children: [
                     SizedBox(
-                      width: 5,
-                    ),
+                            width: 5,
+                          ),
                     Text(
                       "Deportation from:".tr(),
                       textAlign: TextAlign.start,
@@ -83,6 +79,26 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     ),
                   ],
                 ),
+                // StarRedCustom(
+                //   isHidden: true,
+                // ),
+                // Row(
+                //   children: [
+                //     SizedBox(
+                //       width: 5,
+                //     ),
+                //     Text(
+                //       "Deportation from:".tr(),
+                //       textAlign: TextAlign.start,
+                //       style: TextStyle(
+                //         fontSize: 14,
+                //         fontFamily: "Segoe UI",
+                //         fontWeight: FontWeight.w600,
+                //         color: Colors.black,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
             SizedBox(
@@ -170,85 +186,80 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     ),
                   ),
                 ),
+
                 ValuesRelayCustom(NumberFormat('###,##0.00').format(provider.getFromSelectedItemReminderAmount(
                             _fromCurrentItemSelected) -
                         _value)
                     ),
+
               ],
             ),
             SizedBox(height: 26),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    StarRedCustom(
-                      isHidden: true,
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    GestureDetector(
-                      onTap: () {
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CalculateScreen();
+                        }).then((value) {
+                      if (value == null) {
+                      } else if (double.parse(value) >
+                          provider.getFromSelectedItemReminderAmount(
+                              _fromCurrentItemSelected)) {
                         showDialog(
+                            barrierColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return CalculateScreen();
-                            }).then((value) {
-                          if (value == null) {
-                          } else if (double.parse(value) >
-                              provider.getFromSelectedItemReminderAmount(
-                                  _fromCurrentItemSelected)) {
-                            showDialog(
-                              barrierColor: Colors.transparent,
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    child: Column(
-                                      children: [
-                                        Spacer(),
-                                        Container(
-                                          width: MediaQuery.of(context).size.width,
-                                          height: 60,
-                                          color: Color(0XFFC83E5B),
-                                          child: Center(
-                                            child: Text(
-                                              'The input value is greater than the value available for a relay'.tr(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: "Segoe UI"),
-                                            ),
-                                          ),
+                              return Container(
+                                child: Column(
+                                  children: [
+                                    Spacer(),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 60,
+                                      color: Color(0XFFC83E5B),
+                                      child: Center(
+                                        child: Text(
+                                          'vailable for a relay'.tr(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "Segoe UI"),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  );
-                                });
-                            // const snackBar = SnackBar(
-                            //     backgroundColor: Colors.redAccent,
-                            //     content: Text(
-                            //       'القيمة المدخلة أكبر من القيمة المتاحة للترحيل',
-                            //       textAlign: TextAlign.center,
-                            //       style: TextStyle(
-                            //           fontSize: 20,
-                            //           color: Colors.white,
-                            //           fontWeight: FontWeight.w500,
-                            //           fontFamily: "Segoe UI"),
-                            //     ));
-                            // ScaffoldMessenger.of(context)
-                            //     .showSnackBar(snackBar);
-                          } else {
-                            setState(() {
-                              _value = double.parse(value);
+                                  ],
+                                ),
+                              );
                             });
-                          }
+                        // const snackBar = SnackBar(
+                        //     backgroundColor: Colors.redAccent,
+                        //     content: Text(
+                        //       'القيمة المدخلة أكبر من القيمة المتاحة للترحيل',
+                        //       textAlign: TextAlign.center,
+                        //       style: TextStyle(
+                        //           fontSize: 20,
+                        //           color: Colors.white,
+                        //           fontWeight: FontWeight.w500,
+                        //           fontFamily: "Segoe UI"),
+                        //     ));
+                        // ScaffoldMessenger.of(context)
+                        //     .showSnackBar(snackBar);
+                      } else {
+                        setState(() {
+                          _value = double.parse(value);
                         });
-                      },
-                      child: Container(
+                      }
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Container(
                         height: 45,
                         width: 148,
                         decoration: BoxDecoration(
@@ -260,50 +271,65 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                           ],
                         ),
                         child: Center(
-                          child: Text(
+                          child:  Text(
                             _value == 0
-                                ? "Example: Enter the phase value".tr()
+                                ?  "أدخل القيمة".tr()
                                 : NumberFormat('###,##0.00').format(_value),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 13,
                               fontFamily: "Segoe UI",
                               fontWeight: FontWeight.w900,
-                              color: AppColors.MAIN_COLOR,
+                              color: _value == 0 ? Colors.red : AppColors.MAIN_COLOR,
                             ),
+                          ),
+                          // Text(
+                          //   _value == 0
+                          //       ? "Example: Enter the phase value".tr()
+                          //       : NumberFormat('###,##0.00').format(_value),
+                          //   textAlign: TextAlign.center,
+                          //   style: TextStyle(
+                          //     fontSize: 13,
+                          //     fontFamily: "Segoe UI",
+                          //     fontWeight: FontWeight.w900,
+                          //     color: AppColors.MAIN_COLOR,
+                          //   ),
+                          // ),
+                        ),
+                      ),
+                      SizedBox(width: 5,),
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                "assets/images/addadd.png"),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
             SizedBox(
               height: 13,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                StarRedCustom(
-                  isHidden: true,
+                SizedBox(
+                  width: 5,
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "Deportation to:".tr(),
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "Segoe UI",
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
+                Text(
+                  "Deportation to:".tr(),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: "Segoe UI",
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
                 ),
               ],
             ),

@@ -35,7 +35,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     'assets/images/logos.png',
                   ),
                   fit: BoxFit.contain,
-                  height: 150,
+                  height: 180,
                   width: 150,
                 ),
                 // Container(
@@ -214,36 +214,86 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           ),
                           children: [
                             GestureDetector(
-                              child: Text(
-                                "Arabic".tr(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
-                                  color: AppColors.MAIN_COLOR,
-                                ),
-                              ),
-                              onTap: () {
+                              onTap: (){
                                 provider.setLanguage(
-                                    SingingCharacter.Arabic, context);
-                                Navigator.pop(context);
+                                            SingingCharacter.Arabic, context);
+                                        Navigator.pop(context);
                               },
+                              child: Row(
+                                children: [
+                                  Radio<SingingCharacter>(
+                                      value: SingingCharacter.Arabic,
+                                      groupValue: provider.character,
+                                      onChanged: (SingingCharacter value) {
+                                        provider.setLanguage(value, context);
+                                        Navigator.pop(context);
+                                      }),
+                                  Text(
+                                    'Arabic'.tr(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Segoe UI"),
+                                  ),
+                                ],
+                              ),
                             ),
                             GestureDetector(
-                              child: Text(
-                                "English".tr(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
-                                  color: AppColors.MAIN_COLOR,
-                                ),
-                              ),
-                              onTap: () {
-                                // context.setLocale(Locale('en'));
+                              onTap: (){
                                 provider.setLanguage(
-                                    SingingCharacter.English, context);
-                                Navigator.pop(context);
+                                            SingingCharacter.English, context);
+                                        Navigator.pop(context);
                               },
+                              child: Row(
+                                children: [
+                                  Radio<SingingCharacter>(
+                                      value: SingingCharacter.English,
+                                      groupValue: provider.character,
+                                      onChanged: (SingingCharacter value) {
+                                        provider.setLanguage(value, context);
+                                        Navigator.pop(context);
+                                      }),
+                                  Text(
+                                    'English'.tr(),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "Segoe UI"),
+                                  ),
+                                ],
+                              ),
                             ),
+                            // GestureDetector(
+                            //   child: Text(
+                            //     "Arabic".tr(),
+                            //     style: TextStyle(
+                            //       fontWeight: FontWeight.w400,
+                            //       fontSize: 18,
+                            //       color: AppColors.MAIN_COLOR,
+                            //     ),
+                            //   ),
+                            //   onTap: () {
+                            //     provider.setLanguage(
+                            //         SingingCharacter.Arabic, context);
+                            //     Navigator.pop(context);
+                            //   },
+                            // ),
+                            // GestureDetector(
+                            //   child: Text(
+                            //     "English".tr(),
+                            //     style: TextStyle(
+                            //       fontWeight: FontWeight.w400,
+                            //       fontSize: 18,
+                            //       color: AppColors.MAIN_COLOR,
+                            //     ),
+                            //   ),
+                            //   onTap: () {
+                            //     // context.setLocale(Locale('en'));
+                            //     provider.setLanguage(
+                            //         SingingCharacter.English, context);
+                            //     Navigator.pop(context);
+                            //   },
+                            // ),
                           ]
                       ),
                     ),

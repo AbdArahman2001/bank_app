@@ -7,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
+// import 'package:timer_snackbar/timer_snackbar.dart';
 
 class TableOfSaralyScreen extends StatefulWidget {
   static final routeName = "tableOfSaralyScreen";
@@ -404,56 +405,19 @@ return Scaffold(
                               ),
                               TableCell(
                                 child: Center(
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      top: 10,
-                                    ),
-                                    //height: 50,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: 12,
-                                            ),
-                                            StarRedCustom(
-                                              isHidden: true,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: 2,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Enter the amount of the expense"
-                                                    .tr(),
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontWeight:
-                                                        FontWeight.w500,
-                                                    fontFamily: 'Tajawal',
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                  child:  Text(
+                                    "Enter the amount of the expense"
+                                        .tr(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight:
+                                        FontWeight.w500,
+                                        fontFamily: 'Tajawal',
+                                        color: Colors.white),
                                   ),
                                 ),
-                                // verticalAlignment: TableCellVerticalAlignment.middle,
+                                 verticalAlignment: TableCellVerticalAlignment.middle,
                               ),
                               TableCell(
                                 child: Center(
@@ -530,8 +494,12 @@ return Scaffold(
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  showDialog(
+                                  showModalBottomSheet(
                                       context: context,
+                                      backgroundColor: Colors.transparent,
+                                      constraints: BoxConstraints(
+                                        maxWidth:  MediaQuery.of(context).size.width,
+                                      ),
                                       builder: (BuildContext context) {
                                         return CalculateScreen();
                                       }).then((value) {
@@ -557,12 +525,25 @@ return Scaffold(
                                           .showSnackBar(snackBar);
                                     } else {
                                       showToast();
+                                     //  timerSnackbar(
+                                     //    context: context,
+                                     //    contentText: "A snackbar with live timer.",
+                                     //    afterTimeExecute: () => print("Operation Execute."),
+                                     //    second: 1,
+                                     //  );
                                       provider.changeTotalSave(value);
                                     }
                                   });
                                 },
                                 child: Container(
                                   height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.only(
+                                        bottomLeft:
+                                        Radius.circular(
+                                            10)),
+                                  ),
                                   child: Center(
                                     child: Text(
                                       NumberFormat('###,##0.00').format(
@@ -629,7 +610,7 @@ return Scaffold(
                   children: [
                     Container(
                       child: Text(
-                        "Monthly expense list".tr(),
+                        "Monthly financial plan".tr(),
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w900,
@@ -718,51 +699,62 @@ return Scaffold(
                                   TableCellVerticalAlignment.middle,
                             ),
                             TableCell(
-                              child: Container(
-                                padding: EdgeInsets.only(top: 10),
-                                // height: 50,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 12,
-                                        ),
-                                        StarRedCustom(
-                                          isHidden: true,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            "Enter the amount of the expense"
-                                                .tr(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Tajawal',
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                              child: Text(
+                                "Enter the amount of the expense"
+                                    .tr(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Tajawal',
+                                    color: Colors.white),
                               ),
-                              // verticalAlignment: TableCellVerticalAlignment.middle,
+                              /// star red ///
+                              // Container(
+                              //   padding: EdgeInsets.only(top: 10),
+                              //   // height: 50,
+                              //   child: Column(
+                              //     crossAxisAlignment:
+                              //         CrossAxisAlignment.center,
+                              //     mainAxisAlignment: MainAxisAlignment.center,
+                              //     children: [
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.start,
+                              //         children: [
+                              //           SizedBox(
+                              //             width: 12,
+                              //           ),
+                              //           StarRedCustom(
+                              //             isHidden: true,
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       SizedBox(
+                              //         width: 2,
+                              //       ),
+                              //       Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.center,
+                              //         children: [
+                              //           Flexible(
+                              //             child: Text(
+                              //               "Enter the amount of the expense"
+                              //                   .tr(),
+                              //               textAlign: TextAlign.center,
+                              //               style: TextStyle(
+                              //                   fontSize: 13,
+                              //                   fontWeight: FontWeight.w500,
+                              //                   fontFamily: 'Tajawal',
+                              //                   color: Colors.white),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                               verticalAlignment: TableCellVerticalAlignment.middle,
                             ),
                             TableCell(
                               child: Center(
@@ -944,6 +936,13 @@ return Scaffold(
                                         });
                                       },
                                       child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.only(
+                                              bottomLeft:
+                                              Radius.circular(
+                                                  10)),
+                                        ),
                                         child: Center(
                                           child: Text(
                                             NumberFormat('###,##0.00').format(
@@ -1004,320 +1003,320 @@ return Scaffold(
               SizedBox(
                 height: 8,
               ),
-              Container(
-                height: 1.0,
-                color: AppColors.Divider_COLOR.withOpacity(0.31),
-              ),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 15),
-                child: Column(
-                  children: [
-                    // SizedBox(
-                    //   height: 7,
-                    // ),
-                    Text(
-                      "Monthly cash amount".tr(),
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: "Segoe UI",
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.Border_COLOR),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                        ),
-                      ),
-                      child: Table(
-                        columnWidths: {
-                          0: FlexColumnWidth(2),
-                          1: FlexColumnWidth(3),
-                          2: FlexColumnWidth(4),
-                          3: FlexColumnWidth(5),
-                          4: FlexColumnWidth(4),
-                        },
-                        border: TableBorder(
-                            horizontalInside: BorderSide(
-                                width: 1,
-                                color: AppColors.Border_COLOR,
-                                style: BorderStyle.solid),
-                            verticalInside: BorderSide(
-                                width: 1,
-                                color: AppColors.Border_COLOR,
-                                style: BorderStyle.solid)),
-
-                        // border:
-                        //     TableBorder.all(color: AppColors.Border_COLOR),
-                        children: [
-                          TableRow(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              color: AppColors.BG_Table_COLOR,
-                            ),
-                            children: [
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    "NO".tr(),
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontFamily: 'Tajawal',
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: Container(
-                                  height: 50,
-                                  child: Center(
-                                    child: Text(
-                                      "Cash amount".tr(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Tajawal',
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    "The remainder of the monthly amount"
-                                        .tr(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: Container(
-                                  padding: EdgeInsets.only(top: 8),
-                                  // height: 50,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 12,
-                                          ),
-                                          StarRedCustom(
-                                            isHidden: true,
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              "Enter the amount of the expense"
-                                                  .tr(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Tajawal',
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    "Exchange rate".tr(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: Colors.white),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10)),
-                              color: AppColors.bg_COLOR,
-                            ),
-                            children: [
-                              TableCell(
-                                child: SizedBox(
-                                  height: 40,
-                                  child: Center(
-                                    child: Text(
-                                      "1",
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Tajawal',
-                                          color: AppColors.Text_Table_COLOR),
-                                    ),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    "The amount".tr(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: AppColors.Text_Table_COLOR),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    NumberFormat('###,##0.00').format(
-                                        provider.monthList.cashAmount -
-                                            provider.monthList.totalCash),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: AppColors.Text_Table_COLOR),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return CalculateScreen();
-                                        }).then((value) {
-                                      //TODO: show yes no to add reminder amount to save amount
-                                      if (value == null) {
-                                      } else if ((double.parse(value) +
-                                              provider.monthList.totalCash) >
-                                          provider.monthList.cashAmount) {
-                                        final snackBar = SnackBar(
-                                            backgroundColor:
-                                                AppColors.Snack_Bar_COLOR,
-                                            content: Text(
-                                              'The allowance exceeded the residual value of this item'
-                                                  .tr(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: "Segoe UI"),
-                                            ));
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      } else {
-                                        showToast();
-                                        provider.changeTotalCash(value);
-                                      }
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Center(
-                                      child: Text(
-                                        NumberFormat('###,##0.00').format(
-                                            provider.monthList.totalCash),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Tajawal',
-                                            color:
-                                                AppColors.Text_Table_COLOR),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    (provider.monthList.cashAmount == 0
-                                                ? 100
-                                                : provider
-                                                        .monthList.totalCash /
-                                                    provider.monthList
-                                                        .cashAmount *
-                                                    100)
-                                            .toStringAsFixed(0) +
-                                        "%",
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: AppColors.Text_Table_COLOR),
-                                  ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   height: 1.0,
+              //   color: AppColors.Divider_COLOR.withOpacity(0.31),
+              // ),
+              // Container(
+              //   padding:
+              //       EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 15),
+              //   child: Column(
+              //     children: [
+              //       // SizedBox(
+              //       //   height: 7,
+              //       // ),
+              //       Text(
+              //         "Monthly cash amount".tr(),
+              //         style: TextStyle(
+              //           fontSize: 15,
+              //           fontWeight: FontWeight.w900,
+              //           fontFamily: "Segoe UI",
+              //           color: Colors.black,
+              //         ),
+              //       ),
+              //       SizedBox(
+              //         height: 8,
+              //       ),
+              //       Container(
+              //         decoration: BoxDecoration(
+              //           border: Border.all(color: AppColors.Border_COLOR),
+              //           borderRadius: BorderRadius.only(
+              //             topLeft: Radius.circular(10),
+              //             topRight: Radius.circular(10),
+              //             bottomRight: Radius.circular(10),
+              //             bottomLeft: Radius.circular(10),
+              //           ),
+              //         ),
+              //         child: Table(
+              //           columnWidths: {
+              //             0: FlexColumnWidth(2),
+              //             1: FlexColumnWidth(3),
+              //             2: FlexColumnWidth(4),
+              //             3: FlexColumnWidth(5),
+              //             4: FlexColumnWidth(4),
+              //           },
+              //           border: TableBorder(
+              //               horizontalInside: BorderSide(
+              //                   width: 1,
+              //                   color: AppColors.Border_COLOR,
+              //                   style: BorderStyle.solid),
+              //               verticalInside: BorderSide(
+              //                   width: 1,
+              //                   color: AppColors.Border_COLOR,
+              //                   style: BorderStyle.solid)),
+              //
+              //           // border:
+              //           //     TableBorder.all(color: AppColors.Border_COLOR),
+              //           children: [
+              //             TableRow(
+              //               decoration: BoxDecoration(
+              //                 borderRadius: BorderRadius.only(
+              //                   topLeft: Radius.circular(10),
+              //                   topRight: Radius.circular(10),
+              //                 ),
+              //                 color: AppColors.BG_Table_COLOR,
+              //               ),
+              //               children: [
+              //                 TableCell(
+              //                   child: Center(
+              //                     child: Text(
+              //                       "NO".tr(),
+              //                       style: TextStyle(
+              //                           fontSize: 13,
+              //                           fontFamily: 'Tajawal',
+              //                           fontWeight: FontWeight.w500,
+              //                           color: Colors.white),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: Container(
+              //                     height: 50,
+              //                     child: Center(
+              //                       child: Text(
+              //                         "Cash amount".tr(),
+              //                         textAlign: TextAlign.center,
+              //                         style: TextStyle(
+              //                             fontSize: 13,
+              //                             fontWeight: FontWeight.w500,
+              //                             fontFamily: 'Tajawal',
+              //                             color: Colors.white),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: Center(
+              //                     child: Text(
+              //                       "The remainder of the monthly amount"
+              //                           .tr(),
+              //                       textAlign: TextAlign.center,
+              //                       style: TextStyle(
+              //                           fontSize: 13,
+              //                           fontWeight: FontWeight.w500,
+              //                           fontFamily: 'Tajawal',
+              //                           color: Colors.white),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: Container(
+              //                     padding: EdgeInsets.only(top: 8),
+              //                     // height: 50,
+              //                     child: Column(
+              //                       mainAxisAlignment:
+              //                           MainAxisAlignment.center,
+              //                       children: [
+              //                         Row(
+              //                           mainAxisAlignment:
+              //                               MainAxisAlignment.start,
+              //                           children: [
+              //                             SizedBox(
+              //                               width: 12,
+              //                             ),
+              //                             StarRedCustom(
+              //                               isHidden: true,
+              //                             ),
+              //                           ],
+              //                         ),
+              //                         SizedBox(
+              //                           width: 2,
+              //                         ),
+              //                         Row(
+              //                           mainAxisAlignment:
+              //                               MainAxisAlignment.center,
+              //                           children: [
+              //                             Expanded(
+              //                               child: Text(
+              //                                 "Enter the amount of the expense"
+              //                                     .tr(),
+              //                                 textAlign: TextAlign.center,
+              //                                 style: TextStyle(
+              //                                     fontSize: 13,
+              //                                     fontWeight: FontWeight.w500,
+              //                                     fontFamily: 'Tajawal',
+              //                                     color: Colors.white),
+              //                               ),
+              //                             ),
+              //                           ],
+              //                         ),
+              //                       ],
+              //                     ),
+              //                   ),
+              //                 ),
+              //                 TableCell(
+              //                   child: Center(
+              //                     child: Text(
+              //                       "Exchange rate".tr(),
+              //                       textAlign: TextAlign.center,
+              //                       style: TextStyle(
+              //                           fontSize: 13,
+              //                           fontWeight: FontWeight.w500,
+              //                           fontFamily: 'Tajawal',
+              //                           color: Colors.white),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //               ],
+              //             ),
+              //             TableRow(
+              //               decoration: BoxDecoration(
+              //                 borderRadius: BorderRadius.only(
+              //                     bottomRight: Radius.circular(10),
+              //                     bottomLeft: Radius.circular(10)),
+              //                 color: AppColors.bg_COLOR,
+              //               ),
+              //               children: [
+              //                 TableCell(
+              //                   child: SizedBox(
+              //                     height: 40,
+              //                     child: Center(
+              //                       child: Text(
+              //                         "1",
+              //                         style: TextStyle(
+              //                             fontSize: 13,
+              //                             fontWeight: FontWeight.w500,
+              //                             fontFamily: 'Tajawal',
+              //                             color: AppColors.Text_Table_COLOR),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: Center(
+              //                     child: Text(
+              //                       "The amount".tr(),
+              //                       textAlign: TextAlign.center,
+              //                       style: TextStyle(
+              //                           fontSize: 13,
+              //                           fontWeight: FontWeight.w500,
+              //                           fontFamily: 'Tajawal',
+              //                           color: AppColors.Text_Table_COLOR),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: Center(
+              //                     child: Text(
+              //                       NumberFormat('###,##0.00').format(
+              //                           provider.monthList.cashAmount -
+              //                               provider.monthList.totalCash),
+              //                       textAlign: TextAlign.center,
+              //                       style: TextStyle(
+              //                           fontSize: 13,
+              //                           fontWeight: FontWeight.w500,
+              //                           fontFamily: 'Tajawal',
+              //                           color: AppColors.Text_Table_COLOR),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: GestureDetector(
+              //                     onTap: () {
+              //                       showDialog(
+              //                           context: context,
+              //                           builder: (BuildContext context) {
+              //                             return CalculateScreen();
+              //                           }).then((value) {
+              //                         //TODO: show yes no to add reminder amount to save amount
+              //                         if (value == null) {
+              //                         } else if ((double.parse(value) +
+              //                                 provider.monthList.totalCash) >
+              //                             provider.monthList.cashAmount) {
+              //                           final snackBar = SnackBar(
+              //                               backgroundColor:
+              //                                   AppColors.Snack_Bar_COLOR,
+              //                               content: Text(
+              //                                 'The allowance exceeded the residual value of this item'
+              //                                     .tr(),
+              //                                 textAlign: TextAlign.center,
+              //                                 style: TextStyle(
+              //                                     fontSize: 20,
+              //                                     color: Colors.white,
+              //                                     fontWeight: FontWeight.w500,
+              //                                     fontFamily: "Segoe UI"),
+              //                               ));
+              //                           ScaffoldMessenger.of(context)
+              //                               .showSnackBar(snackBar);
+              //                         } else {
+              //                           showToast();
+              //                           provider.changeTotalCash(value);
+              //                         }
+              //                       });
+              //                     },
+              //                     child: Container(
+              //                       child: Center(
+              //                         child: Text(
+              //                           NumberFormat('###,##0.00').format(
+              //                               provider.monthList.totalCash),
+              //                           textAlign: TextAlign.center,
+              //                           style: TextStyle(
+              //                               fontSize: 13,
+              //                               fontWeight: FontWeight.w500,
+              //                               fontFamily: 'Tajawal',
+              //                               color:
+              //                                   AppColors.Text_Table_COLOR),
+              //                         ),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //                 TableCell(
+              //                   child: Center(
+              //                     child: Text(
+              //                       (provider.monthList.cashAmount == 0
+              //                                   ? 100
+              //                                   : provider
+              //                                           .monthList.totalCash /
+              //                                       provider.monthList
+              //                                           .cashAmount *
+              //                                       100)
+              //                               .toStringAsFixed(0) +
+              //                           "%",
+              //                       style: TextStyle(
+              //                           fontSize: 13,
+              //                           fontWeight: FontWeight.w500,
+              //                           fontFamily: 'Tajawal',
+              //                           color: AppColors.Text_Table_COLOR),
+              //                     ),
+              //                   ),
+              //                   verticalAlignment:
+              //                       TableCellVerticalAlignment.middle,
+              //                 ),
+              //               ],
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         );
@@ -1325,7 +1324,13 @@ return Scaffold(
 
     );
   }
-
+/// timer snackbar ///
+  //  timerSnackbar(
+  //  context: context,
+  //  contentText: "A snackbar with live timer.",
+  //  afterTimeExecute: () => print("Operation Execute."),
+  //  second: 1,
+  //   );
   void showToast() {
     final snackBar = SnackBar(
       backgroundColor: AppColors.Snack_Bar_COLOR,

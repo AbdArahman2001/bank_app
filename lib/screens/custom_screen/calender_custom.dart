@@ -31,7 +31,7 @@ class _CalenderCustomState extends State<CalenderCustom> {
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
-         padding: EdgeInsets.only(left: 15, right: 15),
+         padding: EdgeInsets.only(left: 8, right: 8),
         width: 300,
         height: 160,
         child: GestureDetector(
@@ -53,7 +53,8 @@ class _CalenderCustomState extends State<CalenderCustom> {
                   provider.setDate(context);
                 },
                 child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  margin: EdgeInsets.only(left: 16, right: 16),
+                  padding: EdgeInsets.only(left: 16, right: 16),
                   width: MediaQuery.of(context).size.width,
                   height: 48,
                   decoration: BoxDecoration(

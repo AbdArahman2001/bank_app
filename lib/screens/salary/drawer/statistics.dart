@@ -43,9 +43,9 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
             borderRadius: BorderRadius.circular(8),
             color: Colors.white,
           ),
-          padding: EdgeInsets.only(left: 16, top: 3, right: 16),
+          padding: EdgeInsets.only(left: 8, top: 8, right: 16),
           width: 343,
-          height: 300,
+          height: 260,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -68,53 +68,41 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
               SizedBox(
                 height: 10,
               ),
-              Table(
-                columnWidths: {
-                  0: FlexColumnWidth(4),
-                  1: FlexColumnWidth(4),
-                },
-                border: TableBorder(
-                  horizontalInside: BorderSide(
-                      width: 1,
-                      color: AppColors.Border_COLOR,
-                      style: BorderStyle.solid),
-                  verticalInside: BorderSide(
-                      width: 1,
-                      color: AppColors.Border_COLOR,
-                      style: BorderStyle.solid),
-                ),
+              Container(
+                padding: EdgeInsets.only(left: 8),
+                child: Table(
+                  columnWidths: {
+                    0: FlexColumnWidth(4),
+                    1: FlexColumnWidth(4),
+                  },
+                  border: TableBorder(
+                    horizontalInside: BorderSide(
+                        width: 1,
+                        color: AppColors.Border_COLOR,
+                        style: BorderStyle.solid),
+                    verticalInside: BorderSide(
+                        width: 1,
+                        color: AppColors.Border_COLOR,
+                        style: BorderStyle.solid),
+                  ),
 
-                // border:
-                //     TableBorder.all(color: AppColors.Border_COLOR),
-                children: [
-                  TableRow(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                      color: AppColors.BG_Table_COLOR,
-                    ),
-                    children: [
-                      SizedBox(
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                            "Item".tr(),
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Tajawal',
-                                color: Colors.white),
-                          ),
+                  // border:
+                  //     TableBorder.all(color: AppColors.Border_COLOR),
+                  children: [
+                    TableRow(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
                         ),
+                        color: AppColors.BG_Table_COLOR,
                       ),
-                      TableCell(
-                        child:  SizedBox(
+                      children: [
+                        SizedBox(
                           height: 40,
                           child: Center(
                             child: Text(
-                              "Remaining".tr(),
+                              "Item".tr(),
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -122,51 +110,23 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
                                   color: Colors.white),
                             ),
                           ),
-                        ),),
-                    ],
-                  ),
-                  TableRow(
-                    decoration: BoxDecoration(
-                      // borderRadius: BorderRadius.only(
-                      //     bottomRight: Radius.circular(10),
-                      //     bottomLeft: Radius.circular(10)),
-                      color: AppColors.bg_COLOR,
-                    ),
-                    children: [
-                      SizedBox(
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                            "Saver".tr(),
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Tajawal',
-                                color: Colors.black),
-                          ),
                         ),
-                        // verticalAlignment: TableCellVerticalAlignment.middle,
-                      ),
-                      TableCell(
-                        child: SizedBox(
-                          height: 40,
-                          child: Center(
-                            child: Text(
-                              NumberFormat('###,##0.00').format(provider.monthList.saveAmount - provider.monthList.totalSave)
-                                ,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Segoe UI",
-                                color: Colors.black,
+                        TableCell(
+                          child:  SizedBox(
+                            height: 40,
+                            child: Center(
+                              child: Text(
+                                "Remaining".tr(),
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Tajawal',
+                                    color: Colors.white),
                               ),
                             ),
-                          ),
-                        ),
-                        verticalAlignment: TableCellVerticalAlignment.middle,
-                      ),
-                    ],
-                  ),
+                          ),),
+                      ],
+                    ),
                     TableRow(
                       decoration: BoxDecoration(
                         // borderRadius: BorderRadius.only(
@@ -179,7 +139,7 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
                           height: 40,
                           child: Center(
                             child: Text(
-                              "The expenses".tr(),
+                              "Saver".tr(),
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
@@ -194,8 +154,8 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
                             height: 40,
                             child: Center(
                               child: Text(
-                                NumberFormat('###,##0.00').format(provider.monthList.sumExpencesAmount - provider.monthList.sumTotalExpences)
-                                    ,
+                                NumberFormat('###,##0.00').format(provider.monthList.saveAmount - provider.monthList.totalSave)
+                                  ,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w400,
@@ -209,82 +169,106 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
                         ),
                       ],
                     ),
-
-                  TableRow(
-                    decoration: BoxDecoration(
-                      // borderRadius: BorderRadius.only(
-                      //     bottomRight: Radius.circular(10),
-                      //     bottomLeft: Radius.circular(10)),
-                      color: AppColors.bg_COLOR,
-                    ),
-                    children: [
-                      SizedBox(
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                            "The amount".tr(),
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Tajawal',
-                                color: Colors.black),
-                          ),
+                      TableRow(
+                        decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.only(
+                          //     bottomRight: Radius.circular(10),
+                          //     bottomLeft: Radius.circular(10)),
+                          color: AppColors.bg_COLOR,
                         ),
-                        // verticalAlignment: TableCellVerticalAlignment.middle,
-                      ),
-                      TableCell(
-                        child: SizedBox(
-                          height: 40,
-                          child: Center(
-                            child: Text(
-                              NumberFormat('###,##0.00').format(provider.monthList.cashAmount - provider.monthList.totalCash)
-                                 ,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Segoe UI",
-                                color: Colors.black,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                            child: Center(
+                              child: Text(
+                                "The expenses".tr(),
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Tajawal',
+                                    color: Colors.black),
                               ),
                             ),
+                            // verticalAlignment: TableCellVerticalAlignment.middle,
                           ),
-                        ),
-                        verticalAlignment: TableCellVerticalAlignment.middle,
+                          TableCell(
+                            child: SizedBox(
+                              height: 40,
+                              child: Center(
+                                child: Text(
+                                  NumberFormat('###,##0.00').format(provider.monthList.sumExpencesAmount - provider.monthList.sumTotalExpences)
+                                      ,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Segoe UI",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            verticalAlignment: TableCellVerticalAlignment.middle,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
 
-                  TableRow(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                       bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                      color: AppColors.BG_Table_COLOR,
-                    ),
-                    children: [
-                      SizedBox(
-                        height: 40,
-                        child: Center(
-                          child: Text(
-                            "Grand total".tr(),
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Tajawal',
-                                color: Colors.white),
-                          ),
+                    // TableRow(
+                    //   decoration: BoxDecoration(
+                    //     // borderRadius: BorderRadius.only(
+                    //     //     bottomRight: Radius.circular(10),
+                    //     //     bottomLeft: Radius.circular(10)),
+                    //     color: AppColors.bg_COLOR,
+                    //   ),
+                    //   children: [
+                    //     SizedBox(
+                    //       height: 40,
+                    //       child: Center(
+                    //         child: Text(
+                    //           "The amount".tr(),
+                    //           style: TextStyle(
+                    //               fontSize: 15,
+                    //               fontWeight: FontWeight.w500,
+                    //               fontFamily: 'Tajawal',
+                    //               color: Colors.black),
+                    //         ),
+                    //       ),
+                    //       // verticalAlignment: TableCellVerticalAlignment.middle,
+                    //     ),
+                    //     TableCell(
+                    //       child: SizedBox(
+                    //         height: 40,
+                    //         child: Center(
+                    //           child: Text(
+                    //             NumberFormat('###,##0.00').format(provider.monthList.cashAmount - provider.monthList.totalCash)
+                    //                ,
+                    //             style: TextStyle(
+                    //               fontSize: 15,
+                    //               fontWeight: FontWeight.w400,
+                    //               fontFamily: "Segoe UI",
+                    //               color: Colors.black,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       verticalAlignment: TableCellVerticalAlignment.middle,
+                    //     ),
+                    //   ],
+                    // ),
+
+                    TableRow(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                         bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
                         ),
+                        color: AppColors.BG_Table_COLOR,
                       ),
-                      TableCell(
-                        child: SizedBox(
+                      children: [
+                        SizedBox(
                           height: 40,
                           child: Center(
                             child: Text(
-                              NumberFormat('###,##0.00').format((provider.monthList.saveAmount - provider.monthList.totalSave) +
-                                  (provider.monthList.sumExpencesAmount - provider.monthList.sumTotalExpences) +
-                                  (provider.monthList.cashAmount - provider.monthList.totalCash))
-                                  ,
-                              textAlign: TextAlign.center,
+                              "Grand total".tr(),
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -293,11 +277,31 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        TableCell(
+                          child: SizedBox(
+                            height: 40,
+                            child: Center(
+                              child: Text(
+                                NumberFormat('###,##0.00').format((provider.monthList.saveAmount - provider.monthList.totalSave) +
+                                    (provider.monthList.sumExpencesAmount - provider.monthList.sumTotalExpences) +
+                                    (provider.monthList.cashAmount - provider.monthList.totalCash))
+                                    ,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Tajawal',
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
+              Spacer(),
             ],
           ),
         ),

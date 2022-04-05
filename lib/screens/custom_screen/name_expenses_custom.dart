@@ -58,9 +58,10 @@ class _NameExpensesCustomState extends State<NameExpensesCustom> {
                   ],
                 ),
                 child:
-                TextFormField(validator:
+                TextFormField(
+                  validator:
                     (value){
-                  return value.length < 3 ? 'Name must be greater than two characters'.tr() : null;
+                //  return value.length < 3 ? 'Name must be greater than two characters'.tr() : null;
                 },
                   onFieldSubmitted: (value){
                     if(formKey.currentState.validate()){

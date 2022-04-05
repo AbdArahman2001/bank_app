@@ -4,12 +4,15 @@ class AppColors{
   static const MAIN_COLOR = Color(0XFF2E75B3);
   static const Back_Ground_COLOR = Color(0XFFF3F3F3);
   static const Border_COLOR = Color(0XFF62C1D9);
+  static const Border1_COLOR = Color(0XFF62A9D9);
   static const Drawer_COLOR = Color(0XFF0064BC);
   static const DOWNLOAD_ICON_COLOR = Color(0XFFcacfd2);
   static const DATE_COLOR = Color(0XFFbfc1c2);
   static const Next_Back_COLOR = Color(0XFF0033FF);
   static const bg_COLOR = Color(0XFFDDEBF6);
+  static const bg1_COLOR = Color(0XFFedf4fa);
   static const App_Bar_COLOR = Color(0XFFDDEBF6);
+  static const bg2_COLOR = Color(0XFFd3e6f5);
   static const Divider_COLOR = Color(0XFF707070);
   static const BG_Table_COLOR = Color(0XFF2F74B5);
   static const Text_Table_COLOR = Color(0XFF4B4B4B);

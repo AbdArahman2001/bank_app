@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import 'cards/cards_screen.dart';
 
+
 class HomeScreen extends StatefulWidget {
   static final routeName = "homeScreen";
 
@@ -44,34 +45,34 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: AppColors.MAIN_COLOR,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.arrow_forward),
-            onPressed: () {
-              if(Provider.of<HomeProvider>(context, listen: false).monthList.salaryDate == null) {
-                final snackBar = SnackBar(
-                    backgroundColor: AppColors.Snack_Bar_COLOR,
-                    content: Text(
-                      "Salary release date must be entered".tr(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Segoe UI"),
-                    ));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }else {
-                Provider.of<HomeProvider>(context, listen: false).saveList();
-                UserPreferences.instance.saveRoutName(MonthlyIncomeScreen.routeName);
-                Navigator.pushReplacementNamed(
-                  context,
-                    MonthlyIncomeScreen.routeName
-                );
-              }
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.arrow_forward),
+        //     onPressed: () {
+        //       if(Provider.of<HomeProvider>(context, listen: false).monthList.salaryDate == null) {
+        //         final snackBar = SnackBar(
+        //             backgroundColor: AppColors.Snack_Bar_COLOR,
+        //             content: Text(
+        //               "Salary release date must be entered".tr(),
+        //               textAlign: TextAlign.center,
+        //               style: TextStyle(
+        //                   fontSize: 20,
+        //                   color: Colors.white,
+        //                   fontWeight: FontWeight.w500,
+        //                   fontFamily: "Segoe UI"),
+        //             ));
+        //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        //       }else {
+        //         Provider.of<HomeProvider>(context, listen: false).saveList();
+        //         UserPreferences.instance.saveRoutName(MonthlyIncomeScreen.routeName);
+        //         Navigator.pushReplacementNamed(
+        //           context,
+        //             MonthlyIncomeScreen.routeName
+        //         );
+        //       }
+        //     },
+        //   ),
+        // ],
       ),
       body: (Provider.of<HomeProvider>(context).monthList == null) ?
       CircularProgressIndicator()
@@ -84,16 +85,16 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 162,
-                width: 206,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image:
-                        AssetImage("assets/images/Plain credit card-amico.png"),
-                  ),
-                ),
-              ),
+              // Container(
+              //   height: 162,
+              //   width: 206,
+              //   decoration: BoxDecoration(
+              //     image: DecorationImage(
+              //       image:
+              //           AssetImage("assets/images/Plain credit card-amico.png"),
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 21,
               ),
@@ -105,12 +106,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.black,
                     size: 21,
                   ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  StarRedCustom(
-                    isHidden: true,
-                  ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
+                  // StarRedCustom(
+                  //   isHidden: true,
+                  // ),
                   SizedBox(
                     width: 4,
                   ),
@@ -140,40 +141,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Radio<SingingCharacter>(
-                            value: SingingCharacter.Arabic,
-                            groupValue: provider.character,
-                            onChanged: (SingingCharacter value) {
-                              provider.setLanguage(value, context);
-                            }),
-                        Text(
-                          'Arabic'.tr(),
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Segoe UI"),
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: (){
+                        // provider.setLanguage(
+                        //     SingingCharacter.English, context);
+                      },
+                      child: Row(
+                        children: [
+                          Radio<SingingCharacter>(
+                              value: SingingCharacter.Arabic,
+                              groupValue: provider.character,
+                              onChanged: (SingingCharacter value) {
+                                provider.setLanguage(value, context);
+                              }),
+                          Text(
+                            'Arabic'.tr(),
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: "Segoe UI"),
+                          ),
+                        ],
+                      ),
                     ),
                     Spacer(),
-                    Row(
-                      children: [
-                        Radio<SingingCharacter>(
-                            value: SingingCharacter.English,
-                            groupValue: provider.character,
-                            onChanged: (SingingCharacter value) {
-                              provider.setLanguage(value, context);
-                            }),
-                        Text(
-                          'English'.tr(),
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: "Segoe UI"),
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: (){
+                        // provider.setLanguage(
+                        //     SingingCharacter.Arabic, context);
+                        },
+                      child: Row(
+                        children: [
+                          Radio<SingingCharacter>(
+                              value: SingingCharacter.English,
+                              groupValue: provider.character,
+                              onChanged: (SingingCharacter value) {
+                                provider.setLanguage(value, context);
+                              }),
+                          Text(
+                            'English'.tr(),
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: "Segoe UI"),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       width: 40,
@@ -198,22 +211,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
+                  // StarRedCustom(
+                  //   isHidden: true,
+                  // ),
                   SizedBox(
                     width: 4,
                   ),
-                  StarRedCustom(
-                    isHidden: true,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "تاريخ نزول الراتب - Salary descent date".tr(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: "Segoe UI",
-                      fontWeight: FontWeight.bold,
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Text(
+                      "أدخل تاريخ نزول الراتب - Enter salary descent date".tr(),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontFamily: "Segoe UI",
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -250,6 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
+                            color: provider.monthList.salaryDate == null ? Colors.red : Colors.black,
                             fontFamily: "Segoe UI"),
                       ),
                       SizedBox(
@@ -263,48 +280,65 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Spacer(),
-              // Container(
-              //   // padding: EdgeInsets.only(left: 16, right: 16),
-              //   child: Row(
-              //     children: [
-              //       Spacer(),
-              //       GestureDetector(
-              //         onTap: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(builder: (context) => MonthlyIncomeScreen()),
-              //           );
-              //         },
-              //         child: Column(
-              //           children: [
-              //             SizedBox(
-              //               child: Icon(
-              //                 Icons.arrow_forward,
-              //                 color: AppColors.Next_Back_COLOR,
-              //                 size: 30.0,
-              //               ),
-              //               width: 29,
-              //               height: 43,
-              //             ),
-              //             Text(
-              //               "التالي",
-              //               style: TextStyle(
-              //                   color: AppColors.Next_Back_COLOR,
-              //                   fontSize: 13,
-              //                   fontFamily: "Segoe UI",
-              //                   fontWeight: FontWeight.bold),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //
-              //
-              //     ],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 15,
-              // ),
+              Container(
+                // padding: EdgeInsets.only(left: 16, right: 16),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        if(Provider.of<HomeProvider>(context, listen: false).monthList.salaryDate == null) {
+                          final snackBar = SnackBar(
+                              backgroundColor: AppColors.Snack_Bar_COLOR,
+                              content: Text(
+                                "Salary release date must be entered".tr(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "Segoe UI"),
+                              ));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }else {
+                          Provider.of<HomeProvider>(context, listen: false).saveList();
+                          UserPreferences.instance.saveRoutName(MonthlyIncomeScreen.routeName);
+                          Navigator.pushReplacementNamed(
+                              context,
+                              MonthlyIncomeScreen.routeName
+                          );
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: AppColors.MAIN_COLOR,
+                              size: 30.0,
+                            ),
+                            width: 29,
+                            height: 43,
+                          ),
+                          Text(
+                            "Next".tr(),
+                            style: TextStyle(
+                                color: AppColors.MAIN_COLOR,
+                                fontSize: 13,
+                                fontFamily: "Segoe UI",
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+
+
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
             ],
           ),
         );

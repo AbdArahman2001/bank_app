@@ -9,18 +9,25 @@ Function function;
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: function,
-      child: Container(
-        width: 52,
-        height: 47,
-        color: Colors.white,
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-                fontFamily: "Segoe UI",
-                color: Colors.black),
+      child: Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+
+          ),
+          width: 78,
+          height: 30,
+          // color: Colors.white,
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Segoe UI",
+                  color: Colors.black),
+            ),
           ),
         ),
       ),

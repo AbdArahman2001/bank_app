@@ -35,6 +35,64 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
   List<TextFormField> _fields = [];
   ScrollController _scrollController = ScrollController();
 
+  List expenses = [
+    "ملابس",
+    "صالون حلاقة",
+    "مشغل نسائي",
+    "مطاعم",
+    "كوفي شوب",
+    "مقاضي",
+    "إيجار",
+    "إنترنت",
+    "كهرباء",
+    "ماء",
+    "فاتورة جوال",
+    " مصروف المدرسة",
+    "مستلزمات المدرسة",
+    "بنزين",
+    "زيت",
+    "غسيل",
+    "قطع غيار",
+    "صيانة",
+    "مخالفات",
+    "اشتراك نادي",
+    "ترفيه",
+    "تاكسي",
+    "1- بطاقة بنكية",
+    "2- بطاقة بنكية",
+    "3- بطاقة بنكية",
+    "أخرى"
+  ];
+List arabicExpenses = [
+
+  "Clothes",
+  "Hair cut salon",
+  "Female player",
+  "Restaurants",
+  "Coffee shop",
+  "Sued",
+  "Rent",
+  "Internet",
+  "Electricity",
+  "Water",
+ "Mobile bill",
+ "School expenses",
+  "School supplies",
+  "Petrol",
+  "Oil",
+  "Laundry",
+  "Spare parts",
+  "Maintenance",
+  "Irregularities",
+  "Club subscription",
+  "Entertainment",
+  "Taxi",
+  "1- A bank card",
+  "2- A bank card",
+  "3- A bank card",
+  "Other"
+];
+
   @override
   void initState() {
     super.initState();
@@ -57,9 +115,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
     // for (final controller in _textCont) {
     //   controller.dispose();
     // }
-    if(Provider.of<HomeProvider>(context).monthList == null){
-
-    }else{
+    if (Provider.of<HomeProvider>(context).monthList == null) {
+    } else {
       initialFileds();
     }
     return Scaffold(
@@ -78,1020 +135,545 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
         ),
         backgroundColor: AppColors.MAIN_COLOR,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.arrow_forward),
-            onPressed: () {
-              //TODO: show yes no to add reminder amount to save amount
-              provider.validateMonthlyIncome().then((v) {
-                if (v is bool && v) {
-                  if (provider.getRemainingAmount() > 0) {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ReminderCustomDialog();
-                        }).then((value) {
-                      if (value is bool && value) {
-                        provider.monthList.saveAmount +=
-                            provider.getRemainingAmount();
-                        Provider.of<HomeProvider>(context, listen: false)
-                            .saveList(isPlan: true);
-                        UserPreferences.instance.saveRoutName(TableOfSaralyScreen.routeName);
-                        Navigator.pushReplacementNamed(
-                            context, TableOfSaralyScreen.routeName);
-                      }
-                      ;
-                    });
-                  } else {
-                    Provider.of<HomeProvider>(context, listen: false)
-                        .saveList(isPlan: true);
-                    UserPreferences.instance
-                        .saveRoutName(TableOfSaralyScreen.routeName);
-                    UserPreferences.instance.saveRoutName(TableOfSaralyScreen.routeName);
-                    Navigator.pushReplacementNamed(
-                        context, TableOfSaralyScreen.routeName);
-                  }
-                } else {
-                  var snackBar = SnackBar(
-                      backgroundColor: AppColors.Snack_Bar_COLOR,
-                      content: Text(
-                        v,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: "Segoe UI"),
-                      ));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              });
-            },
-          ),
-        ],
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushReplacementNamed(
-                  context, HomeScreen.routeName);
-              // Navigator.of(context).pushNamedAndRemoveUntil(
-              //     HomeScreen.routeName,
-              //     (route) => route.isCurrent &&
-              //             route.settings.name == HomeScreen.routeName
-              //         ? false
-              //         : true);
-              // Navigator.pop(context);
-            }),
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.arrow_forward),
+        //     onPressed: () {
+        //       //TODO: show yes no to add reminder amount to save amount
+        //       provider.validateMonthlyIncome().then((v) {
+        //         if (v is bool && v) {
+        //           if (provider.getRemainingAmount() > 0) {
+        //             showDialog(
+        //                 context: context,
+        //                 builder: (BuildContext context) {
+        //                   return ReminderCustomDialog();
+        //                 }).then((value) {
+        //               if (value is bool && value) {
+        //                 provider.monthList.saveAmount +=
+        //                     provider.getRemainingAmount();
+        //                 Provider.of<HomeProvider>(context, listen: false)
+        //                     .saveList(isPlan: true);
+        //                 UserPreferences.instance.saveRoutName(TableOfSaralyScreen.routeName);
+        //                 Navigator.pushReplacementNamed(
+        //                     context, TableOfSaralyScreen.routeName);
+        //               }
+        //               ;
+        //             });
+        //           } else {
+        //             Provider.of<HomeProvider>(context, listen: false)
+        //                 .saveList(isPlan: true);
+        //             UserPreferences.instance
+        //                 .saveRoutName(TableOfSaralyScreen.routeName);
+        //             UserPreferences.instance.saveRoutName(TableOfSaralyScreen.routeName);
+        //             Navigator.pushReplacementNamed(
+        //                 context, TableOfSaralyScreen.routeName);
+        //           }
+        //         } else {
+        //           var snackBar = SnackBar(
+        //               backgroundColor: AppColors.Snack_Bar_COLOR,
+        //               content: Text(
+        //                 v,
+        //                 textAlign: TextAlign.center,
+        //                 style: TextStyle(
+        //                     fontSize: 20,
+        //                     color: Colors.white,
+        //                     fontWeight: FontWeight.w500,
+        //                     fontFamily: "Segoe UI"),
+        //               ));
+        //           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        //         }
+        //       });
+        //     },
+        //   ),
+        // ],
+        // leading: IconButton(
+        //     icon: Icon(Icons.arrow_back),
+        //     onPressed: () {
+        //       Navigator.pushReplacementNamed(
+        //           context, HomeScreen.routeName);
+        //       // Navigator.of(context).pushNamedAndRemoveUntil(
+        //       //     HomeScreen.routeName,
+        //       //     (route) => route.isCurrent &&
+        //       //             route.settings.name == HomeScreen.routeName
+        //       //         ? false
+        //       //         : true);
+        //       // Navigator.pop(context);
+        //     }),
       ),
-      body: (Provider.of<HomeProvider>(context).monthList == null) ?
-      CircularProgressIndicator()
+      body: (Provider.of<HomeProvider>(context).monthList == null)
+          ? CircularProgressIndicator()
           : Consumer<HomeProvider>(builder: (context, provider, x) {
-
-        return Container(
-          // height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  top: 5,
-                ),
+              return Container(
+                // height: MediaQuery.of(context).size.height,
                 child: Column(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 87,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.16),
-                              spreadRadius: 3,
-                              blurRadius: 6),
-                        ],
-                      ),
                       padding: EdgeInsets.only(
-                          left: 15, right: 15, top: 8, bottom: 8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Source of monthly income".tr(),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: "Segoe UI",
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Spacer(),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return CalculateScreen();
-                                      }).then((value) {
-                                    // TODO: show error message if amount not correct
-                                    if (value == null) {
-                                    } else if (double.parse(value) <
-                                        provider
-                                            .getSumSaveExpencesCashAmount()) {
-                                      final snackBar = SnackBar(
-                                          backgroundColor:
-                                              AppColors.Snack_Bar_COLOR,
-                                          content: Text(
-                                            "Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses"
-                                                .tr(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Segoe UI"),
-                                          ));
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                    } else {
-                                      provider.changeSalaryAmount(value);
-                                    }
-                                  });
-                                },
-                                child: Container(
-                                  height: 30,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/addadd.png"),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 2,
-                              ),
-                              Container(
-                                height: 29,
-                                width: 93,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.grey.shade200,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: AppColors.MAIN_COLOR,
-                                        spreadRadius: 1),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    NumberFormat('###,##0.00').format(
-                                        provider.monthList.salaryAmount),
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Segoe UI",
-                                      color: AppColors.Drawer_COLOR,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  "Remaining from monthly income source after tabulation"
-                                      .tr(),
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: "Segoe UI",
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 29,
-                                width: 93,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.grey.shade200,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: AppColors.MAIN_COLOR,
-                                        spreadRadius: 1),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    NumberFormat('###,##0.00')
-                                        .format(provider.getRemainingAmount()),
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: "Segoe UI",
-                                      color: AppColors.Drawer_COLOR,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
+                        left: 16,
+                        right: 16,
+                        top: 5,
                       ),
-                    ),
-                    SizedBox(
-                      height: 14,
-                    ),
-                    Container(
-                      height: 1.0,
-                      color: AppColors.Border_COLOR,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () async {
-                                await provider.addExpense();
-                                var scrollPosition = _scrollController.position;
-                                _scrollController.animateTo(
-                                  scrollPosition.maxScrollExtent + 60,
-                                  duration: new Duration(milliseconds: 200),
-                                  curve: Curves.easeOut,
-                                );
-                              },
-                              child: Container(
-                                width:
-                                    (MediaQuery.of(context).size.width - 32) /
-                                        3,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: AppColors.MAIN_COLOR,
-                                        spreadRadius: 1),
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/Plus.png"),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "Add expense".tr(),
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Segoe UI",
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                provider.resetValues();
-                              },
-                              child: Container(
-                                width:
-                                    (MediaQuery.of(context).size.width - 32) /
-                                        3,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: AppColors.MAIN_COLOR,
-                                        spreadRadius: 1),
-                                  ],
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/loop.png"),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "Zero values".tr(),
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Segoe UI",
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                provider.changeDeleteEnable();
-                              },
-                              child: Container(
-                                width:
-                                    (MediaQuery.of(context).size.width - 32) /
-                                        3,
-                                height: 24,
-                                decoration: BoxDecoration(
-                                  // borderRadius: BorderRadius.only(
-                                  //     topLeft: Radius.circular(5),
-                                  //     bottomLeft: Radius.circular(5)),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: AppColors.MAIN_COLOR,
-                                        spreadRadius: 1),
-                                  ],
-                                  image: DecorationImage(
-                                    image:
-                                        AssetImage("assets/images/close.png"),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "Delete expense".tr(),
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Segoe UI",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      height: 1.0,
-                      color: AppColors.Border_COLOR,
-                    ),
-                    SizedBox(
-                      // height: 26,
-                      height: 5,
-                    ),
-                    Container(
-                      // padding: EdgeInsets.only(top: 7),
                       child: Column(
                         children: [
-                          // SizedBox(
-                          //   height: 7,
-                          // ),
-                          Text(
-                            "Monthly saver".tr(),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w900,
-                              fontFamily: "Segoe UI",
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(
-                            // height: 13,
-                            height: 5,
-                          ),
                           Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 87,
                             decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.Border_COLOR),
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10)),
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.16),
+                                    spreadRadius: 3,
+                                    blurRadius: 6),
+                              ],
                             ),
-                            child: Table(
-                              columnWidths: {
-                                0: FlexColumnWidth(1),
-                                1: FlexColumnWidth(4),
-                                2: FlexColumnWidth(4),
-                              },
-                              border: TableBorder(
-                                horizontalInside: BorderSide(
-                                    width: 1,
-                                    color: AppColors.Border_COLOR,
-                                    style: BorderStyle.solid),
-                                verticalInside: BorderSide(
-                                    width: 1,
-                                    color: AppColors.Border_COLOR,
-                                    style: BorderStyle.solid),
-                              ),
-
-                              // border:
-                              //     TableBorder.all(color: AppColors.Border_COLOR),
+                            padding: EdgeInsets.only(
+                                left: 15, right: 15, top: 8, bottom: 8),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                TableRow(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
-                                    color: AppColors.BG_Table_COLOR,
-                                  ),
+                                Row(
                                   children: [
-                                    SizedBox(
-                                      height: 40,
-                                      // decoration: BoxDecoration(
-                                      //   borderRadius: BorderRadius.only(
-                                      //       topRight: Radius.circular(10)),
-                                      //   border: Border.all(
-                                      //       color: AppColors.Border_COLOR),
-                                      //   color: AppColors.MAIN_COLOR,
-                                      // ),
-                                      child: Center(
-                                        child: Text(
-                                          "NO".tr(),
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              fontFamily: 'Tajawal',
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white),
+                                    Text(
+                                      "Enter your total monthly income".tr(),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900,
+                                        fontFamily: "Segoe UI",
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    GestureDetector(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return CalculateScreen();
+                                            }).then((value) {
+                                          // TODO: show error message if amount not correct
+                                          if (value == null) {
+                                          } else if (double.parse(value) <
+                                              provider
+                                                  .getSumSaveExpencesCashAmount()) {
+                                            final snackBar = SnackBar(
+                                                backgroundColor:
+                                                    AppColors.Snack_Bar_COLOR,
+                                                content: Text(
+                                                  "Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses"
+                                                      .tr(),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: "Segoe UI"),
+                                                ));
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          } else {
+                                            provider.changeSalaryAmount(value);
+                                          }
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/addadd.png"),
+                                          ),
                                         ),
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 40,
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(
-                                      //       color: AppColors.Border_COLOR),
-                                      //   color: AppColors.MAIN_COLOR,
-                                      // ),
+                                      width: 2,
+                                    ),
+                                    Container(
+                                      height: 29,
+                                      width: 93,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.grey.shade200,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: AppColors.MAIN_COLOR,
+                                              spreadRadius: 1),
+                                        ],
+                                      ),
                                       child: Center(
                                         child: Text(
-                                          "Saver".tr(),
+                                          NumberFormat('###,##0.00').format(
+                                              provider.monthList.salaryAmount),
                                           style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Tajawal',
-                                              color: Colors.white),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "Segoe UI",
+                                            color: AppColors.Drawer_COLOR,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    TableCell(
-                                      child: SizedBox(
-                                        // decoration: BoxDecoration(
-                                        //   borderRadius: BorderRadius.only(
-                                        //       topLeft: Radius.circular(10)),
-                                        //   border: Border.all(
-                                        //       color: AppColors.Border_COLOR),
-                                        //   color: AppColors.MAIN_COLOR,
-                                        // ),
-                                        // padding: EdgeInsets.only(top: 10),
-                                        height: 40,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 10),
-                                                ),
-                                                StarRedCustom(
-                                                  isHidden: true,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 2,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 8),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    "Enter the value \n of the savings"
-                                                        .tr(),
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: 'Tajawal',
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    )
                                   ],
                                 ),
-                                TableRow(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        bottomRight: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10)),
-                                    color: AppColors.bg_COLOR,
-                                  ),
+                                Row(
                                   children: [
-                                    TableCell(
-                                      child: SizedBox(
-                                        height: 40,
-                                        // decoration: BoxDecoration(
-                                        //   borderRadius: BorderRadius.only(
-                                        //       bottomRight: Radius.circular(10)),
-                                        //   color: AppColors.No_Table_COLOR,
-                                        // ),
-                                        // width:
-                                        //     MediaQuery.of(context).size.width,
-                                        child: Center(
-                                          child: Text(
-                                            "1",
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Tajawal',
-                                                color:
-                                                    AppColors.Text_Table_COLOR),
-                                          ),
+                                    Expanded(
+                                      child: Text(
+                                        "The remainder of the total monthly income"
+                                            .tr(),
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: "Segoe UI",
+                                          color: Colors.black,
                                         ),
                                       ),
-                                      verticalAlignment:
-                                          TableCellVerticalAlignment.middle,
                                     ),
-                                    TableCell(
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      height: 29,
+                                      width: 93,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.grey.shade200,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: AppColors.MAIN_COLOR,
+                                              spreadRadius: 1),
+                                        ],
+                                      ),
                                       child: Center(
                                         child: Text(
-                                          "Saver".tr(),
+                                          NumberFormat('###,##0.00').format(
+                                              provider.getRemainingAmount()),
                                           style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Tajawal',
-                                              color:
-                                                  AppColors.Text_Table_COLOR),
-                                        ),
-                                      ),
-                                      verticalAlignment:
-                                          TableCellVerticalAlignment.middle,
-                                    ),
-                                    TableCell(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return CalculateScreen();
-                                              }).then((value) {
-                                            // TODO: show error message if amount not correct
-                                            if (value == null) {
-                                            } else if (double.parse(value) >
-                                                (provider.getRemainingAmount() +
-                                                    provider.monthList
-                                                        .saveAmount)) {
-                                              final snackBar = SnackBar(
-                                                  backgroundColor:
-                                                      AppColors.Snack_Bar_COLOR,
-                                                  content: Text(
-                                                    'Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses'
-                                                        .tr(),
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: "Segoe UI"),
-                                                  ));
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar);
-                                            } else {
-                                              provider.changeSaveAmount(value);
-                                            }
-                                          });
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(10)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              NumberFormat('###,##0.00').format(
-                                                  provider
-                                                      .monthList.saveAmount),
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: "Segoe UI",
-                                                color: Colors.black,
-                                              ),
-                                            ),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "Segoe UI",
+                                            color: AppColors.Drawer_COLOR,
                                           ),
                                         ),
                                       ),
-                                      verticalAlignment:
-                                          TableCellVerticalAlignment.middle,
-                                    ),
+                                    )
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                // height: 27,
-                height: 10,
-              ),
-              Container(
-                height: 1.0,
-                color: AppColors.Divider_COLOR,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 16, top: 4, right: 16),
-                child: Column(
-                  children: [
-                    Container(
-                      child: Text(
-                        "Monthly expense list".tr(),
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: "Segoe UI",
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Row(children: [
-                      Visibility(
-                        visible: provider.isDeleteEnable,
-                        child: GestureDetector(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                // border: Border.all(),
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(0),
-                                ),
-                                color: AppColors.Back_Ground_COLOR,
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/delete_black.png"),
-                                ),
-                              ),
-                              width: MediaQuery.of(context).size.width / 10,
-                              height: 40,
-                            ),
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return DeleteCustomDialog();
-                                  }).then((value) async {
-                                if (value is bool && value) {
-                                  provider.changeDeleteEnable();
-
-                                  await provider.removeExpense();
-                                  initialFileds();
-                                }
-                                ;
-                              });
-                            }),
-                      ),
-                      Expanded(
-                        child: Table(
-                          border: TableBorder(
-                            horizontalInside: BorderSide(
-                                width: 1,
-                                color: AppColors.Border_COLOR,
-                                style: BorderStyle.solid),
-                            verticalInside: BorderSide(
-                                width: 1,
-                                color: AppColors.Border_COLOR,
-                                style: BorderStyle.solid),
+                          SizedBox(
+                            height: 14,
                           ),
-                          columnWidths: {
-                            0: FlexColumnWidth(1),
-                            1: FlexColumnWidth(4),
-                            2: FlexColumnWidth(4),
-                          },
-                          children: [
-                            TableRow(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                  ),
-                                  color: AppColors.BG_Table_COLOR,
-                                ),
-                                children: [
-                                  SizedBox(
-                                    height: 40,
-                                    // decoration: BoxDecoration(
-                                    //   border: Border.all(
-                                    //       color: AppColors.Border_COLOR),
-                                    //   borderRadius: BorderRadius.only(
-                                    //     topRight: Radius.circular(10),
-                                    //   ),
-                                    //   color: AppColors.MAIN_COLOR,
-                                    // ),
-                                    child: Center(
-                                      child: Text(
-                                        "NO".tr(),
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontFamily: 'Tajawal',
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                    // decoration: BoxDecoration(
-                                    //   border: Border.all(
-                                    //       color: AppColors.Border_COLOR),
-                                    //   color: AppColors.MAIN_COLOR,
-                                    // ),
-                                    child: Center(
-                                      child: Text(
-                                        "The expense".tr(),
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Tajawal',
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                    // decoration: BoxDecoration(
-                                    //   border: Border.all(
-                                    //       color: AppColors.Border_COLOR),
-                                    //   borderRadius: BorderRadius.only(
-                                    //       topLeft: Radius.circular(10)),
-                                    //   color: AppColors.MAIN_COLOR,
-                                    // ),
-                                    // padding: EdgeInsets.only(top: 3),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      // crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(top: 3),
-                                            ),
-                                            StarRedCustom(
-                                              isHidden: true,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          width: 2,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(top: 3),
-                                            ),
-                                            Text(
-                                              // "أدخل قيم الجدولة \n للمصاريف الشهرية",
-                                              "Enter tab values".tr(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: 'Tajawal',
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      )
-                    ])
-                  ],
-                ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  controller: _scrollController = ScrollController(),
-                  child: Column(
-                    children: [
-                      // SizedBox(
-                      //   // height: 16,
-                      //   height: 4,
-                      // ),
-                      Container(
-                        padding: EdgeInsets.only(left: 16, top: 4),
-                        child: Column(
-                          children: [
-                            // SizedBox(
-                            //   height: 7,
-                            // ),
-                            //TODO: delete empty expences name
+                          Container(
+                            height: 1.0,
+                            color: AppColors.Border_COLOR,
+                          ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
 
-                            // SizedBox(
-                            //   height: 13,
-                            // ),
-                            Container(
-                              padding: EdgeInsets.only(right: 16),
-                              // decoration: BoxDecoration(
-                              //   borderRadius:
-                              //       BorderRadius.only( topRight:Radius.circular(10)),
-                              // ),
-                              child: Row(children: [
-                                Visibility(
-                                  visible: provider.isDeleteEnable,
-                                  child: Column(children: [
-                                    for (int i = 0;
-                                        i < provider.monthList.expences.length;
-                                        i++)
-                                      SizedBox(
-                                        // decoration: BoxDecoration(
-                                        //   // border: Border.all(),
-                                        //   borderRadius: BorderRadius.only(
-                                        //       bottomRight: Radius.circular(i <
-                                        //               provider
-                                        //                       .monthList
-                                        //                       .expences
-                                        //                       .length -
-                                        //                   1
-                                        //           ? 0
-                                        //           : 10)),
-                                        //   color: AppColors
-                                        //       .Back_Ground_COLOR,
-                                        // ),
-                                        // width: MediaQuery.of(context)
-                                        //     .size
-                                        //     .width,
-                                        height: 40,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                10,
-                                        child: Center(
-                                          child: Checkbox(
-                                            shape: CircleBorder(),
-                                            tristate: false,
-                                            // splashRadius: 30,
-                                            checkColor: Colors.white,
-                                            activeColor: AppColors.MAIN_COLOR,
-                                            value: provider
-                                                .monthList.expences[i].isSelect,
-                                            onChanged: (value) {
-                                              provider.monthList.expences[i]
-                                                      .isSelect =
-                                                  !provider.monthList
-                                                      .expences[i].isSelect;
-                                              provider.printList();
-                                              provider.notifyListeners();
-                                            },
-                                            // controlAffinity: ListTileControlAffinity
-                                            //     .leading, //  <-- leading Checkbox
-                                          ),
-                                        ),
-                                      ),
-                                  ]),
+                          /// add
+                          /// delete
+                          /// zero
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //   children: [
+                          //     /// add expense ///
+                          //     // Column(
+                          //     //   mainAxisAlignment: MainAxisAlignment.center,
+                          //     //   children: [
+                          //     //     GestureDetector(
+                          //     //       onTap: () async {
+                          //     //         await provider.addExpense();
+                          //     //         var scrollPosition = _scrollController.position;
+                          //     //         _scrollController.animateTo(
+                          //     //           scrollPosition.maxScrollExtent + 60,
+                          //     //           duration: new Duration(milliseconds: 200),
+                          //     //           curve: Curves.easeOut,
+                          //     //         );
+                          //     //       },
+                          //     //       child: Container(
+                          //     //         width:
+                          //     //             (MediaQuery.of(context).size.width - 32) /
+                          //     //                 3,
+                          //     //         height: 24,
+                          //     //         decoration: BoxDecoration(
+                          //     //           color: Colors.white,
+                          //     //           boxShadow: [
+                          //     //             BoxShadow(
+                          //     //                 color: AppColors.MAIN_COLOR,
+                          //     //                 spreadRadius: 1),
+                          //     //           ],
+                          //     //           image: DecorationImage(
+                          //     //             image: AssetImage("assets/images/Plus.png"),
+                          //     //           ),
+                          //     //         ),
+                          //     //       ),
+                          //     //     ),
+                          //     //     SizedBox(
+                          //     //       height: 4,
+                          //     //     ),
+                          //     //     Text(
+                          //     //       "Add expense".tr(),
+                          //     //       style: TextStyle(
+                          //     //         fontSize: 13,
+                          //     //         fontWeight: FontWeight.w600,
+                          //     //         fontFamily: "Segoe UI",
+                          //     //       ),
+                          //     //     ),
+                          //     //   ],
+                          //     // ),
+                          //     /// zero expense ///
+                          //     // Column(
+                          //     //   mainAxisAlignment: MainAxisAlignment.center,
+                          //     //   children: [
+                          //     //     GestureDetector(
+                          //     //       onTap: () {
+                          //     //         provider.resetValues();
+                          //     //       },
+                          //     //       child: Container(
+                          //     //         width:
+                          //     //             (MediaQuery.of(context).size.width - 32) /
+                          //     //                 3,
+                          //     //         height: 24,
+                          //     //         decoration: BoxDecoration(
+                          //     //           color: Colors.white,
+                          //     //           boxShadow: [
+                          //     //             BoxShadow(
+                          //     //                 color: AppColors.MAIN_COLOR,
+                          //     //                 spreadRadius: 1),
+                          //     //           ],
+                          //     //           image: DecorationImage(
+                          //     //             image: AssetImage("assets/images/loop.png"),
+                          //     //           ),
+                          //     //         ),
+                          //     //       ),
+                          //     //     ),
+                          //     //     SizedBox(
+                          //     //       height: 4,
+                          //     //     ),
+                          //     //     Text(
+                          //     //       "Zero values".tr(),
+                          //     //       style: TextStyle(
+                          //     //         fontSize: 13,
+                          //     //         fontWeight: FontWeight.w600,
+                          //     //         fontFamily: "Segoe UI",
+                          //     //       ),
+                          //     //     ),
+                          //     //   ],
+                          //     // ),
+                          //     /// delete expense ///
+                          //     // Column(
+                          //     //   mainAxisAlignment: MainAxisAlignment.center,
+                          //     //   children: [
+                          //     //     GestureDetector(
+                          //     //       onTap: () {
+                          //     //         provider.changeDeleteEnable();
+                          //     //       },
+                          //     //       child: Container(
+                          //     //         width:
+                          //     //             (MediaQuery.of(context).size.width - 32) /
+                          //     //                 3,
+                          //     //         height: 24,
+                          //     //         decoration: BoxDecoration(
+                          //     //           // borderRadius: BorderRadius.only(
+                          //     //           //     topLeft: Radius.circular(5),
+                          //     //           //     bottomLeft: Radius.circular(5)),
+                          //     //           color: Colors.white,
+                          //     //           boxShadow: [
+                          //     //             BoxShadow(
+                          //     //                 color: AppColors.MAIN_COLOR,
+                          //     //                 spreadRadius: 1),
+                          //     //           ],
+                          //     //           image: DecorationImage(
+                          //     //             image:
+                          //     //                 AssetImage("assets/images/close.png"),
+                          //     //           ),
+                          //     //         ),
+                          //     //       ),
+                          //     //     ),
+                          //     //     SizedBox(
+                          //     //       height: 4,
+                          //     //     ),
+                          //     //     Text(
+                          //     //       "Delete expense".tr(),
+                          //     //       style: TextStyle(
+                          //     //         fontSize: 13,
+                          //     //         fontWeight: FontWeight.w600,
+                          //     //         fontFamily: "Segoe UI",
+                          //     //       ),
+                          //     //     ),
+                          //     //   ],
+                          //     // ),
+                          //   ],
+                          // ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          /// devider ///
+                          // Container(
+                          //   height: 1.0,
+                          //   color: AppColors.Border_COLOR,
+                          // ),
+                          // SizedBox(
+                          //   // height: 26,
+                          //   height: 5,
+                          // ),
+                          Container(
+                            // padding: EdgeInsets.only(top: 7),
+                            child: Column(
+                              children: [
+                                // SizedBox(
+                                //   height: 7,
+                                // ),
+                                Text(
+                                  "Monthly saver".tr(),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "Segoe UI",
+                                    color: Colors.black,
+                                  ),
                                 ),
-                                Expanded(
-                                  child: Table(
-                                    border: TableBorder(
-                                      top: BorderSide(
-                                        color: AppColors.Border_COLOR,
-                                      ),
-                                      right: BorderSide(
-                                        color: AppColors.Border_COLOR,
-                                      ),
-                                      bottom: BorderSide(
-                                        color: AppColors.Border_COLOR,
-                                      ),
-                                      left: BorderSide(
-                                        color: AppColors.Border_COLOR,
-                                      ),
-                                      horizontalInside: BorderSide(
-                                        color: AppColors.Border_COLOR,
-                                      ),
-                                      verticalInside: BorderSide(
-                                        color: AppColors.Border_COLOR,
-                                      ),
-                                      borderRadius: BorderRadius.only(
+                                SizedBox(
+                                  // height: 13,
+                                  height: 5,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: AppColors.Border_COLOR),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
                                         bottomRight: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
-                                      ),
-                                    ),
-
-                                    // TableBorder(
-                                    //                           horizontalInside: BorderSide(
-                                    //                               width: 1,
-                                    //                               color: AppColors.Border_COLOR,
-                                    //                               style: BorderStyle.solid),
-                                    //                           verticalInside: BorderSide(
-                                    //                               width: 1,
-                                    //                               color: AppColors.Border_COLOR,
-                                    //                               style: BorderStyle.solid),
-                                    //                         ),
+                                        bottomLeft: Radius.circular(10)),
+                                  ),
+                                  child: Table(
                                     columnWidths: {
                                       0: FlexColumnWidth(1),
                                       1: FlexColumnWidth(4),
                                       2: FlexColumnWidth(4),
                                     },
+                                    border: TableBorder(
+                                      horizontalInside: BorderSide(
+                                          width: 1,
+                                          color: AppColors.Border_COLOR,
+                                          style: BorderStyle.solid),
+                                      verticalInside: BorderSide(
+                                          width: 1,
+                                          color: AppColors.Border_COLOR,
+                                          style: BorderStyle.solid),
+                                    ),
+
+                                    // border:
+                                    //     TableBorder.all(color: AppColors.Border_COLOR),
                                     children: [
-                                      for (int i = 0;
-                                          i <
-                                              provider
-                                                  .monthList.expences.length;
-                                          i++)
-                                        TableRow(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              bottomRight: Radius.circular(i <
-                                                      provider.monthList
-                                                              .expences.length -
-                                                          1
-                                                  ? 0
-                                                  : 10),
-                                              bottomLeft: Radius.circular(i <
-                                                      provider.monthList
-                                                              .expences.length -
-                                                          1
-                                                  ? 0
-                                                  : 10),
-                                            ),
-                                            color: AppColors.bg_COLOR,
+                                      TableRow(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            topRight: Radius.circular(10),
                                           ),
-                                          children: [
-                                            SizedBox(
+                                          color: AppColors.BG_Table_COLOR,
+                                        ),
+                                        children: [
+                                          SizedBox(
+                                            height: 40,
+                                            // decoration: BoxDecoration(
+                                            //   borderRadius: BorderRadius.only(
+                                            //       topRight: Radius.circular(10)),
+                                            //   border: Border.all(
+                                            //       color: AppColors.Border_COLOR),
+                                            //   color: AppColors.MAIN_COLOR,
+                                            // ),
+                                            child: Center(
+                                              child: Text(
+                                                "NO".tr(),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontFamily: 'Tajawal',
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 40,
+                                            // decoration: BoxDecoration(
+                                            //   border: Border.all(
+                                            //       color: AppColors.Border_COLOR),
+                                            //   color: AppColors.MAIN_COLOR,
+                                            // ),
+                                            child: Center(
+                                              child: Text(
+                                                "Saver".tr(),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Tajawal',
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                          TableCell(
+                                            child: SizedBox(
                                               // decoration: BoxDecoration(
+                                              //   borderRadius: BorderRadius.only(
+                                              //       topLeft: Radius.circular(10)),
                                               //   border: Border.all(
-                                              //       color: AppColors
-                                              //           .Border_COLOR),
-                                              //   borderRadius:
-                                              //       BorderRadius.only(
-                                              //     bottomRight: Radius.circular(i <
-                                              //             provider
-                                              //                     .monthList
-                                              //                     .expences
-                                              //                     .length -
-                                              //                 1
-                                              //         ? 0
-                                              //         : 10),
-                                              //   ),
-                                              //   color:
-                                              //       AppColors.No_Table_COLOR,
+                                              //       color: AppColors.Border_COLOR),
+                                              //   color: AppColors.MAIN_COLOR,
                                               // ),
-                                              // width: MediaQuery.of(context)
-                                              //     .size
-                                              //     .width,
+                                              // padding: EdgeInsets.only(top: 10),
                                               height: 40,
                                               child: Center(
                                                 child: Text(
-                                                  (i + 1).toString(),
+                                                  "Enter the value \n of the savings"
+                                                      .tr(),
+                                                  textAlign:
+                                                  TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .w500,
+                                                      fontFamily:
+                                                      'Tajawal',
+                                                      color:
+                                                      Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      TableRow(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              bottomRight: Radius.circular(10),
+                                              bottomLeft: Radius.circular(10)),
+                                          color: AppColors.bg_COLOR,
+                                        ),
+                                        children: [
+                                          TableCell(
+                                            child: SizedBox(
+                                              height: 40,
+                                              // decoration: BoxDecoration(
+                                              //   borderRadius: BorderRadius.only(
+                                              //       bottomRight: Radius.circular(10)),
+                                              //   color: AppColors.No_Table_COLOR,
+                                              // ),
+                                              // width:
+                                              //     MediaQuery.of(context).size.width,
+                                              child: Center(
+                                                child: Text(
+                                                  "1",
                                                   style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
@@ -1102,313 +684,225 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                 ),
                                               ),
                                             ),
-                                            // SizedBox(
-                                            //
-                                            //   height: 40,
-                                            //   // decoration: BoxDecoration(
-                                            //   //   // border: Border.all(
-                                            //   //   //     color: AppColors
-                                            //   //   //         .Border_COLOR),
-                                            //   //   color:
-                                            //   //       AppColors.App_Bar_COLOR,
-                                            //   // ),
-                                            //   child: Center(
-                                            //       child: _fields[i]
-                                            //   ),
-                                            // ),
-                                            GestureDetector(
+                                            verticalAlignment:
+                                                TableCellVerticalAlignment
+                                                    .middle,
+                                          ),
+                                          TableCell(
+                                            child: Center(
+                                              child: Text(
+                                                "Saver".tr(),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Tajawal',
+                                                    color: AppColors
+                                                        .Text_Table_COLOR),
+                                              ),
+                                            ),
+                                            verticalAlignment:
+                                                TableCellVerticalAlignment
+                                                    .middle,
+                                          ),
+                                          TableCell(
+                                            child: GestureDetector(
                                               onTap: () {
                                                 showDialog(
                                                     context: context,
-                                                    builder: (BuildContext
-                                                        context) {
-                                                      provider.tresutl =
-                                                          provider
-                                                              .monthList
-                                                              .expences[i]
-                                                              .type;
-                                                      return NameExpensesCustom();
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return CalculateScreen();
                                                     }).then((value) {
                                                   // TODO: show error message if amount not correct
                                                   if (value == null) {
-                                                  } else
-                                                    provider
-                                                        .changeExpensesType(
-                                                            value, i);
+                                                  } else if (double.parse(
+                                                          value) >
+                                                      (provider
+                                                              .getRemainingAmount() +
+                                                          provider.monthList
+                                                              .saveAmount)) {
+                                                    final snackBar = SnackBar(
+                                                        backgroundColor:
+                                                            AppColors
+                                                                .Snack_Bar_COLOR,
+                                                        content: Text(
+                                                          'Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses'
+                                                              .tr(),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  "Segoe UI"),
+                                                        ));
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(snackBar);
+                                                  } else {
+                                                    provider.changeSaveAmount(
+                                                        value);
+                                                  }
                                                 });
                                               },
-                                              child: SizedBox(
-                                                height: 40,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10)),
+                                                ),
                                                 child: Center(
                                                   child: Text(
-        (provider
-                                                                .monthList
-                                                                .expences[i]
-                                                                .type ==
-                                                            null)
-                                                        ? "The expense".tr()
-                                                        : provider.monthList
-                                                            .expences[i].type,
-                                                    textAlign:
-                                                        TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: 'Tajawal',
-                                                        color: (provider
+                                                    NumberFormat('###,##0.00')
+                                                        .format(provider
                                                             .monthList
-                                                            .expences[i]
-                                                            .type ==
-                                                            null)
-                                                            ? Colors.red : AppColors
-                                                            .Text_Table_COLOR),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                              // decoration: BoxDecoration(
-                                              //   borderRadius:
-                                              //       BorderRadius.only(
-                                              //     bottomLeft: Radius.circular(i <
-                                              //             provider
-                                              //                     .monthList
-                                              //                     .expences
-                                              //                     .length -
-                                              //                 1
-                                              //         ? 0
-                                              //         : 10),
-                                              //   ),
-                                              //   border: Border.all(
-                                              //       color: AppColors
-                                              //           .Border_COLOR),
-                                              //   color:
-                                              //       AppColors.App_Bar_COLOR,
-                                              // ),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return CalculateScreen();
-                                                      }).then((value) {
-                                                    // TODO: show error message if amount not correct
-                                                    if (value == null) {
-                                                    } else if (double.parse(
-                                                            value) >
-                                                        (provider
-                                                                .getRemainingAmount() +
-                                                            provider
-                                                                .monthList
-                                                                .expences[i]
-                                                                .amount)) {
-                                                      final snackBar = SnackBar(
-                                                          backgroundColor:
-                                                              AppColors
-                                                                  .Snack_Bar_COLOR,
-                                                          content: Text(
-                                                            'Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses'
-                                                                .tr(),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                                fontSize: 20,
-                                                                color: Colors
-                                                                    .white,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                fontFamily:
-                                                                    "Segoe UI"),
-                                                          ));
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              snackBar);
-                                                    } else {
-                                                      provider
-                                                          .changeExpensesAmount(
-                                                              value, i);
-                                                    }
-                                                  });
-                                                },
-                                                child: SizedBox(
-                                                  // decoration: BoxDecoration(
-                                                  //   borderRadius:
-                                                  //       BorderRadius.only(
-                                                  //     bottomLeft: Radius.circular(i <
-                                                  //             provider
-                                                  //                     .monthList
-                                                  //                     .expences
-                                                  //                     .length -
-                                                  //                 1
-                                                  //         ? 0
-                                                  //         : 10),
-                                                  //   ),
-                                                  // ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      NumberFormat('###,##0.00')
-                                                          .format(provider
-                                                              .monthList
-                                                              .expences[i]
-                                                              .amount),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily: 'Tajawal',
-                                                          color: AppColors
-                                                              .Text_Table_COLOR),
+                                                            .saveAmount),
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontFamily: "Segoe UI",
+                                                      color: Colors.black,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 1.0,
-                color: AppColors.Divider_COLOR,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      "Monthly cash amount".tr(),
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w900,
-                        fontFamily: "Segoe UI",
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      // height: 13,
-                      height: 5,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.Border_COLOR),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                            bottomLeft: Radius.circular(10)),
-                      ),
-                      child: Table(
-                        columnWidths: {
-                          0: FlexColumnWidth(1),
-                          1: FlexColumnWidth(4),
-                          2: FlexColumnWidth(4),
-                        },
-                        border: TableBorder(
-                          horizontalInside: BorderSide(
-                              width: 1,
-                              color: AppColors.Border_COLOR,
-                              style: BorderStyle.solid),
-                          verticalInside: BorderSide(
-                              width: 1,
-                              color: AppColors.Border_COLOR,
-                              style: BorderStyle.solid),
-                        ),
-
-                        // border:
-                        //     TableBorder.all(color: AppColors.Border_COLOR),
-                        children: [
-                          TableRow(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              color: AppColors.BG_Table_COLOR,
-                            ),
-                            children: [
-                              SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(
-                                    "NO".tr(),
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontFamily: 'Tajawal',
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 40,
-                                child: Center(
-                                  child: Text(
-                                    "Cash amount".tr(),
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              TableCell(
-                                child: SizedBox(
-                                  height: 40,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 10),
-                                          ),
-                                          StarRedCustom(
-                                            isHidden: true,
+                                            verticalAlignment:
+                                                TableCellVerticalAlignment
+                                                    .middle,
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 2,
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      // height: 27,
+                      height: 10,
+                    ),
+                    Container(
+                      height: 1.0,
+                      color: AppColors.Divider_COLOR,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 16, top: 4, right: 16),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Text(
+                              "Monthly financial plan".tr(),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
+                                fontFamily: "Segoe UI",
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 3,),
+                          Row(children: [
+                            // GestureDetector(
+                            //     child: Container(
+                            //       decoration: BoxDecoration(
+                            //         // border: Border.all(),
+                            //         borderRadius: BorderRadius.only(
+                            //           bottomRight: Radius.circular(0),
+                            //         ),
+                            //         color: AppColors.Back_Ground_COLOR,
+                            //         image: DecorationImage(
+                            //           image: AssetImage(
+                            //               "assets/images/delete_black.png"),
+                            //         ),
+                            //       ),
+                            //       width: MediaQuery.of(context).size.width / 10,
+                            //       height: 40,
+                            //     ),
+                            //     onTap: () {
+                            //       showDialog(
+                            //           context: context,
+                            //           builder: (BuildContext context) {
+                            //             return DeleteCustomDialog();
+                            //           }).then((value) async {
+                            //         if (value is bool && value) {
+                            //           provider.changeDeleteEnable();
+                            //
+                            //           await provider.removeExpense();
+                            //           initialFileds();
+                            //         }
+                            //         ;
+                            //       });
+                            //     }),
+                            Expanded(
+                              child: Table(
+                                border: TableBorder(
+                                  horizontalInside: BorderSide(
+                                      width: 1,
+                                      color: AppColors.Border_COLOR,
+                                      style: BorderStyle.solid),
+                                  verticalInside: BorderSide(
+                                      width: 1,
+                                      color: AppColors.Border_COLOR,
+                                      style: BorderStyle.solid),
+                                ),
+                                columnWidths: {
+                                  0: FlexColumnWidth(1),
+                                  1: FlexColumnWidth(4),
+                                  2: FlexColumnWidth(4),
+                                },
+                                children: [
+                                  TableRow(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                        color: AppColors.BG_Table_COLOR,
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 10),
-                                          ),
-                                          Expanded(
+                                      children: [
+                                        SizedBox(
+                                          height: 40,
+                                          // decoration: BoxDecoration(
+                                          //   border: Border.all(
+                                          //       color: AppColors.Border_COLOR),
+                                          //   borderRadius: BorderRadius.only(
+                                          //     topRight: Radius.circular(10),
+                                          //   ),
+                                          //   color: AppColors.MAIN_COLOR,
+                                          // ),
+                                          child: Center(
                                             child: Text(
-                                              "Enter the cash amount".tr(),
-                                              textAlign: TextAlign.center,
+                                              "NO".tr(),
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily: 'Tajawal',
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                          // decoration: BoxDecoration(
+                                          //   border: Border.all(
+                                          //       color: AppColors.Border_COLOR),
+                                          //   color: AppColors.MAIN_COLOR,
+                                          // ),
+                                          child: Center(
+                                            child: Text(
+                                              "Item name".tr(),
                                               style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w500,
@@ -1416,185 +910,845 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                   color: Colors.white),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                          // decoration: BoxDecoration(
+                                          //   border: Border.all(
+                                          //       color: AppColors.Border_COLOR),
+                                          //   borderRadius: BorderRadius.only(
+                                          //       topLeft: Radius.circular(10)),
+                                          //   color: AppColors.MAIN_COLOR,
+                                          // ),
+                                          // padding: EdgeInsets.only(top: 3),
+                                          child: Center(
+                                            child: Text(
+                                              // "أدخل قيم الجدولة \n للمصاريف الشهرية",
+                                              "Enter item values".tr(),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  fontFamily: 'Tajawal',
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                ],
+                              ),
+                            ),
+                            Column(children: [
+                              SizedBox(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width / 10,
+                                child: Center(
+                                  child: Container(),
                                 ),
                               ),
-                            ],
-                          ),
-                          TableRow(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10)),
-                              color: AppColors.bg_COLOR,
-                            ),
-                            children: [
-                              TableCell(
-                                child: SizedBox(
-                                  height: 40,
-                                  child: Center(
-                                    child: Text(
-                                      "1",
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Tajawal',
-                                          color: AppColors.Text_Table_COLOR),
+                            ]),
+                          ])
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        controller: _scrollController = ScrollController(),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 16, top: 4),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Table(
+                                            border: TableBorder(
+                                              top: BorderSide(
+                                                color: AppColors.Border_COLOR,
+                                              ),
+                                              right: BorderSide(
+                                                color: AppColors.Border_COLOR,
+                                              ),
+                                              bottom: BorderSide(
+                                                color: AppColors.Border_COLOR,
+                                              ),
+                                              left: BorderSide(
+                                                color: AppColors.Border_COLOR,
+                                              ),
+                                              horizontalInside: BorderSide(
+                                                color: AppColors.Border_COLOR,
+                                              ),
+                                              verticalInside: BorderSide(
+                                                color: AppColors.Border_COLOR,
+                                              ),
+                                              borderRadius: BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(10),
+                                                bottomLeft: Radius.circular(10),
+                                              ),
+                                            ),
+                                            columnWidths: {
+                                              0: FlexColumnWidth(1),
+                                              1: FlexColumnWidth(4),
+                                              2: FlexColumnWidth(4),
+                                            },
+                                            children: [
+                                              for (int i = 0;
+                                                  i <
+                                                      provider.monthList
+                                                          .expences.length;
+                                                  i++)
+                                                TableRow(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                      bottomRight: Radius.circular(i <
+                                                              provider
+                                                                      .monthList
+                                                                      .expences
+                                                                      .length -
+                                                                  1
+                                                          ? 0
+                                                          : 10),
+                                                      bottomLeft: Radius.circular(i <
+                                                              provider
+                                                                      .monthList
+                                                                      .expences
+                                                                      .length -
+                                                                  1
+                                                          ? 0
+                                                          : 10),
+                                                    ),
+                                                    color: i %2 == 0 ?  AppColors.bg1_COLOR: AppColors.bg_COLOR,
+                                                  ),
+                                                  children: [
+                                                    SizedBox(
+                                                      // decoration: BoxDecoration(
+                                                      //   border: Border.all(
+                                                      //       color: AppColors
+                                                      //           .Border_COLOR),
+                                                      //   borderRadius:
+                                                      //       BorderRadius.only(
+                                                      //     bottomRight: Radius.circular(i <
+                                                      //             provider
+                                                      //                     .monthList
+                                                      //                     .expences
+                                                      //                     .length -
+                                                      //                 1
+                                                      //         ? 0
+                                                      //         : 10),
+                                                      //   ),
+                                                      //   color:
+                                                      //       AppColors.No_Table_COLOR,
+                                                      // ),
+                                                      // width: MediaQuery.of(context)
+                                                      //     .size
+                                                      //     .width,
+                                                      height: 40,
+                                                      child: Center(
+                                                        child: Text(
+                                                          (i + 1).toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontFamily:
+                                                                  'Tajawal',
+                                                              color: AppColors
+                                                                  .Text_Table_COLOR),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    // SizedBox(
+                                                    //
+                                                    //   height: 40,
+                                                    //   // decoration: BoxDecoration(
+                                                    //   //   // border: Border.all(
+                                                    //   //   //     color: AppColors
+                                                    //   //   //         .Border_COLOR),
+                                                    //   //   color:
+                                                    //   //       AppColors.App_Bar_COLOR,
+                                                    //   // ),
+                                                    //   child: Center(
+                                                    //       child: _fields[i]
+                                                    //   ),
+                                                    // ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              provider.tresutl =
+                                                                  provider
+                                                                      .monthList
+                                                                      .expences[
+                                                                          i]
+                                                                      .type;
+                                                              return NameExpensesCustom();
+                                                            }).then((value) {
+                                                          // TODO: show error message if amount not correct
+                                                          if (value == null) {
+                                                          } else
+                                                            provider
+                                                                .changeExpensesType(
+                                                                    value, i);
+                                                        });
+                                                      },
+                                                      child:  Container(
+                                                        height: 40,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
+                                                          BorderRadius.only(
+                                                              bottomLeft:
+                                                              Radius.circular(
+                                                                  10)),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            (provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                            i]
+                                                                        .type ==
+                                                                    null)
+                                                                ? "Enter the item name"
+                                                                    .tr()
+                                                                : provider
+                                                                    .monthList
+                                                                    .expences[i]
+                                                                    .type,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontFamily:
+                                                                    'Tajawal',
+                                                                color: (provider
+                                                                            .monthList
+                                                                            .expences[
+                                                                                i]
+                                                                            .type ==
+                                                                        null)
+                                                                    ? Colors.red
+                                                                    : AppColors
+                                                                        .Text_Table_COLOR),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 40,
+                                                      // decoration: BoxDecoration(
+                                                      //   borderRadius:
+                                                      //       BorderRadius.only(
+                                                      //     bottomLeft: Radius.circular(i <
+                                                      //             provider
+                                                      //                     .monthList
+                                                      //                     .expences
+                                                      //                     .length -
+                                                      //                 1
+                                                      //         ? 0
+                                                      //         : 10),
+                                                      //   ),
+                                                      //   border: Border.all(
+                                                      //       color: AppColors
+                                                      //           .Border_COLOR),
+                                                      //   color:
+                                                      //       AppColors.App_Bar_COLOR,
+                                                      // ),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return CalculateScreen();
+                                                              }).then((value) {
+                                                            // TODO: show error message if amount not correct
+                                                            if (value == null) {
+                                                            } else if (double
+                                                                    .parse(
+                                                                        value) >
+                                                                (provider
+                                                                        .getRemainingAmount() +
+                                                                    provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                            i]
+                                                                        .amount)) {
+                                                              final snackBar =
+                                                                  SnackBar(
+                                                                      backgroundColor:
+                                                                          AppColors
+                                                                              .Snack_Bar_COLOR,
+                                                                      content:
+                                                                          Text(
+                                                                        'Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses'
+                                                                            .tr(),
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                20,
+                                                                            color:
+                                                                                Colors.white,
+                                                                            fontWeight: FontWeight.w500,
+                                                                            fontFamily: "Segoe UI"),
+                                                                      ));
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      snackBar);
+                                                            } else {
+                                                              provider
+                                                                  .changeExpensesAmount(
+                                                                      value, i);
+                                                            }
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft:
+                                                                Radius.circular(
+                                                                    10)),
+                                                          ),
+                                                          child: Center(
+                                                            child: Text(
+                                                              //"أدخل القيم +",
+                                                              NumberFormat(
+                                                                      '###,##0.00')
+                                                                  .format(provider
+                                                                      .monthList
+                                                                      .expences[
+                                                                          i]
+                                                                      .amount),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontFamily:
+                                                                      'Tajawal',
+                                                                 // color: provider.monthList.expences[i].amount == null ? Colors.red : Colors.black,
+
+                                                                  color: AppColors
+                                                                      .Text_Table_COLOR,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                        Column(children: [
+                                          for (int i = 0;
+                                              i <
+                                                  provider.monthList.expences
+                                                      .length;
+                                              i++)
+                                            SizedBox(
+                                              height: 40,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  10,
+                                              /// close ///
+                                              // GestureDetector(
+                                              //                                                     //   onTap: () {
+                                              //                                                     //    if(provider.monthList
+                                              //                                                     //        .expences[i].isSelect){
+                                              //                                                     //      provider
+                                              //                                                     //          .monthList
+                                              //                                                     //          .expences[i]
+                                              //                                                     //          .isSelect =
+                                              //                                                     //      !provider
+                                              //                                                     //          .monthList
+                                              //                                                     //          .expences[i]
+                                              //                                                     //          .isSelect;
+                                              //                                                     //      provider.printList();
+                                              //                                                     //      provider
+                                              //                                                     //          .notifyListeners();
+                                              //                                                     //      showDialog(
+                                              //                                                     //          context: context,
+                                              //                                                     //          builder:
+                                              //                                                     //              (BuildContext
+                                              //                                                     //          context) {
+                                              //                                                     //            return DeleteCustomDialog();
+                                              //                                                     //          }).then((value) async {
+                                              //                                                     //        if (value is bool &&
+                                              //                                                     //            value) {
+                                              //                                                     //          provider
+                                              //                                                     //              .changeDeleteEnable();
+                                              //                                                     //
+                                              //                                                     //          await provider
+                                              //                                                     //              .removeExpense();
+                                              //                                                     //          initialFileds();
+                                              //                                                     //        }
+                                              //                                                     //        ;
+                                              //                                                     //      });
+                                              //                                                     //    }
+                                              //                                                     //   },
+                                              //                                                     //   child: Image(
+                                              //                                                     //     image: AssetImage(
+                                              //                                                     //         "assets/images/close.png"),
+                                              //                                                     //   ),
+                                              //                                                     // ),
+                                              child: Center(
+                                                child:  Checkbox(
+                                                  shape: CircleBorder(),
+                                                  tristate: false,
+                                                  // splashRadius: 30,
+                                                  checkColor: Colors.white,
+                                                  activeColor:
+                                                  AppColors.MAIN_COLOR,
+                                                  value: provider.monthList
+                                                      .expences[i].isSelect,
+                                                  onChanged: (value) {
+                                                    provider
+                                                        .monthList
+                                                        .expences[i]
+                                                        .isSelect =
+                                                    !provider
+                                                        .monthList
+                                                        .expences[i]
+                                                        .isSelect;
+                                                    provider.printList();
+                                                    provider
+                                                        .notifyListeners();
+                                                    showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (BuildContext
+                                                        context) {
+                                                          return DeleteCustomDialog();
+                                                        }).then((value) async {
+                                                      if (value is bool &&
+                                                          value) {
+                                                        provider
+                                                            .changeDeleteEnable();
+
+                                                        await provider
+                                                            .removeExpense();
+                                                        initialFileds();
+                                                      }
+                                                      ;
+                                                    });
+                                                  },
+                                                  // controlAffinity: ListTileControlAffinity
+                                                  //     .leading, //  <-- leading Checkbox
+                                                ),
+                                              ),
+                                            ),
+                                        ]),
+                                      ],
                                     ),
                                   ),
-                                ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
+                                ],
                               ),
-                              TableCell(
-                                child: Center(
-                                  child: Text(
-                                    "The amount".tr(),
-                                    style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Tajawal',
-                                        color: AppColors.Text_Table_COLOR),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    // Container(
+                    //   height: 1.0,
+                    //   color: AppColors.Divider_COLOR,
+                    // ),
+                    // Container(
+                    //   padding: EdgeInsets.only(left: 16, right: 16),
+                    //   child: Column(
+                    //     children: [
+                    //       SizedBox(
+                    //         height: 2,
+                    //       ),
+                    //       Text(
+                    //         "Monthly cash amount".tr(),
+                    //         style: TextStyle(
+                    //           fontSize: 15,
+                    //           fontWeight: FontWeight.w900,
+                    //           fontFamily: "Segoe UI",
+                    //           color: Colors.black,
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         // height: 13,
+                    //         height: 5,
+                    //       ),
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //           border: Border.all(color: AppColors.Border_COLOR),
+                    //           borderRadius: BorderRadius.only(
+                    //               topLeft: Radius.circular(10),
+                    //               topRight: Radius.circular(10),
+                    //               bottomRight: Radius.circular(10),
+                    //               bottomLeft: Radius.circular(10)),
+                    //         ),
+                    //         child: Table(
+                    //           columnWidths: {
+                    //             0: FlexColumnWidth(1),
+                    //             1: FlexColumnWidth(4),
+                    //             2: FlexColumnWidth(4),
+                    //           },
+                    //           border: TableBorder(
+                    //             horizontalInside: BorderSide(
+                    //                 width: 1,
+                    //                 color: AppColors.Border_COLOR,
+                    //                 style: BorderStyle.solid),
+                    //             verticalInside: BorderSide(
+                    //                 width: 1,
+                    //                 color: AppColors.Border_COLOR,
+                    //                 style: BorderStyle.solid),
+                    //           ),
+                    //
+                    //           // border:
+                    //           //     TableBorder.all(color: AppColors.Border_COLOR),
+                    //           children: [
+                    //             TableRow(
+                    //               decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.only(
+                    //                   topLeft: Radius.circular(10),
+                    //                   topRight: Radius.circular(10),
+                    //                 ),
+                    //                 color: AppColors.BG_Table_COLOR,
+                    //               ),
+                    //               children: [
+                    //                 SizedBox(
+                    //                   height: 40,
+                    //                   child: Center(
+                    //                     child: Text(
+                    //                       "NO".tr(),
+                    //                       style: TextStyle(
+                    //                           fontSize: 13,
+                    //                           fontFamily: 'Tajawal',
+                    //                           fontWeight: FontWeight.w500,
+                    //                           color: Colors.white),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 SizedBox(
+                    //                   height: 40,
+                    //                   child: Center(
+                    //                     child: Text(
+                    //                       "Cash amount".tr(),
+                    //                       style: TextStyle(
+                    //                           fontSize: 13,
+                    //                           fontWeight: FontWeight.w500,
+                    //                           fontFamily: 'Tajawal',
+                    //                           color: Colors.white),
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 TableCell(
+                    //                   child: SizedBox(
+                    //                     height: 40,
+                    //                     child: Row(
+                    //                       mainAxisAlignment: MainAxisAlignment.center,
+                    //                       crossAxisAlignment:
+                    //                           CrossAxisAlignment.center,
+                    //                       children: [
+                    //                         Column(
+                    //                           mainAxisAlignment:
+                    //                               MainAxisAlignment.start,
+                    //                           children: [
+                    //                             Padding(
+                    //                               padding: EdgeInsets.only(top: 10),
+                    //                             ),
+                    //                             StarRedCustom(
+                    //                               isHidden: true,
+                    //                             ),
+                    //                           ],
+                    //                         ),
+                    //                         SizedBox(
+                    //                           width: 2,
+                    //                         ),
+                    //                         Column(
+                    //                           mainAxisAlignment:
+                    //                               MainAxisAlignment.start,
+                    //                           children: [
+                    //                             Padding(
+                    //                               padding: EdgeInsets.only(top: 10),
+                    //                             ),
+                    //                             Expanded(
+                    //                               child: Text(
+                    //                                 "Enter the cash amount".tr(),
+                    //                                 textAlign: TextAlign.center,
+                    //                                 style: TextStyle(
+                    //                                     fontSize: 13,
+                    //                                     fontWeight: FontWeight.w500,
+                    //                                     fontFamily: 'Tajawal',
+                    //                                     color: Colors.white),
+                    //                               ),
+                    //                             ),
+                    //                           ],
+                    //                         ),
+                    //                       ],
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             TableRow(
+                    //               decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.only(
+                    //                     bottomRight: Radius.circular(10),
+                    //                     bottomLeft: Radius.circular(10)),
+                    //                 color: AppColors.bg_COLOR,
+                    //               ),
+                    //               children: [
+                    //                 TableCell(
+                    //                   child: SizedBox(
+                    //                     height: 40,
+                    //                     child: Center(
+                    //                       child: Text(
+                    //                         "1",
+                    //                         style: TextStyle(
+                    //                             fontSize: 13,
+                    //                             fontWeight: FontWeight.w500,
+                    //                             fontFamily: 'Tajawal',
+                    //                             color: AppColors.Text_Table_COLOR),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                   verticalAlignment:
+                    //                       TableCellVerticalAlignment.middle,
+                    //                 ),
+                    //                 TableCell(
+                    //                   child: Center(
+                    //                     child: Text(
+                    //                       "The amount".tr(),
+                    //                       style: TextStyle(
+                    //                           fontSize: 13,
+                    //                           fontWeight: FontWeight.w500,
+                    //                           fontFamily: 'Tajawal',
+                    //                           color: AppColors.Text_Table_COLOR),
+                    //                     ),
+                    //                   ),
+                    //                   verticalAlignment:
+                    //                       TableCellVerticalAlignment.middle,
+                    //                 ),
+                    //                 TableCell(
+                    //                   child: GestureDetector(
+                    //                     onTap: () {
+                    //                       showDialog(
+                    //                           context: context,
+                    //                           builder: (BuildContext context) {
+                    //                             return CalculateScreen();
+                    //                           }).then((value) {
+                    //                         // TODO: show error message if amount not correct
+                    //                         if (value == null) {
+                    //                         } else if (double.parse(value) >
+                    //                             (provider.getRemainingAmount() +
+                    //                                 provider.monthList.cashAmount)) {
+                    //                           final snackBar = SnackBar(
+                    //                               backgroundColor:
+                    //                                   AppColors.Snack_Bar_COLOR,
+                    //                               content: Text(
+                    //                                 'Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses'
+                    //                                     .tr(),
+                    //                                 textAlign: TextAlign.center,
+                    //                                 style: TextStyle(
+                    //                                     fontSize: 20,
+                    //                                     color: Colors.white,
+                    //                                     fontWeight: FontWeight.w500,
+                    //                                     fontFamily: "Segoe UI"),
+                    //                               ));
+                    //                           ScaffoldMessenger.of(context)
+                    //                               .showSnackBar(snackBar);
+                    //                         } else {
+                    //                           provider.changeCashAmount(value);
+                    //                         }
+                    //                       });
+                    //                     },
+                    //                     child: Container(
+                    //                       decoration: BoxDecoration(
+                    //                         borderRadius: BorderRadius.only(
+                    //                             bottomLeft: Radius.circular(10)),
+                    //                       ),
+                    //                       child: Center(
+                    //                         child: Text(
+                    //                           NumberFormat('###,##0.00').format(
+                    //                               provider.monthList.cashAmount),
+                    //                           style: TextStyle(
+                    //                             fontSize: 13,
+                    //                             fontWeight: FontWeight.w400,
+                    //                             fontFamily: "Segoe UI",
+                    //                             color: Colors.black,
+                    //                           ),
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                   verticalAlignment:
+                    //                       TableCellVerticalAlignment.middle,
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    /// back /// previous
+                    Container(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacementNamed(
+                                  context, HomeScreen.routeName);
+                            },
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 29,
+                                  height: 43,
+                                  child: Icon(
+                                    Icons.arrow_back,
+                                    color: AppColors.MAIN_COLOR,
+                                    size: 30.0,
                                   ),
                                 ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                              TableCell(
-                                child: GestureDetector(
-                                  onTap: () {
+                                // SizedBox(height: 5,),
+                                Text(
+                                  "Previous".tr(),
+                                  style: TextStyle(
+                                      color: AppColors.MAIN_COLOR,
+                                      fontSize: 13,
+                                      fontFamily: "Segoe UI",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              provider.validateMonthlyIncome().then((v) {
+                                if (v is bool && v) {
+                                  if (provider.getRemainingAmount() > 0) {
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return CalculateScreen();
+                                          return ReminderCustomDialog();
                                         }).then((value) {
-                                      // TODO: show error message if amount not correct
-                                      if (value == null) {
-                                      } else if (double.parse(value) >
-                                          (provider.getRemainingAmount() +
-                                              provider.monthList.cashAmount)) {
-                                        final snackBar = SnackBar(
-                                            backgroundColor:
-                                                AppColors.Snack_Bar_COLOR,
-                                            content: Text(
-                                              'Salary is not proportional to total expenses. Please either increase the salary or reduce the expenses'
-                                                  .tr(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontFamily: "Segoe UI"),
-                                            ));
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      } else {
-                                        provider.changeCashAmount(value);
+                                      if (value is bool && value) {
+                                        provider.monthList.saveAmount +=
+                                            provider.getRemainingAmount();
+                                        Provider.of<HomeProvider>(context,
+                                                listen: false)
+                                            .saveList(isPlan: true);
+                                        UserPreferences.instance.saveRoutName(
+                                            TableOfSaralyScreen.routeName);
+                                        Navigator.pushReplacementNamed(context,
+                                            TableOfSaralyScreen.routeName);
                                       }
+                                      ;
                                     });
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(10)),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        NumberFormat('###,##0.00').format(
-                                            provider.monthList.cashAmount),
+                                  } else {
+                                    Provider.of<HomeProvider>(context,
+                                            listen: false)
+                                        .saveList(isPlan: true);
+                                    UserPreferences.instance.saveRoutName(
+                                        TableOfSaralyScreen.routeName);
+                                    UserPreferences.instance.saveRoutName(
+                                        TableOfSaralyScreen.routeName);
+                                    Navigator.pushReplacementNamed(
+                                        context, TableOfSaralyScreen.routeName);
+                                  }
+                                } else {
+                                  var snackBar = SnackBar(
+                                      backgroundColor:
+                                          AppColors.Snack_Bar_COLOR,
+                                      content: Text(
+                                        v,
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: "Segoe UI",
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Segoe UI"),
+                                      ));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
+                              });
+                            },
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  child: Icon(
+                                    Icons.arrow_forward,
+                                    color: AppColors.MAIN_COLOR,
+                                    size: 30.0,
                                   ),
+                                  width: 29,
+                                  height: 43,
                                 ),
-                                verticalAlignment:
-                                    TableCellVerticalAlignment.middle,
-                              ),
-                            ],
+                                Text(
+                                  "Next".tr(),
+                                  style: TextStyle(
+                                      color: AppColors.MAIN_COLOR,
+                                      fontSize: 13,
+                                      fontFamily: "Segoe UI",
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 15,
+                    ),
                   ],
                 ),
-              ),
-              // Container(
-              //   padding: EdgeInsets.only(left: 16, right: 16),
-              //   child: Row(
-              //     children: [
-              //       GestureDetector(
-              //         onTap: () {
-              //           Navigator.pop(context);
-              //         },
-              //         child: Column(
-              //           children: [
-              //             SizedBox(
-              //               width: 29,
-              //               height: 43,
-              //               child: Icon(
-              //                 Icons.arrow_back,
-              //                 color: AppColors.MAIN_COLOR,
-              //                 size: 30.0,
-              //               ),
-              //             ),
-              //             // SizedBox(height: 5,),
-              //             Text(
-              //               "السابق",
-              //               style: TextStyle(
-              //                   color: AppColors.MAIN_COLOR,
-              //                   fontSize: 13,
-              //                   fontFamily: "Segoe UI",
-              //                   fontWeight: FontWeight.bold),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //       Spacer(),
-              //       GestureDetector(
-              //         onTap: () {
-              //           Navigator.pushReplacementNamed(
-              //               context, CardsScreen.routeName);
-              //         },
-              //         child: Column(
-              //           children: [
-              //             SizedBox(
-              //               child: Icon(
-              //                 Icons.arrow_forward,
-              //                 color: AppColors.MAIN_COLOR,
-              //                 size: 30.0,
-              //               ),
-              //               width: 29,
-              //               height: 43,
-              //             ),
-              //             Text(
-              //               "التالي",
-              //               style: TextStyle(
-              //                   color: AppColors.MAIN_COLOR,
-              //                   fontSize: 13,
-              //                   fontFamily: "Segoe UI",
-              //                   fontWeight: FontWeight.bold),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
-        );
-      }),
+              );
+            }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await provider.addExpense();
+          var scrollPosition = _scrollController.position;
+          _scrollController.animateTo(
+            scrollPosition.maxScrollExtent + 60,
+            duration: new Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+          );
+        },
+        backgroundColor: AppColors.MAIN_COLOR,
+        child: Text(
+          "+",
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
