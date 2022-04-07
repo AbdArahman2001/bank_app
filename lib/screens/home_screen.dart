@@ -198,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 40,
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(

@@ -17,7 +17,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
   HomeProvider provider;
   List<List<String>> expences = [];
   List<List<String>> _currencies = [
-    ['0', 'Saver'],
+    ['0', 'Saver'.tr()],
   ];
   double _value = 0.0;
   int _fromCurrentItemSelected = 0;
@@ -34,6 +34,8 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
     });
     // expences = Provider.of<HomeProvider>(context,listen: false).monthList.expences.map((e) => [e.id,e.type]).toList();
     _currencies.addAll(expences);
+    print("_currencies");
+    _currencies.forEach((element) {print(element);});
   }
 
   @override
@@ -203,7 +205,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return CalculateScreen("القيمة المرحلة",0,0,false);
+                          return CalculateScreen("The value to be carried over".tr(),0,0,false);
                         }).then((value) {
                       if (value == null) {
                       } else if (double.parse(value) >
@@ -273,7 +275,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                         child: Center(
                           child:  Text(
                             _value == 0
-                                ?  "أدخل القيمة".tr()
+                                ?  "Enter the value + ".tr()
                                 : NumberFormat('###,##0.00').format(_value),
                             textAlign: TextAlign.center,
                             style: TextStyle(

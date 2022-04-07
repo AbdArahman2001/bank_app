@@ -97,7 +97,7 @@ class _NameExpensesCustomState extends State<NameExpensesCustom> {
                         itemsVisibleInDropdown: 6,
                     required: false,
                     strict: false,
-                    hintText: 'اختر اسم المصروف',
+                        hintText: 'Choose item name'.tr(),
                     items: arabicExpenses,
                     setter: (dynamic newValue) {
                       selectedItem = newValue;

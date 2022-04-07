@@ -1,5 +1,6 @@
 library dropdownfield;
 
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -94,16 +95,16 @@ class DropDownField extends FormField<String> {
       final InputDecoration effectiveDecoration = InputDecoration(
           border: InputBorder.none,
           filled: true,
-          icon: icon,
-          suffixIcon: IconButton(
-              icon: Icon(Icons.arrow_drop_down,
-                  size: 30.0, color: Colors.black),
-              onPressed: () {
-                SystemChannels.textInput.invokeMethod('TextInput.hide');
-                state.setState(() {
-                  state._showdropdown = !state._showdropdown;
-                });
-              }),
+          // icon: icon,
+          // suffixIcon: IconButton(
+          //     icon: Icon(Icons.arrow_drop_down,
+          //         size: 30.0, color: Colors.black),
+          //     onPressed: () {
+          //       SystemChannels.textInput.invokeMethod('TextInput.hide');
+          //       state.setState(() {
+          //         state._showdropdown = !state._showdropdown;
+          //       });
+          //     }),
           hintStyle: hintStyle,
           labelStyle: labelStyle,
           hintText: hintText,
@@ -118,7 +119,7 @@ class DropDownField extends FormField<String> {
                 child: TextFormField(
                   onTap: (){
                     state.setState(() {
-                      state._showdropdown = !state._showdropdown;
+                      // state._showdropdown = !state._showdropdown;
                     });
                   },
                   // autovalidate: true,
@@ -162,13 +163,15 @@ class DropDownField extends FormField<String> {
               )
             ],
           ),
-          !state._showdropdown
-              ? Container()
-              : Container(
+          // !state._showdropdown
+          //     ? Container()
+          //     :
+      Container(
             alignment: Alignment.topCenter,
-            height: itemsVisibleInDropdown *
-                48.0, //limit to default 3 items in dropdownlist view and then remaining scrolls
-            width: MediaQuery.of(field.context).size.width,
+            // height: itemsVisibleInDropdown *
+            //     48.0, //limit to default 3 items in dropdownlist view and then remaining scrolls
+        height: MediaQuery.of(field.context).size.height - 200,
+        width: MediaQuery.of(field.context).size.width,
             child: ListView(
               cacheExtent: 0.0,
               scrollDirection: Axis.vertical,
@@ -193,7 +196,7 @@ class DropDownField extends FormField<String> {
 
 class DropDownFieldState extends FormFieldState<String> {
   TextEditingController _controller;
-  bool _showdropdown = false;
+  bool _showdropdown = true;
   bool _isSearching = true;
   String _searchText = "";
 
@@ -261,9 +264,9 @@ class DropDownFieldState extends FormFieldState<String> {
     for (var item in items) {
       if (_searchText.isNotEmpty) {
         if (item.toUpperCase().contains(_searchText.toUpperCase()))
-          childItems.add(_getListTile(item));
+          childItems.add(_getListTile(item.tr()));
       } else {
-        childItems.add(_getListTile(item));
+        childItems.add(_getListTile(item.tr()));
       }
     }
     _isSearching ? childItems : List();

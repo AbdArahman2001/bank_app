@@ -17,7 +17,7 @@ class MoneyCashDialog extends StatefulWidget {
 class _MoneyCashDialogState extends State<MoneyCashDialog> {
   List<String> expences;
 
-  List<String> _currencies = ['Saver'.tr(),];
+  List<String> _currencies = ["Saver".tr(),];
   double _addedValue = 0.0;
   int _currentItemSelected1 = 0;
   double _value = 0.0;
@@ -98,7 +98,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("مبلغ إضافي",0,0,false);
+                        return CalculateScreen("The amount is extra".tr(),0,0,false);
                       }).then((value) {
                     _addedValue = double.parse(value);
                     // provider.availbeCash = double.parse(value);
@@ -123,7 +123,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                       child: Center(
                         child:  Text(
                           _addedValue == 0
-                              ?  "أدخل القيمة".tr()
+                              ?  "Enter the value + ".tr()
                               : NumberFormat('###,##0.00').format(_addedValue),
                           textAlign: TextAlign.center,
                           style: TextStyle(

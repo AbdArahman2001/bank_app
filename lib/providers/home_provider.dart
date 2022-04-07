@@ -463,7 +463,7 @@ class HomeProvider extends ChangeNotifier {
       "saveInit": 0.0,
       "expences": [
         {"id": 1, "type": null, "init": 0.0, "amount": 0.0, "total": 0.0, "isSelect": false},
-        {"id": 2, "type": null, "init": 0.0,"amount": 0.0, "total": 0.0, "isSelect": false}
+        // {"id": 2, "type": null, "init": 0.0,"amount": 0.0, "total": 0.0, "isSelect": false}
       ]
     });
   }

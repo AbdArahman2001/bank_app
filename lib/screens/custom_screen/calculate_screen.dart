@@ -1,13 +1,15 @@
+import 'package:bank_app_flutter/model/HiveData.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/all_numbers_custom.dart';
 import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
 import 'package:bank_app_flutter/screens/custom_screen/custom_button.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'dart:ui' as ui;
 class CalculateScreen extends StatefulWidget {
   String type;
   double amount;
@@ -40,9 +42,7 @@ String text;
       backgroundColor: Colors.transparent,
       contentPadding: EdgeInsets.zero,
       elevation: 0.0,
-
       content: Column(
-
         mainAxisAlignment: MainAxisAlignment.end,
         children: [Container(
           decoration: BoxDecoration(
@@ -74,7 +74,7 @@ String text;
                         child: Column(
                           children: [
                             Text(
-                              "المتبقي",
+                              "Remaining".tr(),
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ String text;
                                   color: Colors.black),
                             ),
                             Text(
-                              "${widget.rmain - double.parse(provider.result)}",
+                              NumberFormat('###,##0.00').format(widget.rmain - double.parse(provider.result)),
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
@@ -95,9 +95,9 @@ String text;
                     ),
                   ),
                   SizedBox(width: 5,),
-                  Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Expanded(
+                  Expanded(
+                    child: Directionality(
+                      textDirection: ui.TextDirection.ltr,
                       child: Container(
                         // height: 36,
                         height: 32,
@@ -132,9 +132,9 @@ String text;
               Row(
                 children: [
                   // SizedBox(width: 48,),
-                  Directionality(
-                    textDirection: TextDirection.ltr,
-                    child: Expanded(
+                  Expanded(
+                    child: Directionality(
+                      textDirection: ui.TextDirection.ltr,
                       child: Container(
                         // height: 36,
                         height: 38,
@@ -197,7 +197,7 @@ String text;
                    provider.clearNumber();
                    Navigator.pop(context,text);
                  },
-                title: "ADD",
+                title: "ADD".tr(),
               ),
               // SizedBox(height: 8,),
             ],

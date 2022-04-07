@@ -143,11 +143,59 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     TitleDrawerCustom(
                       function: () {
                         // Navigator.pop(context);
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return FinancialRelayCustom();
-                            });
+                        if (Provider.of<HomeProvider>(context, listen: false)
+                            .monthList
+                            .expences.length > 0) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return FinancialRelayCustom();
+                              });
+                        }else{
+                          showDialog(
+                              barrierColor: Colors.transparent,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      Spacer(),
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 60,
+                                        color: Color(0XFFC83E5B),
+                                        child: Center(
+                                          child: Text(
+                                            'There are no other items to carry over the value'.tr(),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Segoe UI"),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                          // snack bar
+                          // var snackBar = SnackBar(
+                          //     backgroundColor:
+                          //     AppColors.Snack_Bar_COLOR,
+                          //     content: Text(
+                          //       "There are no other items to carry over the value".tr(),
+                          //       textAlign: TextAlign.center,
+                          //       style: TextStyle(
+                          //           fontSize: 20,
+                          //           color: Colors.white,
+                          //           fontWeight: FontWeight.w500,
+                          //           fontFamily: "Segoe UI"),
+                          //     ));
+                          // ScaffoldMessenger.of(context)
+                          //     .showSnackBar(snackBar);
+                        }
                       },
                       text: "Financial deportation".tr(),
                       imageicon: Image(

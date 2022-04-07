@@ -3,6 +3,7 @@ import 'package:bank_app_flutter/providers/cards_provider.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/route_helper/route_helper.dart';
 import 'package:bank_app_flutter/screens/cards/cards_screen.dart';
+import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom_screen.dart';
 import 'package:bank_app_flutter/screens/salary/following_the_rules_screen.dart';
 import 'package:bank_app_flutter/screens/home_screen.dart';
 import 'package:bank_app_flutter/screens/launch_screen.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
             FollowingTheRulesScreen(),
         MonthlyIncomeScreen.routeName: (context) => MonthlyIncomeScreen(),
         CardsScreen.routeName: (context) => CardsScreen(),
+        NameExpensesCustomScreen.routeName: (context) => NameExpensesCustomScreen(),
       },
       home: LaunchScreen(),
     );

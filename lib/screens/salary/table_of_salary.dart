@@ -501,7 +501,7 @@ return Scaffold(
                                         maxWidth:  MediaQuery.of(context).size.width,
                                       ),
                                       builder: (BuildContext context) {
-                                        return CalculateScreen("Save".tr(),provider
+                                        return CalculateScreen("Saver".tr(),provider
                                             .getRemainingAmount() +
                                             provider.monthList
                                                 .saveAmount,provider
@@ -517,7 +517,9 @@ return Scaffold(
                                     } else if ((double.parse(value) +
                                             provider.monthList.totalSave) >
                                         provider.monthList.saveAmount) {
+
                                       final snackBar = SnackBar(
+
                                           backgroundColor:
                                               AppColors.Snack_Bar_COLOR,
                                           content: Text(
@@ -557,7 +559,7 @@ return Scaffold(
                                     child: provider.monthList.totalSave ==
                                         0
                                         ? Text(
-                                        "أدخل القيمة +",
+                                        "Enter the value + ".tr(),
                                         style: TextStyle(
                                             fontSize:
                                             13,
@@ -990,7 +992,7 @@ return Scaffold(
                                               .total ==
                                               0
                                               ? Text(
-                                              "أدخل القيمة +",
+                                              "Enter the value + ".tr(),
                                               style: TextStyle(
                                                   fontSize:
                                                   13,
@@ -1390,6 +1392,7 @@ return Scaffold(
   //   );
   void showToast() {
     final snackBar = SnackBar(
+      duration: Duration(seconds: 6),
       backgroundColor: AppColors.Snack_Bar_COLOR,
       content: Text(
         'Entered value is approved'.tr(),

@@ -4,7 +4,7 @@ import 'package:bank_app_flutter/prefs/UserPreferences.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/custom/reminder_custom_dialog.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom.dart';
+import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom_screen.dart';
 import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -62,7 +62,6 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
     "3- بطاقة بنكية",
     "أخرى"
   ];
-
 
   @override
   void initState() {
@@ -220,12 +219,11 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                       onTap: () {
                                         showDialog(
                                             context: context,
-
                                             builder: (BuildContext context) {
-                                              return CalculateScreen("Salary".tr(),
+                                              return CalculateScreen(
+                                                  "Salary".tr(),
                                                   provider
-                                                      .monthList
-                                                      .salaryAmount,
+                                                      .monthList.salaryAmount,
                                                   0,
                                                   false);
                                             }).then((value) {
@@ -685,16 +683,19 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                     context: context,
                                                     builder:
                                                         (BuildContext context) {
-                                                      return CalculateScreen("Save".tr(),provider
-                                                          .getRemainingAmount() +
-                                                          provider.monthList
-                                                              .saveAmount,provider
-                                                          .getRemainingAmount() +
-                                                          provider.monthList
-                                                              .saveAmount-provider
-                                                          .getRemainingAmount() +
-                                                          provider.monthList
-                                                              .totalSave,false);
+                                                      return CalculateScreen(
+                                                          "Saver".tr(),
+                                                          provider.getRemainingAmount() +
+                                                              provider.monthList
+                                                                  .saveAmount,
+                                                          provider.getRemainingAmount() +
+                                                              provider.monthList
+                                                                  .saveAmount -
+                                                              provider
+                                                                  .getRemainingAmount() +
+                                                              provider.monthList
+                                                                  .totalSave,
+                                                          false);
                                                     }).then((value) {
                                                   // TODO: show error message if amount not correct
                                                   if (value == null) {
@@ -744,7 +745,9 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                   child: provider.monthList
                                                               .saveAmount ==
                                                           0
-                                                      ? Text("أدخل القيمة +",
+                                                      ? Text(
+                                                          "Enter the value + "
+                                                              .tr(),
                                                           style: TextStyle(
                                                               fontSize: 13,
                                                               fontWeight:
@@ -941,7 +944,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                             Column(children: [
                               SizedBox(
                                 height: 40,
-                                width: MediaQuery.of(context).size.width / 10,
+                                width: MediaQuery.of(context).size.width / 20,
                                 child: Center(
                                   child: Container(),
                                 ),
@@ -1082,26 +1085,37 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                     // ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              provider.tresutl =
-                                                                  provider
-                                                                      .monthList
-                                                                      .expences[
-                                                                          i]
-                                                                      .type;
-                                                              return NameExpensesCustom();
-                                                            }).then((value) {
-                                                          // TODO: show error message if amount not correct
+                                                        Navigator.pushNamed(
+                                                                context,
+                                                                NameExpensesCustomScreen
+                                                                    .routeName)
+                                                            .then((value) {
                                                           if (value == null) {
                                                           } else
                                                             provider
                                                                 .changeExpensesType(
                                                                     value, i);
                                                         });
+                                                        // showDialog(
+                                                        //     context: context,
+                                                        //     builder:
+                                                        //         (BuildContext
+                                                        //             context) {
+                                                        //       provider.tresutl =
+                                                        //           provider
+                                                        //               .monthList
+                                                        //               .expences[
+                                                        //                   i]
+                                                        //               .type;
+                                                        //       return NameExpensesCustom();
+                                                        //     }).then((value) {
+                                                        //   // TODO: show error message if amount not correct
+                                                        //   if (value == null) {
+                                                        //   } else
+                                                        //     provider
+                                                        //         .changeExpensesType(
+                                                        //             value, i);
+                                                        // });
                                                       },
                                                       child: Container(
                                                         height: 40,
@@ -1116,16 +1130,17 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                         child: Center(
                                                           child: Text(
                                                             (provider
-                                                                        .monthList
-                                                                        .expences[
-                                                                            i]
-                                                                        .type ==
-                                                                    null || provider
-                                                                .monthList
-                                                                .expences[
-                                                            i]
-                                                                .type ==
-                                                                "")
+                                                                            .monthList
+                                                                            .expences[
+                                                                                i]
+                                                                            .type ==
+                                                                        null ||
+                                                                    provider
+                                                                            .monthList
+                                                                            .expences[
+                                                                                i]
+                                                                            .type ==
+                                                                        "")
                                                                 ? "Enter the item name"
                                                                     .tr()
                                                                 : provider
@@ -1141,17 +1156,10 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                                         .w500,
                                                                 fontFamily:
                                                                     'Tajawal',
-                                                                color: (provider
-                                                                            .monthList
-                                                                            .expences[
-                                                                                i]
-                                                                            .type ==
-                                                                        null|| provider
-                                                                    .monthList
-                                                                    .expences[
-                                                                i]
-                                                                    .type ==
-                                                                    "")
+                                                                color: (provider.monthList.expences[i].type ==
+                                                                            null ||
+                                                                        provider.monthList.expences[i].type ==
+                                                                            "")
                                                                     ? Colors.red
                                                                     : AppColors
                                                                         .Text_Table_COLOR),
@@ -1186,26 +1194,27 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                               builder:
                                                                   (BuildContext
                                                                       context) {
-                                                                return CalculateScreen(provider
-                                                                    .monthList
-                                                                    .expences[
-                                                                i]
-                                                                    .type,
+                                                                return CalculateScreen(
                                                                     provider
                                                                         .monthList
                                                                         .expences[
-                                                                    i]
+                                                                            i]
+                                                                        .type,
+                                                                    provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                            i]
                                                                         .amount,
                                                                     provider
-                                                                        .monthList
-                                                                        .expences[
-                                                                    i]
-                                                                        .amount - provider
-                                                                        .monthList
-                                                                        .expences[
-                                                                    i]
-                                                                        .total,
-                                                                false);
+                                                                            .monthList
+                                                                            .expences[
+                                                                                i]
+                                                                            .amount -
+                                                                        provider
+                                                                            .monthList
+                                                                            .expences[i]
+                                                                            .total,
+                                                                    false);
                                                               }).then((value) {
                                                             // TODO: show error message if amount not correct
                                                             if (value == null) {
@@ -1266,8 +1275,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                                             i]
                                                                         .amount ==
                                                                     0
-                                                                ? Text(
-                                                                    "أدخل القيمة +",
+                                                                ? Text("Enter the value + ".tr(),
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             13,
@@ -1323,7 +1331,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  10,
+                                                  20,
 
                                               /// close ///
                                               // GestureDetector(
@@ -1394,7 +1402,6 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                 ),
                                               ),
                                             ),
-
                                         ]),
                                       ],
                                     ),
@@ -1777,9 +1784,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
           );
         },
         backgroundColor: AppColors.MAIN_COLOR,
-        child: Text(
-          "+",
-          style: TextStyle(fontSize: 20),
+        child: Icon(
+          Icons.add,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
