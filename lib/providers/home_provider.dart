@@ -342,13 +342,26 @@ class HomeProvider extends ChangeNotifier {
   String equation = "0";
   setNumber(String number) {
     var after = tNumber.split(".");
-    if (equation == "0" && number != ".") {
+    print("after");
+    after.forEach((element) {print(element);});
+    print("tNumber $tNumber");
+    print("end after");
+    if (tNumber == "0" && (number == "0" || number != ".")) {
+      print("init case");
       tNumber = number;
-      equation = number;
+      if(equation == "0"){
+        equation = number;
+      }else{
+        equation = equation + number;
+      }
+
       evalEquation();
     } else if ((after.length < 2 && number != "." && after[0].length > 7) ||
-        (after.length > 1 && (after[1].length > 1 || number == "."))) {
+        (after.length > 1 && (after[1].length > 1 || number == ".")) ||
+        (tNumber[tNumber.length - 1] == '.' && number == "." )) {
+      print("dot is here");
     } else {
+      print("default case is here");
       tNumber = tNumber + number;
       equation = equation + number;
       evalEquation();
@@ -373,7 +386,7 @@ class HomeProvider extends ChangeNotifier {
     Parser p = Parser();
     ContextModel cm = ContextModel();
     Expression exp = p.parse(equation);
-    tNumber = "0";
+
     result = exp.evaluate(EvaluationType.REAL, cm).toString();
     print(exp);
     print(exp.evaluate(EvaluationType.REAL, cm));
@@ -420,6 +433,7 @@ class HomeProvider extends ChangeNotifier {
 
     }else{
       equation = equation + op;
+      tNumber = "0";
     }
     notifyListeners();
   }
@@ -601,10 +615,12 @@ class HomeProvider extends ChangeNotifier {
   void addAdditionalValue(double addedValue, int currentItemSelected1, {bool save = true}) {
     if (currentItemSelected1 == 0) {
       monthList.saveAmount += addedValue;
-    } else if (currentItemSelected1 == 1) {
-      monthList.cashAmount += addedValue;
-    } else {
-      monthList.expences[currentItemSelected1 - 2].amount += addedValue;
+    }
+    // else if (currentItemSelected1 == 1) {
+    //   monthList.cashAmount += addedValue;
+    // }
+    else {
+      monthList.expences[currentItemSelected1 - 1].amount += addedValue;
       reCalcExpSum();
     }
     if(save)

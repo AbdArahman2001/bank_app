@@ -330,9 +330,9 @@ return Scaffold(
                         columnWidths: {
                           0: FlexColumnWidth(2),
                           1: FlexColumnWidth(3),
-                          2: FlexColumnWidth(4),
+                          2: FlexColumnWidth(5),
                           3: FlexColumnWidth(5),
-                          4: FlexColumnWidth(4),
+                          4: FlexColumnWidth(3),
                         },
                         border: TableBorder(
                             horizontalInside: BorderSide(
@@ -390,7 +390,7 @@ return Scaffold(
                               TableCell(
                                 child: Center(
                                   child: Text(
-                                    "The remainder of the monthly savings value"
+                                    "The remainder of the savings"
                                         .tr(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -406,7 +406,7 @@ return Scaffold(
                               TableCell(
                                 child: Center(
                                   child:  Text(
-                                    "Enter the amount of the expense"
+                                    "Enter the savings amount"
                                         .tr(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -494,14 +494,10 @@ return Scaffold(
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  showModalBottomSheet(
+                                  showDialog(
                                       context: context,
-                                      backgroundColor: Colors.transparent,
-                                      constraints: BoxConstraints(
-                                        maxWidth:  MediaQuery.of(context).size.width,
-                                      ),
                                       builder: (BuildContext context) {
-                                        return CalculateScreen("Saver".tr(),provider
+                                        return CalculateScreen(1,"Saver".tr(),provider
                                             .getRemainingAmount() +
                                             provider.monthList
                                                 .saveAmount,provider
@@ -661,9 +657,9 @@ return Scaffold(
                       columnWidths: {
                         0: FlexColumnWidth(2),
                         1: FlexColumnWidth(3),
-                        2: FlexColumnWidth(4),
+                        2: FlexColumnWidth(5),
                         3: FlexColumnWidth(5),
-                        4: FlexColumnWidth(4),
+                        4: FlexColumnWidth(3),
                       },
                       children: [
                         TableRow(
@@ -710,7 +706,7 @@ return Scaffold(
                             TableCell(
                               child: Center(
                                 child: Text(
-                                  "The remaining amount of the monthly expense"
+                                  "The remainder of the expense"
                                       .tr(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -725,7 +721,7 @@ return Scaffold(
                             ),
                             TableCell(
                               child: Text(
-                                "Enter the amount of the expense"
+                                "Enter the expense amount"
                                     .tr(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -837,9 +833,9 @@ return Scaffold(
                           columnWidths: {
                             0: FlexColumnWidth(2),
                             1: FlexColumnWidth(3),
-                            2: FlexColumnWidth(4),
+                            2: FlexColumnWidth(5),
                             3: FlexColumnWidth(5),
-                            4: FlexColumnWidth(4),
+                            4: FlexColumnWidth(3),
                           },
                           children: [
                             for (int i = 0;
@@ -928,7 +924,7 @@ return Scaffold(
                                         showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
-                                              return CalculateScreen(provider
+                                              return CalculateScreen(i+1,provider
                                                   .monthList
                                                   .expences[
                                               i]

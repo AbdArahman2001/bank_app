@@ -8,15 +8,18 @@ class CloseButtonCustom extends StatelessWidget {
       onTap: (){
         Navigator.pop(context);
       },
-      child: Container(
-        width: 24,
-        height: 24,
-        decoration: BoxDecoration(
-      image: DecorationImage(
-      image: AssetImage("assets/images/close.png"),
-    ),
-    ),
+      child:
+      Container(
+          height: 60,
+          width: 60,
+          child: Icon(
+            Icons.cancel,
+            color: Colors.red,
+            size: 50,
+          )
+        // Image.asset("assets/images/check (1).png",color: Colors.green,))
       ),
+
     );
   }
 }

@@ -1,16 +1,10 @@
 import 'package:bank_app_flutter/prefs/UserPreferences.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/star_red_custom.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
-
 import 'package:provider/provider.dart';
-
-import 'cards/cards_screen.dart';
-
 
 class HomeScreen extends StatefulWidget {
   static final routeName = "homeScreen";
@@ -74,275 +68,409 @@ class _HomeScreenState extends State<HomeScreen> {
         //   ),
         // ],
       ),
-      body: (Provider.of<HomeProvider>(context).monthList == null) ?
-      CircularProgressIndicator()
+      body: (Provider.of<HomeProvider>(context).monthList == null)
+          ? CircularProgressIndicator()
           : Consumer<HomeProvider>(builder: (context, provider, x) {
-        return Container(
-          padding: EdgeInsets.only(left: 16, right: 16, top: 22),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Container(
-              //   height: 162,
-              //   width: 206,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image:
-              //           AssetImage("assets/images/Plain credit card-amico.png"),
-              //     ),
-              //   ),
-              // ),
-              SizedBox(
-                height: 21,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(
-                    Icons.language,
-                    color: Colors.black,
-                    size: 21,
-                  ),
-                  // SizedBox(
-                  //   width: 4,
-                  // ),
-                  // StarRedCustom(
-                  //   isHidden: true,
-                  // ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    "اللغة - Language".tr(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontFamily: "Segoe UI",
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(color: AppColors.Border_COLOR, spreadRadius: 1),
-                  ],
-                ),
-                child: Row(
+              return Container(
+                // padding: EdgeInsets.only(left: 16, right: 16, top: 22),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: (){
-                        // provider.setLanguage(
-                        //     SingingCharacter.English, context);
-                      },
-                      child: Row(
-                        children: [
-                          Radio<SingingCharacter>(
-                              value: SingingCharacter.Arabic,
-                              groupValue: provider.character,
-                              onChanged: (SingingCharacter value) {
-                                provider.setLanguage(value, context);
-                              }),
-                          Text(
-                            'Arabic'.tr(),
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Segoe UI"),
-                          ),
-                        ],
-                      ),
+                    // Container(
+                    //   height: 162,
+                    //   width: 206,
+                    //   decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //       image:
+                    //           AssetImage("assets/images/Plain credit card-amico.png"),
+                    //     ),
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 21,
                     ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: (){
-                        // provider.setLanguage(
-                        //     SingingCharacter.Arabic, context);
-                        },
+                    Container(
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 22),
+
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Radio<SingingCharacter>(
-                              value: SingingCharacter.English,
-                              groupValue: provider.character,
-                              onChanged: (SingingCharacter value) {
-                                provider.setLanguage(value, context);
-                              }),
+                          Icon(
+                            Icons.language,
+                            color: Colors.black,
+                            size: 21,
+                          ),
+                          // SizedBox(
+                          //   width: 4,
+                          // ),
+                          // StarRedCustom(
+                          //   isHidden: true,
+                          // ),
+                          SizedBox(
+                            width: 4,
+                          ),
                           Text(
-                            'English'.tr(),
+                            "اللغة - Language".tr(),
                             style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: "Segoe UI"),
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontFamily: "Segoe UI",
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(
-                      width: 40,
+                      height: 20,
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/cakendar.png"),
+                    Container(
+                      margin:EdgeInsets.only(left: 16, right: 16),
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      height: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.Border_COLOR, spreadRadius: 1),
+                        ],
                       ),
-                    ),
-                  ),
-                  // SizedBox(
-                  //   width: 4,
-                  // ),
-                  // StarRedCustom(
-                  //   isHidden: true,
-                  // ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    child: Text(
-                      "أدخل تاريخ نزول الراتب - Enter salary descent date".tr(),
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontFamily: "Segoe UI",
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  provider.setDate(context);
-                },
-                child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  width: MediaQuery.of(context).size.width,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(color: AppColors.Border_COLOR, spreadRadius: 1),
-                    ],
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        provider.monthList.salaryDate != null
-                            ? provider.monthList.salaryDate
-                            : "YYYY/MM/DD",
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: provider.monthList.salaryDate == null ? Colors.red : Colors.black,
-                            fontFamily: "Segoe UI"),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      // Text(
-                      //   inputFormat.format(DateTime.fromMillisecondsSinceEpoch(),),
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-              Spacer(),
-              Container(
-                // padding: EdgeInsets.only(left: 16, right: 16),
-                child: Row(
-                  children: [
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        if(Provider.of<HomeProvider>(context, listen: false).monthList.salaryDate == null) {
-                          final snackBar = SnackBar(
-                              backgroundColor: AppColors.Snack_Bar_COLOR,
-                              content: Text(
-                                "Salary release date must be entered".tr(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: "Segoe UI"),
-                              ));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }else {
-                          Provider.of<HomeProvider>(context, listen: false).saveList();
-                          UserPreferences.instance.saveRoutName(MonthlyIncomeScreen.routeName);
-                          Navigator.pushReplacementNamed(
-                              context,
-                              MonthlyIncomeScreen.routeName
-                          );
-                        }
-                      },
-                      child: Column(
+                      child: Row(
                         children: [
-                          SizedBox(
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.MAIN_COLOR,
-                              size: 30.0,
+                          GestureDetector(
+                            onTap: () {
+                              // provider.setLanguage(
+                              //     SingingCharacter.English, context);
+                            },
+                            child: Row(
+                              children: [
+                                Radio<SingingCharacter>(
+                                    value: SingingCharacter.Arabic,
+                                    groupValue: provider.character,
+                                    onChanged: (SingingCharacter value) {
+                                      provider.setLanguage(value, context);
+                                    }),
+                                Text(
+                                  'Arabic'.tr(),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "Segoe UI"),
+                                ),
+                              ],
                             ),
-                            width: 29,
-                            height: 43,
                           ),
-                          Text(
-                            "Next".tr(),
-                            style: TextStyle(
-                                color: AppColors.MAIN_COLOR,
-                                fontSize: 13,
-                                fontFamily: "Segoe UI",
-                                fontWeight: FontWeight.bold),
+                          Spacer(),
+                          GestureDetector(
+                            onTap: () {
+                              // provider.setLanguage(
+                              //     SingingCharacter.Arabic, context);
+                            },
+                            child: Row(
+                              children: [
+                                Radio<SingingCharacter>(
+                                    value: SingingCharacter.English,
+                                    groupValue: provider.character,
+                                    onChanged: (SingingCharacter value) {
+                                      provider.setLanguage(value, context);
+                                    }),
+                                Text(
+                                  'English'.tr(),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "Segoe UI"),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40,
                           ),
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 16, right: 16, ),
 
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 24,
+                            height: 24,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/cakendar.png"),
+                              ),
+                            ),
+                          ),
+                          // SizedBox(
+                          //   width: 4,
+                          // ),
+                          // StarRedCustom(
+                          //   isHidden: true,
+                          // ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Text(
+                              "أدخل تاريخ نزول الراتب - Enter salary descent date"
+                                  .tr(),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: "Segoe UI",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        provider.setDate(context);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 16, right: 16,),
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        width: MediaQuery.of(context).size.width,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: AppColors.Border_COLOR, spreadRadius: 1),
+                          ],
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              provider.monthList.salaryDate != null
+                                  ? provider.monthList.salaryDate
+                                  : "YYYY/MM/DD",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: provider.monthList.salaryDate == null
+                                      ? Colors.red
+                                      : Colors.black,
+                                  fontFamily: "Segoe UI"),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            // Text(
+                            //   inputFormat.format(DateTime.fromMillisecondsSinceEpoch(),),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Container(
+                      // padding: EdgeInsets.only(left: 16, right: 16),
+                      height: 60,
+                      // color: Colors.red,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, HomeScreen.routeName);
+                              },
+                              child: Container(
+                              // color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
 
+                              // color: Colors.yellow,
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                if (Provider.of<HomeProvider>(context,
+                                            listen: false)
+                                        .monthList
+                                        .salaryDate ==
+                                    null) {
+                                  final snackBar = SnackBar(
+                                      backgroundColor:
+                                          AppColors.Snack_Bar_COLOR,
+                                      content: Text(
+                                        "Salary release date must be entered"
+                                            .tr(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Segoe UI"),
+                                      ));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                } else {
+                                  Provider.of<HomeProvider>(context,
+                                          listen: false)
+                                      .saveList();
+                                  UserPreferences.instance.saveRoutName(
+                                      MonthlyIncomeScreen.routeName);
+                                  Navigator.pushReplacementNamed(
+                                      context, MonthlyIncomeScreen.routeName);
+                                }
+                              },
+                              child: Container(
+
+                                // width: 70,
+                                // height: 60,
+                                // color: Colors.green,
+                                padding: EdgeInsets.only(left: 20),
+                                // width: 70,
+                                // height: 60,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: AppColors.MAIN_COLOR,
+                                        size: 30.0,
+                                      ),
+                                      // width: 29,
+                                      // height: 43,
+                                    ),
+                                    Text(
+                                      "Next".tr(),
+                                      style: TextStyle(
+                                          color: AppColors.MAIN_COLOR,
+                                          fontSize: 13,
+                                          fontFamily: "Segoe UI",
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Container(
+                    //   height: 60,
+                    //   // padding: EdgeInsets.only(left: 16, right: 16),
+                    //   child: Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //     children: [
+                    //       Expanded(
+                    //           child: Container(
+                    //         color: Colors.red,
+                    //       )),
+                    //       Expanded(
+                    //           child: Container(
+                    //         color: Colors.green,
+                    //       )),
+                    //       GestureDetector(
+                    //         onTap: () {
+                    //           if (Provider.of<HomeProvider>(context,
+                    //                       listen: false)
+                    //                   .monthList
+                    //                   .salaryDate ==
+                    //               null) {
+                    //             final snackBar = SnackBar(
+                    //                 backgroundColor: AppColors.Snack_Bar_COLOR,
+                    //                 content: Text(
+                    //                   "Salary release date must be entered"
+                    //                       .tr(),
+                    //                   textAlign: TextAlign.center,
+                    //                   style: TextStyle(
+                    //                       fontSize: 20,
+                    //                       color: Colors.white,
+                    //                       fontWeight: FontWeight.w500,
+                    //                       fontFamily: "Segoe UI"),
+                    //                 ));
+                    //             ScaffoldMessenger.of(context)
+                    //                 .showSnackBar(snackBar);
+                    //           } else {
+                    //             Provider.of<HomeProvider>(context,
+                    //                     listen: false)
+                    //                 .saveList();
+                    //             UserPreferences.instance.saveRoutName(
+                    //                 MonthlyIncomeScreen.routeName);
+                    //             Navigator.pushReplacementNamed(
+                    //                 context, MonthlyIncomeScreen.routeName);
+                    //           }
+                    //         },
+                    //         child: Container(
+                    //           // width: 70,
+                    //           // height: 60,
+                    //           // color: Colors.green,
+                    //           margin: EdgeInsets.only(left: 20),
+                    //           // width: 70,
+                    //           // height: 60,
+                    //           child: Column(
+                    //             crossAxisAlignment: CrossAxisAlignment.end,
+                    //             children: [
+                    //               SizedBox(
+                    //                 child: Icon(
+                    //                   Icons.arrow_forward,
+                    //                   color: AppColors.MAIN_COLOR,
+                    //                   size: 30.0,
+                    //                 ),
+                    //                 // width: 29,
+                    //                 // height: 43,
+                    //               ),
+                    //               Text(
+                    //                 "Next".tr(),
+                    //                 style: TextStyle(
+                    //                     color: AppColors.MAIN_COLOR,
+                    //                     fontSize: 13,
+                    //                     fontFamily: "Segoe UI",
+                    //                     fontWeight: FontWeight.bold),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 15,
+                    // ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
-        );
-      }),
+              );
+            }),
     );
   }
 }

@@ -79,7 +79,7 @@ class _FinancialStatusUpdateDialogState
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("text",0,0,true);
+                        return CalculateScreen(0,"text",0,0,true);
                       }).then((value) {
                     provider.monthList.salaryAmount = double.parse(value);
                     provider.notifyListeners();
@@ -97,7 +97,7 @@ class _FinancialStatusUpdateDialogState
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("text",0,0,true);
+                        return CalculateScreen(0,"text",0,0,true);
                       }).then((value) {
                     provider.monthList.saveAmount = double.parse(value);
                     provider.notifyListeners();
@@ -115,7 +115,7 @@ class _FinancialStatusUpdateDialogState
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("text",0,0,true);
+                        return CalculateScreen(0,"text",0,0,true);
                       }).then((value) {
                     provider.aVisaLimit1 = double.parse(value);
                     provider.notifyListeners();
@@ -131,7 +131,7 @@ class _FinancialStatusUpdateDialogState
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("text",0,0,true);
+                        return CalculateScreen(0,"text",0,0,true);
                       }).then((value) {
                     provider.aVisaLimit2 = double.parse(value);
                     provider.notifyListeners();
@@ -151,7 +151,7 @@ class _FinancialStatusUpdateDialogState
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("text",0,0,true);
+                        return CalculateScreen(0,"text",0,0,true);
                       }).then((value) {
                     provider.availbeCash = double.parse(value);
                     provider.notifyListeners();

@@ -11,13 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 class CalculateScreen extends StatefulWidget {
+  String index;
   String type;
   double amount;
   double rmain;
   bool isRmain;
 
-  CalculateScreen(String t, double a, double r,bool ir){
-    type = t;
+  CalculateScreen(int i,String t, double a, double r,bool ir){
+    index = i == 0 ? "" : "${i}- ";
+    type = t != null && t != "" ? t : "اسم البند".tr();
     amount = a;
     rmain = r;
     isRmain = ir;
@@ -38,173 +40,180 @@ String text;
   Widget build(BuildContext context) {
     provider = Provider.of<HomeProvider>(context);
 
-    return AlertDialog(
-      backgroundColor: Colors.transparent,
-      contentPadding: EdgeInsets.zero,
-      elevation: 0.0,
-      content: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.Border_COLOR ),
-            borderRadius: BorderRadius.circular(20),
-            color: AppColors.bg_COLOR,
-          ),
-          // padding: EdgeInsets.only(top: 16, bottom: 8,left: 4,right: 4),
-          width: MediaQuery.of(context).size.width,
-          // width: 272,
-          height: 300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 5,),
-                  Container(
-                    width: 78,
-                    height: 47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color:  widget.isRmain? Colors.white : Colors.transparent,
-
-                    ),
-                    child: Visibility(
-                      visible: widget.isRmain,
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Text(
-                              "Remaining".tr(),
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Segoe UI",
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              NumberFormat('###,##0.00').format(widget.rmain - double.parse(provider.result)),
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Segoe UI",
-                                  color: Colors.black),
-                            ),
-                          ],
-                        ),
+    return Container(
+      // backgroundColor: Colors.transparent,
+      // // contentPadding: EdgeInsets.zero,
+      // elevation: 0.0,
+       child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+            height:MediaQuery.of(context).size.height/1.45,
+             // width: 400,
+            decoration: BoxDecoration(
+              border: Border.all(color: AppColors.Border_COLOR),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+              color: AppColors.bg_COLOR,
+            ),
+            // padding: EdgeInsets.only(top: 16, bottom: 8,left: 4,right: 4),
+            //  width: MediaQuery.of(context).size.width,
+            // height: MediaQuery
+            //     .of(context)
+            //     .size
+            //     .height / 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Spacer(),
+                    CloseButtonCustom(),
+                  ],
+                ),
+                Directionality(
+                  textDirection: ui.TextDirection.ltr,
+                  child: Container(
+                    child: Center(
+                      child: Directionality(
+                        textDirection: context.locale == Locale('ar') ? ui
+                            .TextDirection.rtl : ui.TextDirection.ltr,
+                        child: Text(
+                          "${widget.index} ${widget.type}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: "Segoe UI",
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                          ),),
                       ),
                     ),
+                    height: 32,
+                    margin: EdgeInsets.only(left: 5,right: 5,bottom: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.MAIN_COLOR,
+                      boxShadow: [
+                        BoxShadow(color: Colors.white, spreadRadius: 1),
+                        //color: AppColors.Border_COLOR
+                      ],
+                    ),
                   ),
-                  SizedBox(width: 5,),
-                  Expanded(
-                    child: Directionality(
-                      textDirection: ui.TextDirection.ltr,
-                      child: Container(
-                        // height: 36,
-                        height: 32,
-                        // width: 200,
-                        child: Center(
-                          child: Text(
-                            "${widget.type}",
+                ),
+                Visibility(
+                  visible: widget.isRmain,
+                  child: Container(
+                    height: 32,
+                    margin: EdgeInsets.only(top: 5,left: 5,right: 5,bottom: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.bg1_COLOR,
+                      boxShadow: [
+                        BoxShadow(color: AppColors.Border_COLOR, spreadRadius: 1),
+                        //color: AppColors.Border_COLOR
+                      ],
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Remaining".tr() + " " + NumberFormat('###,##0.00').format(widget.rmain -
+                        double.parse(provider.result)),
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w900,
+                              fontFamily: "Segoe UI",
+                              color: (widget.rmain -
+                                  double.parse(provider.result)) < 0 ? Colors.red : Colors.black),
+                        ),
+                        // Text(
+                        //   " ",
+                        //   style: TextStyle(
+                        //       fontSize: 15,
+                        //       fontWeight: FontWeight.w900,
+                        //       fontFamily: "Segoe UI",
+                        //       color: Colors.black),
+                        // ),
+                        // Text(
+                        //   " ",
+                        //   style: TextStyle(
+                        //       fontSize: 15,
+                        //       fontWeight: FontWeight.w900,
+                        //       fontFamily: "Segoe UI",
+                        //       color: Colors.black),
+                        // ),
+                      ],
+                    ),
+                  ),
+                ),
+                Directionality(
+                  textDirection: ui.TextDirection.ltr,
+                  child: Container(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            " ${NumberFormat('###,##0.00').format(
+                                double.parse(provider.result))} " +
+                                "Expenses".tr(),
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: "Segoe UI",
                               fontWeight: FontWeight.w900,
-                              color: Colors.white,
+                              color: AppColors.MAIN_COLOR,
                             ),),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.MAIN_COLOR,
-                          boxShadow: [
-                            BoxShadow(color: Colors.white, spreadRadius: 1),
-                         //color: AppColors.Border_COLOR
-                          ],
-                        ),
+                          Text(
+                            " ${provider.equation}",
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: "Segoe UI",
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.Border1_COLOR,
+                              // color: AppColors.MAIN_COLOR,
+                            ),),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(width: 16,),
-                  CloseButtonCustom(),
-                  SizedBox(width: 12,),
-                ],
-              ),
-              SizedBox(height: 8,),
-              Row(
-                children: [
-                  // SizedBox(width: 48,),
-                  Expanded(
-                    child: Directionality(
-                      textDirection: ui.TextDirection.ltr,
-                      child: Container(
-                        // height: 36,
-                        height: 38,
-                        // width: 200,
-                        child: Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                " ${provider.result} " + "Total".tr(),
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: "Segoe UI",
-                                  fontWeight: FontWeight.w900,
-                                  color: AppColors.MAIN_COLOR,
-                                ),),
-                              Text(
-                                provider.equation,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontFamily: "Segoe UI",
-                                  fontWeight: FontWeight.w900,
-                                  color: AppColors.Border1_COLOR,
-                                  // color: AppColors.MAIN_COLOR,
-                                ),),
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(color: AppColors.Border_COLOR, spreadRadius: 1),
-                          ],
-                        ),
-                      ),
+                     height: 55,
+                    margin: EdgeInsets.only(left: 5,right: 5,bottom: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: AppColors.Border_COLOR, spreadRadius: 1),
+                      ],
                     ),
                   ),
-                  // SizedBox(width: 48,),
+                ),
+                // Spacer(),
+                SizedBox(height: 10,),
 
-                ],
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              SizedBox(
-                // width: 171,
-                width: MediaQuery.of(context).size.width,
-                height: 135,
-                child: AllNumbersCustom(),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              // Spacer(),
-              CustomButton(
-                 function: () {
-                   text = provider.result;
-                   provider.clearNumber();
-                   Navigator.pop(context,text);
-                 },
-                title: "ADD".tr(),
-              ),
-              // SizedBox(height: 8,),
-            ],
-          ),
-        )],
-      ),
-    );
+                Expanded(child: Container(child: AllNumbersCustom())),
+                // SizedBox(
+                //   height: 8,
+                // ),
+               // SizedBox(height: 10,),
+
+                // CustomButton(
+                //   function: () {
+                //     text = provider.result;
+                //     provider.clearNumber();
+                //     Navigator.pop(context, text);
+                //   },
+                //   title: "ADD".tr(),
+                // ),
+                SizedBox(height: 4,),
+              ],
+            ),
+          )
+          ],
+        ),
+      );
+
   }
 }
 
@@ -356,7 +365,7 @@ String text;
 //                  provider.clearNumber();
 //                  Navigator.pop(context,text);
 //                },
-//               title: "ADD",
+//               title: "ADD".tr(),
 //             ),
 //             // SizedBox(height: 8,),
 //           ],

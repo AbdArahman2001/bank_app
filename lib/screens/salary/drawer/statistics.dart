@@ -45,7 +45,7 @@ class _StatisticsDialogDialogState extends State<StatisticsDialog> {
           ),
           padding: EdgeInsets.only(left: 8, top: 8, right: 16),
           width: 343,
-          height: 260,
+          height: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

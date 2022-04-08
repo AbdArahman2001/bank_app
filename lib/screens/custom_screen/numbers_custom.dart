@@ -15,8 +15,8 @@ Function function;
           color: Colors.white,
 
         ),
-        width: 78,
-        height: 30,
+        // width: 78,
+        // height: 65,
         // color: Colors.white,
         child: Center(
           child: Text(

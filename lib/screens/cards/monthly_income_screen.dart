@@ -4,7 +4,7 @@ import 'package:bank_app_flutter/prefs/UserPreferences.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/custom/reminder_custom_dialog.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom_screen.dart';
+import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom.dart';
 import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -93,16 +93,58 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.Back_Ground_COLOR,
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            "Schedule your salary".tr(),
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontFamily: "Segoe UI",
-                fontWeight: FontWeight.bold),
+        bottom: PreferredSize(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10),
+            child: Text.rich(
+              TextSpan(
+                text: 'Divide the income by making a financial plan by the needs of the current month'.tr(),
+                style: TextStyle(fontSize: 15,color: Colors.white),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: ' ',
+                  ),
+                  TextSpan(
+                      text: 'and go to the next page'.tr(),
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
+                      )
+                  ),
+                  TextSpan(
+                      text: ' ',
+                  ),
+                  TextSpan(
+                      text: 'to record the daily expenses and know the remaining for each item'.tr(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15
+                      )
+                  ),
+                  // can add more TextSpans here...
+                ],
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
+          preferredSize: Size(0.0, 25.0),
         ),
+        // title: Center(
+        //   child: FittedBox(
+        //     fit: BoxFit.scaleDown,
+        //     child: Text(
+        //       "Divide the income by making a financial plan on the needs of the current month and go to the next page to record the daily expenses and know the remaining for each item"
+        //           .tr(),
+        //       style: TextStyle(
+        //           color: Colors.white,
+        //           fontSize: 10,
+        //           fontFamily: "Segoe UI",
+        //           fontWeight: FontWeight.bold),
+        //     ),
+        //   ),
+        // ),
         backgroundColor: AppColors.MAIN_COLOR,
         elevation: 0,
         // actions: [
@@ -221,6 +263,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return CalculateScreen(
+                                                  0,
                                                   "Salary".tr(),
                                                   provider
                                                       .monthList.salaryAmount,
@@ -610,7 +653,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                               height: 40,
                                               child: Center(
                                                 child: Text(
-                                                  "Enter the value \n of the savings"
+                                                  "Enter the savings amount"
                                                       .tr(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
@@ -684,6 +727,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                     builder:
                                                         (BuildContext context) {
                                                       return CalculateScreen(
+                                                          0,
                                                           "Saver".tr(),
                                                           provider.getRemainingAmount() +
                                                               provider.monthList
@@ -1085,37 +1129,37 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                     // ),
                                                     GestureDetector(
                                                       onTap: () {
-                                                        Navigator.pushNamed(
-                                                                context,
-                                                                NameExpensesCustomScreen
-                                                                    .routeName)
-                                                            .then((value) {
-                                                          if (value == null) {
-                                                          } else
-                                                            provider
-                                                                .changeExpensesType(
-                                                                    value, i);
-                                                        });
-                                                        // showDialog(
-                                                        //     context: context,
-                                                        //     builder:
-                                                        //         (BuildContext
-                                                        //             context) {
-                                                        //       provider.tresutl =
-                                                        //           provider
-                                                        //               .monthList
-                                                        //               .expences[
-                                                        //                   i]
-                                                        //               .type;
-                                                        //       return NameExpensesCustom();
-                                                        //     }).then((value) {
-                                                        //   // TODO: show error message if amount not correct
+                                                        // Navigator.pushNamed(
+                                                        //         context,
+                                                        //         NameExpensesCustomScreen
+                                                        //             .routeName)
+                                                        //     .then((value) {
                                                         //   if (value == null) {
                                                         //   } else
                                                         //     provider
                                                         //         .changeExpensesType(
                                                         //             value, i);
                                                         // });
+                                                        showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              provider.tresutl =
+                                                                  provider
+                                                                      .monthList
+                                                                      .expences[
+                                                                          i]
+                                                                      .type;
+                                                              return NameExpensesCustom();
+                                                            }).then((value) {
+                                                          // TODO: show error message if amount not correct
+                                                          if (value == null) {
+                                                          } else
+                                                            provider
+                                                                .changeExpensesType(
+                                                                    value, i);
+                                                        });
                                                       },
                                                       child: Container(
                                                         height: 40,
@@ -1195,6 +1239,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                                   (BuildContext
                                                                       context) {
                                                                 return CalculateScreen(
+                                                                    (i + 1),
                                                                     provider
                                                                         .monthList
                                                                         .expences[
@@ -1395,7 +1440,13 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                       }
                                                     });
                                                   },
-                                                  child: Image(
+                                                  child: 
+                                                  // Icon(
+                                                  //   Icons.cancel_outlined,
+                                                  //   color: Colors.red,
+                                                  //    // size: 10,
+                                                  // ),
+                                                  Image(
                                                     image: AssetImage(
                                                         "assets/images/close.png"),
                                                   ),
@@ -1656,136 +1707,194 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                     //   ),
                     // ),
                     /// back /// previous
+                    SizedBox(
+                      // height: 27,
+                      height: 5,
+                    ),
                     Container(
-                      padding: EdgeInsets.only(left: 16, right: 16),
+                      height: 1.0,
+                      color: AppColors.Divider_COLOR,
+                    ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      // padding: EdgeInsets.only(left: 16, right: 16),
+                      height: 60,
+                      // color: Colors.red,
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, HomeScreen.routeName);
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  width: 29,
-                                  height: 43,
-                                  child: Icon(
-                                    Icons.arrow_back,
-                                    color: AppColors.MAIN_COLOR,
-                                    size: 30.0,
-                                  ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, HomeScreen.routeName);
+                              },
+                              child: Container(
+                                // color: Colors.green,
+margin: EdgeInsets.only(right: 20),
+                                // width: 70,
+                                // height: 60,
+                                child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        children: [
+                                    SizedBox(
+                                      // width: 29,
+                                      // height: 43,
+                                      child: Icon(
+                                        Icons.arrow_back,
+                                        color: AppColors.MAIN_COLOR,
+                                        size: 30.0,
+                                      ),
+                                    ),
+                                    // SizedBox(height: 5,),
+                                    Text(
+                                      "Previous".tr(),
+                                      style: TextStyle(
+                                          color: AppColors.MAIN_COLOR,
+                                          fontSize: 13,
+                                          fontFamily: "Segoe UI",
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
-                                // SizedBox(height: 5,),
-                                Text(
-                                  "Previous".tr(),
-                                  style: TextStyle(
-                                      color: AppColors.MAIN_COLOR,
-                                      fontSize: 13,
-                                      fontFamily: "Segoe UI",
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
-                          Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              provider.validateMonthlyIncome().then((v) {
-                                if (v is bool && v) {
-                                  if (provider.getRemainingAmount() > 0) {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return ReminderCustomDialog();
-                                        }).then((value) {
-                                      if (value is bool && value) {
-                                        provider.monthList.saveAmount +=
-                                            provider.getRemainingAmount();
-                                        Provider.of<HomeProvider>(context,
-                                                listen: false)
-                                            .saveList(isPlan: true);
-                                        UserPreferences.instance.saveRoutName(
-                                            TableOfSaralyScreen.routeName);
-                                        Navigator.pushReplacementNamed(context,
-                                            TableOfSaralyScreen.routeName);
-                                      }
-                                      ;
-                                    });
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("Add Item".tr(),
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                        color: AppColors.MAIN_COLOR,
+                                          fontWeight: FontWeight.bold
+                                      ),),
+                                ],
+                              ),
+                              // color: Colors.yellow,
+
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                provider.validateMonthlyIncome().then((v) {
+                                  if (v is bool && v) {
+                                    if (provider.getRemainingAmount() > 0) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return ReminderCustomDialog();
+                                          }).then((value) {
+                                        if (value is bool && value) {
+                                          provider.monthList.saveAmount +=
+                                              provider.getRemainingAmount();
+                                          Provider.of<HomeProvider>(context,
+                                                  listen: false)
+                                              .saveList(isPlan: true);
+                                          UserPreferences.instance.saveRoutName(
+                                              TableOfSaralyScreen.routeName);
+                                          Navigator.pushReplacementNamed(context,
+                                              TableOfSaralyScreen.routeName);
+                                        }
+                                        ;
+                                      });
+                                    } else {
+                                      Provider.of<HomeProvider>(context,
+                                              listen: false)
+                                          .saveList(isPlan: true);
+                                      UserPreferences.instance.saveRoutName(
+                                          TableOfSaralyScreen.routeName);
+                                      UserPreferences.instance.saveRoutName(
+                                          TableOfSaralyScreen.routeName);
+                                      Navigator.pushReplacementNamed(
+                                          context, TableOfSaralyScreen.routeName);
+                                    }
                                   } else {
-                                    Provider.of<HomeProvider>(context,
-                                            listen: false)
-                                        .saveList(isPlan: true);
-                                    UserPreferences.instance.saveRoutName(
-                                        TableOfSaralyScreen.routeName);
-                                    UserPreferences.instance.saveRoutName(
-                                        TableOfSaralyScreen.routeName);
-                                    Navigator.pushReplacementNamed(
-                                        context, TableOfSaralyScreen.routeName);
+                                    var snackBar = SnackBar(
+                                        backgroundColor:
+                                            AppColors.Snack_Bar_COLOR,
+                                        content: Text(
+                                          v,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "Segoe UI"),
+                                        ));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
                                   }
-                                } else {
-                                  var snackBar = SnackBar(
-                                      backgroundColor:
-                                          AppColors.Snack_Bar_COLOR,
-                                      content: Text(
-                                        v,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "Segoe UI"),
-                                      ));
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              });
-                            },
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  child: Icon(
-                                    Icons.arrow_forward,
-                                    color: AppColors.MAIN_COLOR,
-                                    size: 30.0,
-                                  ),
-                                  width: 29,
-                                  height: 43,
+                                });
+                              },
+                              child: Container(
+                                // width: 70,
+                                // height: 60,
+                                // color: Colors.green,
+                                margin: EdgeInsets.only(left: 20),
+                                // width: 70,
+                                // height: 60,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.center,                                  children: [
+                                    SizedBox(
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: AppColors.MAIN_COLOR,
+                                        size: 30.0,
+                                      ),
+                                      // width: 29,
+                                      // height: 43,
+                                    ),
+                                    Text(
+                                      "Next".tr(),
+                                      style: TextStyle(
+                                          color: AppColors.MAIN_COLOR,
+                                          fontSize: 13,
+                                          fontFamily: "Segoe UI",
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "Next".tr(),
-                                  style: TextStyle(
-                                      color: AppColors.MAIN_COLOR,
-                                      fontSize: 13,
-                                      fontFamily: "Segoe UI",
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    // SizedB
                   ],
                 ),
               );
             }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await provider.addExpense();
-          var scrollPosition = _scrollController.position;
-          _scrollController.animateTo(
-            scrollPosition.maxScrollExtent + 60,
-            duration: new Duration(milliseconds: 200),
-            curve: Curves.easeOut,
-          );
-        },
-        backgroundColor: AppColors.MAIN_COLOR,
-        child: Icon(
-          Icons.add,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 6.0),
+        child: FloatingActionButton(
+
+          onPressed: () async {
+            await provider.addExpense();
+            var scrollPosition = _scrollController.position;
+            _scrollController.animateTo(
+              scrollPosition.maxScrollExtent + 60,
+              duration: new Duration(milliseconds: 200),
+              curve: Curves.easeOut,
+            );
+          },
+
+          backgroundColor: AppColors.MAIN_COLOR,
+          child: Icon(
+            Icons.add,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

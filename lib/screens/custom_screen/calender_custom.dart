@@ -33,7 +33,7 @@ class _CalenderCustomState extends State<CalenderCustom> {
         ),
          padding: EdgeInsets.only(left: 8, right: 8),
         width: 300,
-        height: 160,
+        height: 200,
         child: GestureDetector(
           onTap: () {
             provider.setDate(context);

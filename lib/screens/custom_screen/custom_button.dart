@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return SizedBox(
-      height: 36,
+      height: 60,
       width: 114,
       // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: ElevatedButton(

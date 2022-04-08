@@ -40,7 +40,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
           ),
           padding: EdgeInsets.only(left: 8, top: 8,right: 16),
           width: 343,
-          height: 300,
+          height: 400,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
              crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,7 +98,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen("The amount is extra".tr(),0,0,false);
+                        return CalculateScreen(0,"The amount is extra".tr(),0,0,false);
                       }).then((value) {
                     _addedValue = double.parse(value);
                     // provider.availbeCash = double.parse(value);
@@ -292,14 +292,31 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/okk.png"),
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.green,
+                      // image: DecorationImage(
+                      //   image: AssetImage("assets/images/okk.png"),
+                      // ),
                     ),
-                  ),
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 50,
+                    )
+                  // Image.asset("assets/images/check (1).png",color: Colors.green,))
                 ),
+                // Container(
+                //   height: 30,
+                //   width: 30,
+                //   decoration: BoxDecoration(
+                //     image: DecorationImage(
+                //       image: AssetImage("assets/images/okk.png"),
+                //     ),
+                //   ),
+                // ),
               ),
               SizedBox(
                 height: 16,

@@ -51,7 +51,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
         ),
         padding: EdgeInsets.only(left: 8, top: 8, right: 16),
         //width: 343,
-        height: 350,
+        height: 400,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -205,7 +205,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return CalculateScreen("The value to be carried over".tr(),0,0,false);
+                          return CalculateScreen(0,"The value to be carried over".tr(),0,0,false);
                         }).then((value) {
                       if (value == null) {
                       } else if (double.parse(value) >
@@ -356,6 +356,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                         canvasColor: AppColors.Back_Ground_COLOR,
                       ),
                       child: DropdownButton<String>(
+
                         items: _currencies
                             .where((element) =>
                                 element !=
@@ -436,13 +437,21 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/okk.png"),
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.green,
+                        // image: DecorationImage(
+                        //   image: AssetImage("assets/images/okk.png"),
+                        // ),
                       ),
-                    ),
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 50,
+                      )
+                    // Image.asset("assets/images/check (1).png",color: Colors.green,))
                   ),
                 ),
               ],
