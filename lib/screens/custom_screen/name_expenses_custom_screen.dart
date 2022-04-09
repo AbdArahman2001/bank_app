@@ -78,7 +78,7 @@ class _NameExpensesCustomScreenState extends State<NameExpensesCustomScreen> {
                       itemsVisibleInDropdown: 6,
                       required: false,
                       strict: false,
-                      hintText: 'Choose item name'.tr(),
+                      hintText: '"Enter item name"'.tr(),
                       items: arabicExpenses,
                       setter: (dynamic newValue) {
                         selectedItem = newValue;

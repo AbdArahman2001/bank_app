@@ -79,16 +79,11 @@ class _NameExpensesCustomState extends State<NameExpensesCustom> {
               SizedBox(
                 height: 10,
               ),
-              // DropdownButton(items: arabicExpenses, onChanged: (v){}),
               Spacer(),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
                   onTap: () {
                     Navigator.pop(context, controller.text);
-                    // if(formKey.currentState.validate()){
-                    //   Navigator.pop(context, controller.value);
-                    // }else{
-                    // }
                   },
                   child: Container(
                     height: 60,

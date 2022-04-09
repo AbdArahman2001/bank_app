@@ -427,35 +427,84 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
             SizedBox(
               height: 17,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    provider.transfareAmount(_fromCurrentItemSelected,
-                        _toCurrentItemSelected, _value);
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.green,
-                        // image: DecorationImage(
-                        //   image: AssetImage("assets/images/okk.png"),
-                        // ),
-                      ),
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.white,
-                        size: 50,
-                      )
-                    // Image.asset("assets/images/check (1).png",color: Colors.green,))
+            Container(
+              // padding: EdgeInsets.only(left: 16, right: 16),
+              height: 60,
+              // color: Colors.red,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Container(
+                      // color: Colors.red,
+                    ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: (){
+                        provider.transfareAmount(_fromCurrentItemSelected,
+                            _toCurrentItemSelected, _value);
+                        Navigator.pop(context);
+                      },
+                      child: Center(
+                        child: Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green,
+                              // image: DecorationImage(
+                              //   image: AssetImage("assets/images/okk.png"),
+                              // ),
+                            ),
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 50,
+                            )
+                          // Image.asset("assets/images/check (1).png",color: Colors.green,))
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      // color: Colors.black
+                    ),
+                  ),
+                ],
+              ),
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         provider.transfareAmount(_fromCurrentItemSelected,
+            //             _toCurrentItemSelected, _value);
+            //         Navigator.pop(context);
+            //       },
+            //       child: Container(
+            //           height: 60,
+            //           width: 60,
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(50),
+            //             color: Colors.green,
+            //             // image: DecorationImage(
+            //             //   image: AssetImage("assets/images/okk.png"),
+            //             // ),
+            //           ),
+            //           child: Icon(
+            //             Icons.check,
+            //             color: Colors.white,
+            //             size: 50,
+            //           )
+            //         // Image.asset("assets/images/check (1).png",color: Colors.green,))
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

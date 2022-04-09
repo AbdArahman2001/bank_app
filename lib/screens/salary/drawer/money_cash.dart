@@ -286,38 +286,86 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                 ],
               ),
               Spacer(),
-              GestureDetector(
-                onTap: () {
-                  provider.addAdditionalValue(_addedValue,_currentItemSelected1);
-                  Navigator.pop(context);
-                },
-                child: Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.green,
-                      // image: DecorationImage(
-                      //   image: AssetImage("assets/images/okk.png"),
-                      // ),
+              Container(
+                // padding: EdgeInsets.only(left: 16, right: 16),
+                height: 60,
+                // color: Colors.red,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        // color: Colors.red,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 50,
-                    )
-                  // Image.asset("assets/images/check (1).png",color: Colors.green,))
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: (){
+                          provider.addAdditionalValue(_addedValue,_currentItemSelected1);
+                          Navigator.pop(context);
+                        },
+                        child: Center(
+                          child: Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.green,
+                                // image: DecorationImage(
+                                //   image: AssetImage("assets/images/okk.png"),
+                                // ),
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 50,
+                              )
+                            // Image.asset("assets/images/check (1).png",color: Colors.green,))
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        // color: Colors.black
+                      ),
+                    ),
+                  ],
                 ),
-                // Container(
-                //   height: 30,
-                //   width: 30,
-                //   decoration: BoxDecoration(
-                //     image: DecorationImage(
-                //       image: AssetImage("assets/images/okk.png"),
-                //     ),
-                //   ),
-                // ),
               ),
+              // GestureDetector(
+              //   onTap: () {
+              //     provider.addAdditionalValue(_addedValue,_currentItemSelected1);
+              //     Navigator.pop(context);
+              //   },
+              //   child: Container(
+              //       height: 60,
+              //       width: 60,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(50),
+              //         color: Colors.green,
+              //         // image: DecorationImage(
+              //         //   image: AssetImage("assets/images/okk.png"),
+              //         // ),
+              //       ),
+              //       child: Icon(
+              //         Icons.check,
+              //         color: Colors.white,
+              //         size: 50,
+              //       )
+              //     // Image.asset("assets/images/check (1).png",color: Colors.green,))
+              //   ),
+              //   // Container(
+              //   //   height: 30,
+              //   //   width: 30,
+              //   //   decoration: BoxDecoration(
+              //   //     image: DecorationImage(
+              //   //       image: AssetImage("assets/images/okk.png"),
+              //   //     ),
+              //   //   ),
+              //   // ),
+              // ),
               SizedBox(
                 height: 16,
               ),

@@ -10,14 +10,12 @@ class CloseButtonCustom extends StatelessWidget {
       },
       child:
       Container(
-          height: 60,
-          width: 60,
-          child: Icon(
-            Icons.cancel,
-            color: Colors.red,
-            size: 50,
-          )
-        // Image.asset("assets/images/check (1).png",color: Colors.green,))
+        // padding: EdgeInsets.only(right: 60,left: 60),
+        child: Icon(
+          Icons.cancel,
+          color: Colors.red,
+          size: 50,
+        ),
       ),
 
     );

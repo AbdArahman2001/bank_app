@@ -4,7 +4,7 @@ import 'package:bank_app_flutter/prefs/UserPreferences.dart';
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/custom/reminder_custom_dialog.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom.dart';
+import 'package:bank_app_flutter/screens/custom_screen/custom_dropdown_textfeild.dart';
 import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -98,8 +98,10 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
             padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10),
             child: Text.rich(
               TextSpan(
-                text: 'Divide the income by making a financial plan by the needs of the current month'.tr(),
-                style: TextStyle(fontSize: 15,color: Colors.white),
+                text:
+                    'Divide the income by making a financial plan by the needs of the current month'
+                        .tr(),
+                style: TextStyle(fontSize: 15, color: Colors.white),
                 children: <TextSpan>[
                   TextSpan(
                     text: ' ',
@@ -107,22 +109,18 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                   TextSpan(
                       text: 'and go to the next page'.tr(),
                       style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16
-                      )
+                          decoration: TextDecoration.underline,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  TextSpan(
+                    text: ' ',
                   ),
                   TextSpan(
-                      text: ' ',
-                  ),
-                  TextSpan(
-                      text: 'to record the daily expenses and know the remaining for each item'.tr(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15
-                      )
-                  ),
+                      text:
+                          'to record the daily expenses and know the remaining for each item'
+                              .tr(),
+                      style: TextStyle(color: Colors.white, fontSize: 15)),
                   // can add more TextSpans here...
                 ],
               ),
@@ -1151,7 +1149,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                                       .expences[
                                                                           i]
                                                                       .type;
-                                                              return NameExpensesCustom();
+                                                              return CustomDropdownTextfeildScreen();
+                                                              //NameExpensesCustom();
                                                             }).then((value) {
                                                           // TODO: show error message if amount not correct
                                                           if (value == null) {
@@ -1440,13 +1439,13 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                       }
                                                     });
                                                   },
-                                                  child: 
-                                                  // Icon(
-                                                  //   Icons.cancel_outlined,
-                                                  //   color: Colors.red,
-                                                  //    // size: 10,
-                                                  // ),
-                                                  Image(
+                                                  child:
+                                                      // Icon(
+                                                      //   Icons.cancel_outlined,
+                                                      //   color: Colors.red,
+                                                      //    // size: 10,
+                                                      // ),
+                                                      Image(
                                                     image: AssetImage(
                                                         "assets/images/close.png"),
                                                   ),
@@ -1735,14 +1734,13 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                               },
                               child: Container(
                                 // color: Colors.green,
-margin: EdgeInsets.only(right: 20),
+                                margin: EdgeInsets.only(right: 20, left: 20),
                                 // width: 70,
                                 // height: 60,
                                 child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-
-        children: [
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
                                     SizedBox(
                                       // width: 29,
                                       // height: 43,
@@ -1772,16 +1770,16 @@ margin: EdgeInsets.only(right: 20),
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text("Add Item".tr(),
-                                      style: TextStyle(
-                                          fontSize: 15,
+                                  Text(
+                                    "Add Item".tr(),
+                                    style: TextStyle(
+                                        fontSize: 15,
                                         color: AppColors.MAIN_COLOR,
-                                          fontWeight: FontWeight.bold
-                                      ),),
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ],
                               ),
                               // color: Colors.yellow,
-
                             ),
                           ),
                           Expanded(
@@ -1803,7 +1801,8 @@ margin: EdgeInsets.only(right: 20),
                                               .saveList(isPlan: true);
                                           UserPreferences.instance.saveRoutName(
                                               TableOfSaralyScreen.routeName);
-                                          Navigator.pushReplacementNamed(context,
+                                          Navigator.pushReplacementNamed(
+                                              context,
                                               TableOfSaralyScreen.routeName);
                                         }
                                         ;
@@ -1816,8 +1815,8 @@ margin: EdgeInsets.only(right: 20),
                                           TableOfSaralyScreen.routeName);
                                       UserPreferences.instance.saveRoutName(
                                           TableOfSaralyScreen.routeName);
-                                      Navigator.pushReplacementNamed(
-                                          context, TableOfSaralyScreen.routeName);
+                                      Navigator.pushReplacementNamed(context,
+                                          TableOfSaralyScreen.routeName);
                                     }
                                   } else {
                                     var snackBar = SnackBar(
@@ -1841,12 +1840,13 @@ margin: EdgeInsets.only(right: 20),
                                 // width: 70,
                                 // height: 60,
                                 // color: Colors.green,
-                                margin: EdgeInsets.only(left: 20),
+                                margin: EdgeInsets.only(left: 20, right: 20),
                                 // width: 70,
                                 // height: 60,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.center,                                  children: [
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
                                     SizedBox(
                                       child: Icon(
                                         Icons.arrow_forward,
@@ -1880,7 +1880,6 @@ margin: EdgeInsets.only(right: 20),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 6.0),
         child: FloatingActionButton(
-
           onPressed: () async {
             await provider.addExpense();
             var scrollPosition = _scrollController.position;
@@ -1890,7 +1889,6 @@ margin: EdgeInsets.only(right: 20),
               curve: Curves.easeOut,
             );
           },
-
           backgroundColor: AppColors.MAIN_COLOR,
           child: Icon(
             Icons.add,

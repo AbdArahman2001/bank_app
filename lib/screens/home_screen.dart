@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // width: 70,
                                 // height: 60,
                                 // color: Colors.green,
-                                padding: EdgeInsets.only(left: 20),
+                                padding: EdgeInsets.only(left: 20,right: 20),
                                 // width: 70,
                                 // height: 60,
                                 child: Column(

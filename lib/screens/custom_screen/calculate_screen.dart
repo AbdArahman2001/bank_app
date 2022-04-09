@@ -1,15 +1,14 @@
-import 'package:bank_app_flutter/model/HiveData.dart';
+import 'dart:ui' as ui;
+
 import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/all_numbers_custom.dart';
 import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/custom_button.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:ui' as ui;
+
 class CalculateScreen extends StatefulWidget {
   String index;
   String type;
@@ -17,25 +16,29 @@ class CalculateScreen extends StatefulWidget {
   double rmain;
   bool isRmain;
 
-  CalculateScreen(int i,String t, double a, double r,bool ir){
+  CalculateScreen(int i, String t, double a, double r, bool ir) {
     index = i == 0 ? "" : "${i}- ";
     type = t != null && t != "" ? t : "اسم البند".tr();
     amount = a;
     rmain = r;
     isRmain = ir;
   }
+
   @override
   State<CalculateScreen> createState() => _CalculateScreenState();
 }
+
 class _CalculateScreenState extends State<CalculateScreen> {
   HomeProvider provider;
-String text;
+  String text;
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     provider.result = "0";
   }
+
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<HomeProvider>(context);
@@ -44,15 +47,16 @@ String text;
       // backgroundColor: Colors.transparent,
       // // contentPadding: EdgeInsets.zero,
       // elevation: 0.0,
-       child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-            height:MediaQuery.of(context).size.height/1.45,
-             // width: 400,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height / 1.45,
+            // width: 400,
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.Border_COLOR),
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               color: AppColors.bg_COLOR,
             ),
             // padding: EdgeInsets.only(top: 16, bottom: 8,left: 4,right: 4),
@@ -64,20 +68,35 @@ String text;
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Spacer(),
-                    CloseButtonCustom(),
-                  ],
+                Container(
+                  height: 60,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          // color: Colors.red,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          // color: Colors.green,
+                        ),
+                      ),
+                      Expanded(
+                          child: CloseButtonCustom()),
+                    ],
+                  ),
                 ),
                 Directionality(
                   textDirection: ui.TextDirection.ltr,
                   child: Container(
                     child: Center(
                       child: Directionality(
-                        textDirection: context.locale == Locale('ar') ? ui
-                            .TextDirection.rtl : ui.TextDirection.ltr,
+                        textDirection: context.locale == Locale('ar')
+                            ? ui.TextDirection.rtl
+                            : ui.TextDirection.ltr,
                         child: Text(
                           "${widget.index} ${widget.type}",
                           style: TextStyle(
@@ -85,11 +104,12 @@ String text;
                             fontFamily: "Segoe UI",
                             fontWeight: FontWeight.w900,
                             color: Colors.white,
-                          ),),
+                          ),
+                        ),
                       ),
                     ),
                     height: 32,
-                    margin: EdgeInsets.only(left: 5,right: 5,bottom: 5),
+                    margin: EdgeInsets.only(left: 5, right: 5, bottom: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.MAIN_COLOR,
@@ -104,12 +124,14 @@ String text;
                   visible: widget.isRmain,
                   child: Container(
                     height: 32,
-                    margin: EdgeInsets.only(top: 5,left: 5,right: 5,bottom: 5),
+                    margin:
+                        EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.bg1_COLOR,
                       boxShadow: [
-                        BoxShadow(color: AppColors.Border_COLOR, spreadRadius: 1),
+                        BoxShadow(
+                            color: AppColors.Border_COLOR, spreadRadius: 1),
                         //color: AppColors.Border_COLOR
                       ],
                     ),
@@ -118,14 +140,19 @@ String text;
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Remaining".tr() + " " + NumberFormat('###,##0.00').format(widget.rmain -
-                        double.parse(provider.result)),
+                          "Remaining".tr() +
+                              " " +
+                              NumberFormat('###,##0.00').format(
+                                  widget.rmain - double.parse(provider.result)),
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w900,
                               fontFamily: "Segoe UI",
                               color: (widget.rmain -
-                                  double.parse(provider.result)) < 0 ? Colors.red : Colors.black),
+                                          double.parse(provider.result)) <
+                                      0
+                                  ? Colors.red
+                                  : Colors.black),
                         ),
                         // Text(
                         //   " ",
@@ -156,15 +183,15 @@ String text;
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            " ${NumberFormat('###,##0.00').format(
-                                double.parse(provider.result))} " +
+                            " ${NumberFormat('###,##0.00').format(double.parse(provider.result))} " +
                                 "Expenses".tr(),
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: "Segoe UI",
                               fontWeight: FontWeight.w900,
                               color: AppColors.MAIN_COLOR,
-                            ),),
+                            ),
+                          ),
                           Text(
                             " ${provider.equation}",
                             style: TextStyle(
@@ -173,12 +200,13 @@ String text;
                               fontWeight: FontWeight.w900,
                               color: AppColors.Border1_COLOR,
                               // color: AppColors.MAIN_COLOR,
-                            ),),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                     height: 55,
-                    margin: EdgeInsets.only(left: 5,right: 5,bottom: 5),
+                    height: 55,
+                    margin: EdgeInsets.only(left: 5, right: 5, bottom: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -190,13 +218,15 @@ String text;
                   ),
                 ),
                 // Spacer(),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
 
                 Expanded(child: Container(child: AllNumbersCustom())),
                 // SizedBox(
                 //   height: 8,
                 // ),
-               // SizedBox(height: 10,),
+                // SizedBox(height: 10,),
 
                 // CustomButton(
                 //   function: () {
@@ -206,17 +236,17 @@ String text;
                 //   },
                 //   title: "ADD".tr(),
                 // ),
-                SizedBox(height: 4,),
+                SizedBox(
+                  height: 4,
+                ),
               ],
             ),
           )
-          ],
-        ),
-      );
-
+        ],
+      ),
+    );
   }
 }
-
 
 /// dialog ///
 /// import 'package:bank_app_flutter/providers/home_provider.dart';
