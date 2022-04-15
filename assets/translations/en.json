@@ -24,6 +24,8 @@
   "Enter item name": "Enter item name",
   "The value to be carried over" : "The value to be carried over",
   "Divide the income by making a financial plan on the needs of the current month and go to the next page to record the daily expenses and know the remaining for each item": "Divide the income by making a financial plan on the needs of the current month and go to the next page to record the daily expenses and know the remaining for each item",
+  "Enter the daily and monthly expenses" : "Enter the daily and monthly expenses",
+  "Name must be less than 15 characters" : "Name must be less than 15 characters",
 
   "Enter the savings amount": "Enter the savings amount",
   "Enter the value \n of the savings": "Enter the value \n of the savings",

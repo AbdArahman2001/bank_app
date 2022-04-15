@@ -96,6 +96,8 @@
   "The value to be carried over" : "القيمة المرحلة",
   "The amount is extra" : "المبلغ الإضافي",
   "There are no other items to carry over the value" : "لا يوجد بنود أخرى ليتم الترحيل إليها",
+  "Enter the daily and monthly expenses" : "أدخل المصاريف اليومية والشهرية",
+  "Name must be less than 15 characters" : "يجب أن يكون الاسم أقل من 15 حرفًا",
 
   "Clothes" : "ملابس",
   "Hair cut salon" :  "صالون حلاقة",

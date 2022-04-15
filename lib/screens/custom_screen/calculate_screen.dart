@@ -37,6 +37,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
     // TODO: implement dispose
     super.dispose();
     provider.result = "0";
+    provider.equation = "0";
   }
 
   @override
@@ -193,7 +194,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                             ),
                           ),
                           Text(
-                            " ${provider.equation}",
+                            " ${NumberFormat('###,##0.00').format(double.parse(provider.equation))}",
                             style: TextStyle(
                               fontSize: 13,
                               fontFamily: "Segoe UI",

@@ -1,12 +1,9 @@
 import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/text_values_custom.dart';
-import 'package:bank_app_flutter/screens/salary/following_the_rules_screen.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 import 'package:provider/provider.dart';
 
 class MoneyCashDialog extends StatefulWidget {
@@ -17,16 +14,24 @@ class MoneyCashDialog extends StatefulWidget {
 class _MoneyCashDialogState extends State<MoneyCashDialog> {
   List<String> expences;
 
-  List<String> _currencies = ["Saver".tr(),];
+  List<String> _currencies = [
+    "Saver".tr(),
+  ];
   double _addedValue = 0.0;
   int _currentItemSelected1 = 0;
   double _value = 0.0;
+
   @override
-  initState(){
+  initState() {
     super.initState();
-    expences = Provider.of<HomeProvider>(context,listen: false).monthList.expences.map((e) => e.type).toList();
+    expences = Provider.of<HomeProvider>(context, listen: false)
+        .monthList
+        .expences
+        .map((e) => e.type)
+        .toList();
     _currencies.addAll(expences);
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(builder: (context, provider, x) {
@@ -38,12 +43,12 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
             borderRadius: BorderRadius.circular(8),
             color: Colors.white,
           ),
-          padding: EdgeInsets.only(left: 8, top: 8,right: 16),
+          padding: EdgeInsets.only(left: 8, top: 8, right: 16),
           width: 343,
           height: 400,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-             crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -86,7 +91,6 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                       ),
                     ),
                   ),
-
                 ],
               ),
               SizedBox(
@@ -98,7 +102,8 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CalculateScreen(0,"The amount is extra".tr(),0,0,false);
+                        return CalculateScreen(
+                            0, "The amount is extra".tr(), 0, 0, false);
                       }).then((value) {
                     _addedValue = double.parse(value);
                     // provider.availbeCash = double.parse(value);
@@ -121,16 +126,18 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                         ],
                       ),
                       child: Center(
-                        child:  Text(
+                        child: Text(
                           _addedValue == 0
-                              ?  "Enter the value + ".tr()
+                              ? "Enter the value + ".tr()
                               : NumberFormat('###,##0.00').format(_addedValue),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
                             fontFamily: "Segoe UI",
                             fontWeight: FontWeight.w900,
-                            color: _addedValue == 0 ? Colors.red : AppColors.MAIN_COLOR,
+                            color: _addedValue == 0
+                                ? Colors.red
+                                : AppColors.MAIN_COLOR,
                           ),
                         ),
                         // Text(
@@ -147,14 +154,15 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                         // ),
                       ),
                     ),
-                    SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Container(
                       height: 30,
                       width: 30,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(
-                              "assets/images/addadd.png"),
+                          image: AssetImage("assets/images/addadd.png"),
                         ),
                       ),
                     ),
@@ -212,7 +220,8 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    "Please select the item to which the amount will be credited:".tr(),
+                    "Please select the item to which the amount will be credited:"
+                        .tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
@@ -221,68 +230,134 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 8,),
-                  Container(
-                    margin: EdgeInsets.only(left: 60,right: 60),
-                    height: 38,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: AppColors.Drawer_COLOR, spreadRadius: 1),
-                      ],
-                    ),
-                    child: Center(
-                      child: Theme(
-                        data: Theme.of(context).copyWith(
-                          canvasColor: AppColors.Back_Ground_COLOR,
-                        ),
-                        child: DropdownButton<String>(
-                          items: _currencies.asMap().map((i,String dropDownStringItem) {
-                            return MapEntry(i,DropdownMenuItem<String>(
-                              value: i.toString(),
-                              child: Row(
-                                  children: [
-                                    Text((i < 1 ? 0 : i).toString(),style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Segoe UI",
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.Drawer_COLOR,
-                                    ),
-                                    ),
-                                    Text("-",style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Segoe UI",
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.Drawer_COLOR,
-                                    ),
-                                    ),
-                                    SizedBox(width: 5,),
-                                    Text(dropDownStringItem,style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: "Segoe UI",
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.Drawer_COLOR,
-                                    ),
-                                    ),
-                                  ]
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: 20,),
+                      Expanded(
+                        child: Container(
+                          // margin: EdgeInsets.only(left: 50, right: 50),
+                          height: 38,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: AppColors.Drawer_COLOR, spreadRadius: 1),
+                            ],
+                          ),
+                          child: Center(
+                            child: Theme(
+                              data: Theme.of(context).copyWith(
+                                canvasColor: AppColors.Back_Ground_COLOR,
                               ),
-                            ));
-                          }).values.toList(),
-                          onChanged: (String newValueSelected) {
-                            setState(() {
-                              int parsed = int.tryParse(newValueSelected);
-                              this._currentItemSelected1 = parsed != null ? parsed : 0;
-                            });
-                          },
-                          value: _currentItemSelected1.toString(),
-
+                              child: DropdownButton<String>(
+                                items: _currencies
+                                    .asMap()
+                                    .map((i, String dropDownStringItem) {
+                                      return MapEntry(
+                                          i,
+                                          DropdownMenuItem<String>(
+                                            value: i.toString(),
+                                            child: Row(children: [
+                                              Text(
+                                                (i < 1 ? 0 : i).toString(),
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily: "Segoe UI",
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.Drawer_COLOR,
+                                                ),
+                                              ),
+                                              Text(
+                                                "-",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily: "Segoe UI",
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.Drawer_COLOR,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                dropDownStringItem,
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily: "Segoe UI",
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.Drawer_COLOR,
+                                                ),
+                                              ),
+                                            ]),
+                                          ));
+                                    })
+                                    .values
+                                    .toList(),
+                                onChanged: (String newValueSelected) {
+                                  setState(() {
+                                    int parsed = int.tryParse(newValueSelected);
+                                    this._currentItemSelected1 =
+                                        parsed != null ? parsed : 0;
+                                  });
+                                },
+                                value: _currentItemSelected1.toString(),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                      SizedBox(width: 20,),
 
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(width: 20,),
+
+                      Expanded(
+                        child: Container(
+                          // margin: EdgeInsets.only(left: 50, right: 50),
+                          height: 38,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.bg1_COLOR,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: AppColors.Border_COLOR, spreadRadius: 1),
+                              //color: AppColors.Border_COLOR
+                            ],
+                          ),
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Remaining".tr() +
+                                      " " +
+                                      NumberFormat('###,##0.00').format(
+                                          provider.getFromSelectedItemReminderAmount(
+                                                  _currentItemSelected1) + _addedValue),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "Segoe UI",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                      SizedBox(width: 20,),
+
+                    ],
+                  ),
                 ],
               ),
               Spacer(),
@@ -296,19 +371,20 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                   children: [
                     Expanded(
                       child: Container(
-                        // color: Colors.red,
-                      ),
+                          // color: Colors.red,
+                          ),
                     ),
                     Expanded(
                       child: GestureDetector(
-                        onTap: (){
-                          provider.addAdditionalValue(_addedValue,_currentItemSelected1);
+                        onTap: () {
+                          provider.addAdditionalValue(
+                              _addedValue, _currentItemSelected1);
                           Navigator.pop(context);
                         },
                         child: Center(
                           child: Container(
-                              height: 60,
-                              width: 60,
+                              height: 50,
+                              width: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 color: Colors.green,
@@ -321,15 +397,15 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                                 color: Colors.white,
                                 size: 50,
                               )
-                            // Image.asset("assets/images/check (1).png",color: Colors.green,))
-                          ),
+                              // Image.asset("assets/images/check (1).png",color: Colors.green,))
+                              ),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Container(
-                        // color: Colors.black
-                      ),
+                          // color: Colors.black
+                          ),
                     ),
                   ],
                 ),

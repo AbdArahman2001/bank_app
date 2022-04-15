@@ -406,7 +406,7 @@ return Scaffold(
                               TableCell(
                                 child: Center(
                                   child:  Text(
-                                    "Enter the savings amount"
+                                    "Enter the expense amount"
                                         .tr(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -635,6 +635,17 @@ return Scaffold(
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w900,
+                          fontFamily: "Segoe UI",
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        "Enter the daily and monthly expenses".tr(),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                           fontFamily: "Segoe UI",
                           color: Colors.black,
                         ),

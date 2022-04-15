@@ -15,6 +15,7 @@ class _CustomDropdownTextfeildScreenState
     extends State<CustomDropdownTextfeildScreen> {
   final _formKey = GlobalKey<FormState>();
 
+
   TextEditingController controller = new TextEditingController();
   HomeProvider provider;
 
@@ -106,7 +107,8 @@ class _CustomDropdownTextfeildScreenState
                       controller.text.length == 0 ? false : true;
                     },
                     validator: (value){
-                       controller.text.length == 0 ? false : true;
+                       // controller.text.length == 0 || controller.text.length > 3  ? false : true;
+                       return  controller.text.length  > 17 ? 'Name must be less than 15 characters'.tr() : null;
                     },
                     onChanged: (v){
                       controller.text.length == 0 ? false : true;
@@ -130,7 +132,7 @@ class _CustomDropdownTextfeildScreenState
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Visibility(
-                            visible:  controller.text.length == 0 ? false : true,
+                           // visible:  controller.text.length == 0 ? false : true,
                             child: IconButton(
                               onPressed: () {
                                 controller.clear();
@@ -202,9 +204,11 @@ class _CustomDropdownTextfeildScreenState
                             },
                             child: Card(
                               child: ListTile(
-                                leading: Icon(
-                                  Icons.circle,
-                                  color: AppColors.MAIN_COLOR,
+                                leading:  Text(
+                                  "${index+1} -",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
                                 title: Text(
                                   arabicExpenses[index].tr(),
@@ -243,13 +247,18 @@ class _CustomDropdownTextfeildScreenState
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pop(context, controller.text);
+
+                            if(_formKey.currentState.validate()){
+                              Navigator.pop(context, controller.text);
+                            }else{
+                            }
+
 
                           },
                           child: Center(
                             child: Container(
-                                height: 60,
-                                width: 60,
+                                height: 50,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.green,

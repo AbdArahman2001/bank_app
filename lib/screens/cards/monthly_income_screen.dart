@@ -321,16 +321,26 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                         ],
                                       ),
                                       child: Center(
-                                        child: Text(
-                                          NumberFormat('###,##0.00').format(
-                                              provider.monthList.salaryAmount),
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: "Segoe UI",
-                                            color: AppColors.Drawer_COLOR,
-                                          ),
-                                        ),
+                                        child: provider
+                                                    .monthList.salaryAmount ==
+                                                0
+                                            ? Text("Enter the value + ".tr(),
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Tajawal',
+                                                    color: Colors.red))
+                                            : Text(
+                                                NumberFormat('###,##0.00')
+                                                    .format(provider.monthList
+                                                        .salaryAmount),
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Segoe UI",
+                                                  color: AppColors.Drawer_COLOR,
+                                                ),
+                                              ),
                                       ),
                                     )
                                   ],
@@ -1720,7 +1730,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                     ),
                     Container(
                       // padding: EdgeInsets.only(left: 16, right: 16),
-                      height: 60,
+                      height: 75,
                       // color: Colors.red,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1768,8 +1778,32 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                             child: Container(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(50)),
+                                      color: AppColors.MAIN_COLOR,
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () async {
+                                        await provider.addExpense();
+                                        var scrollPosition =
+                                            _scrollController.position;
+                                        _scrollController.animateTo(
+                                          scrollPosition.maxScrollExtent + 60,
+                                          duration:
+                                              new Duration(milliseconds: 200),
+                                          curve: Curves.easeOut,
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                   Text(
                                     "Add Item".tr(),
                                     style: TextStyle(
@@ -1777,6 +1811,13 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                         color: AppColors.MAIN_COLOR,
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  // Text(
+                                  //   "Add Item".tr(),
+                                  //   style: TextStyle(
+                                  //       fontSize: 15,
+                                  //       color: AppColors.MAIN_COLOR,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
                                 ],
                               ),
                               // color: Colors.yellow,
@@ -1877,25 +1918,25 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                 ),
               );
             }),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 6.0),
-        child: FloatingActionButton(
-          onPressed: () async {
-            await provider.addExpense();
-            var scrollPosition = _scrollController.position;
-            _scrollController.animateTo(
-              scrollPosition.maxScrollExtent + 60,
-              duration: new Duration(milliseconds: 200),
-              curve: Curves.easeOut,
-            );
-          },
-          backgroundColor: AppColors.MAIN_COLOR,
-          child: Icon(
-            Icons.add,
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: Padding(
+      //   padding: const EdgeInsets.only(bottom: 6.0),
+      //   child: FloatingActionButton(
+      //     onPressed: () async {
+      //       await provider.addExpense();
+      //       var scrollPosition = _scrollController.position;
+      //       _scrollController.animateTo(
+      //         scrollPosition.maxScrollExtent + 60,
+      //         duration: new Duration(milliseconds: 200),
+      //         curve: Curves.easeOut,
+      //       );
+      //     },
+      //     backgroundColor: AppColors.MAIN_COLOR,
+      //     child: Icon(
+      //       Icons.add,
+      //     ),
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
