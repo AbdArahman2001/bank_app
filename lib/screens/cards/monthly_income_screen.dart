@@ -696,7 +696,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                               //     MediaQuery.of(context).size.width,
                                               child: Center(
                                                 child: Text(
-                                                  "1",
+                                                  "0",
                                                   style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
