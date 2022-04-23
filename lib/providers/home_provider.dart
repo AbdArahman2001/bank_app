@@ -632,8 +632,25 @@ class HomeProvider extends ChangeNotifier {
     double diff;
     if (selectedItem == 0) {
       diff = (monthList.saveAmount - monthList.totalSave);
-    } else if (selectedItem == 1) {
-      diff = (monthList.cashAmount - monthList.totalCash);
+    // } else if (selectedItem == 1) {
+    //   diff = (monthList.cashAmount - monthList.totalCash);
+    } else {
+      diff = (monthList.expences[selectedItem - 1].amount -
+          monthList.expences[selectedItem - 1].total);
+    }
+
+    return diff;
+  }
+
+  double getFromSelectedItemReminderAmountRelay(int selectedItem) {
+    double diff;
+    if (selectedItem == 0) {
+      diff = 0;
+    }else
+    if (selectedItem == 1) {
+      diff = (monthList.saveAmount - monthList.totalSave);
+    // } else if (selectedItem == 1) {
+    //   diff = (monthList.cashAmount - monthList.totalCash);
     } else {
       diff = (monthList.expences[selectedItem - 2].amount -
           monthList.expences[selectedItem - 2].total);

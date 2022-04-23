@@ -987,6 +987,7 @@ return Scaffold(
                                         });
                                       },
                                       child: Container(
+                                        height: 50,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                           BorderRadius.only(

@@ -16,11 +16,12 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
   HomeProvider provider;
   List<List<String>> expences = [];
   List<List<String>> _currencies = [
+    ['-1', 'Choose item name'.tr()],
     ['0', 'Saver'.tr()],
   ];
   double _value = 0.0;
   int _fromCurrentItemSelected = 0;
-  int _toCurrentItemSelected = 1;
+  int _toCurrentItemSelected = 0;
 
   int count = 1;
   @override
@@ -140,52 +141,60 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                 ),
                                 child: DropdownButton<String>(
                                   items: _currencies
-                                      .where((element) =>
+                                      .where((element) => ( element[1] == 'Choose item name'.tr() ||
                                           element[1] !=
-                                          _currencies[_toCurrentItemSelected][1])
+                                          _currencies[_toCurrentItemSelected][1]) )
                                       .toList()
                                       .asMap()
                                       .map((i, List<String> dropDownStringItem) {
                                         return MapEntry(
                                             i,
                                             DropdownMenuItem<String>(
-                                              value: (i < _toCurrentItemSelected)
-                                                  ? i.toString()
-                                                  : (i + 1).toString(),
+                                              value: i == 0 ? "0" : (_toCurrentItemSelected == 0 ||
+                                                  i < _toCurrentItemSelected) ?
+                                              i.toString() : (i + 1).toString(),
                                               child: Row(children: [
-                                                 Text(" "),
-                                                Text(
-                                                  (dropDownStringItem[0])
-                                                      .toString()
-                                                      .tr(),
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: "Segoe UI",
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.Drawer_COLOR,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "-",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: "Segoe UI",
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.Drawer_COLOR,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 1,
-                                                ),
-                                                Text(
-                                                  dropDownStringItem[1].tr(),
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: "Segoe UI",
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.Drawer_COLOR,
-                                                  ),
-                                                ),
+                                                 Text(i == 0 ? " ${dropDownStringItem[1].tr()}": " ${(dropDownStringItem[0])
+                                                     .toString()}- ${dropDownStringItem[1].tr()}",
+                                                     style: TextStyle(
+                                                       fontSize: 14,
+                                                       fontFamily: "Segoe UI",
+                                                       fontWeight: FontWeight.w600,
+                                                       color: AppColors.Drawer_COLOR,
+                                                     ),
+                                                 ),
+                                                // Text(
+                                                //   (dropDownStringItem[0])
+                                                //       .toString()
+                                                //       .tr(),
+                                                //   style: TextStyle(
+                                                //     fontSize: 14,
+                                                //     fontFamily: "Segoe UI",
+                                                //     fontWeight: FontWeight.w600,
+                                                //     color: AppColors.Drawer_COLOR,
+                                                //   ),
+                                                // ),
+                                                // Text(
+                                                //   "-",
+                                                //   style: TextStyle(
+                                                //     fontSize: 14,
+                                                //     fontFamily: "Segoe UI",
+                                                //     fontWeight: FontWeight.w600,
+                                                //     color: AppColors.Drawer_COLOR,
+                                                //   ),
+                                                // ),
+                                                // SizedBox(
+                                                //   width: 1,
+                                                // ),
+                                                // Text(
+                                                //   dropDownStringItem[1].tr(),
+                                                //   style: TextStyle(
+                                                //     fontSize: 14,
+                                                //     fontFamily: "Segoe UI",
+                                                //     fontWeight: FontWeight.w600,
+                                                //     color: AppColors.Drawer_COLOR,
+                                                //   ),
+                                                // ),
                                               ]),
                                             ));
                                       })
@@ -210,7 +219,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                         ),
                         Expanded(
                           child: ValuesRelayCustom(NumberFormat('###,##0.00').format(
-                              provider.getFromSelectedItemReminderAmount(
+                              provider.getFromSelectedItemReminderAmountRelay(
                                       _fromCurrentItemSelected) -
                                   _value)),
                         ),
@@ -238,7 +247,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                 }).then((value) {
                               if (value == null) {
                               } else if (double.parse(value) >
-                                  provider.getFromSelectedItemReminderAmount(
+                                  provider.getFromSelectedItemReminderAmountRelay(
                                       _fromCurrentItemSelected)) {
                                 showDialog(
                                     barrierColor: Colors.transparent,
@@ -396,7 +405,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                 ),
                                 child: DropdownButton<String>(
                                   items: _currencies
-                                      .where((element) =>
+                                      .where((element) => element[1] == 'Choose item name'.tr() ||
                                           element !=
                                           _currencies[_fromCurrentItemSelected])
                                       .toList()
@@ -405,15 +414,11 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                         return MapEntry(
                                             i,
                                             DropdownMenuItem<String>(
-                                              value: (i < _fromCurrentItemSelected)
-                                                  ? i.toString()
-                                                  : (i + 1).toString(),
+                                              value: i == 0 ? "0" : (_fromCurrentItemSelected == 0 || i < _fromCurrentItemSelected) ?
+                                              i.toString() : (i + 1).toString(),
                                               child: Row(children: [
-                                                Text(" "),
-                                                Text(
-                                                  (dropDownStringItem[0])
-                                                      .toString()
-                                                      .tr(),
+                                                Text(i == 0 ? " ${dropDownStringItem[1].tr()}": " ${(dropDownStringItem[0])
+                                                    .toString()}- ${dropDownStringItem[1].tr()}",
                                                   style: TextStyle(
                                                     fontSize: 14,
                                                     fontFamily: "Segoe UI",
@@ -421,27 +426,39 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                                     color: AppColors.Drawer_COLOR,
                                                   ),
                                                 ),
-                                                Text(
-                                                  "-",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: "Segoe UI",
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.Drawer_COLOR,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 1,
-                                                ),
-                                                Text(
-                                                  dropDownStringItem[1].tr(),
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: "Segoe UI",
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.Drawer_COLOR,
-                                                  ),
-                                                ),
+                                                // Text(" "),
+                                                // Text(
+                                                //   (dropDownStringItem[0])
+                                                //       .toString()
+                                                //       .tr(),
+                                                //   style: TextStyle(
+                                                //     fontSize: 14,
+                                                //     fontFamily: "Segoe UI",
+                                                //     fontWeight: FontWeight.w600,
+                                                //     color: AppColors.Drawer_COLOR,
+                                                //   ),
+                                                // ),
+                                                // Text(
+                                                //   "-",
+                                                //   style: TextStyle(
+                                                //     fontSize: 14,
+                                                //     fontFamily: "Segoe UI",
+                                                //     fontWeight: FontWeight.w600,
+                                                //     color: AppColors.Drawer_COLOR,
+                                                //   ),
+                                                // ),
+                                                // SizedBox(
+                                                //   width: 1,
+                                                // ),
+                                                // Text(
+                                                //   dropDownStringItem[1].tr(),
+                                                //   style: TextStyle(
+                                                //     fontSize: 14,
+                                                //     fontFamily: "Segoe UI",
+                                                //     fontWeight: FontWeight.w600,
+                                                //     color: AppColors.Drawer_COLOR,
+                                                //   ),
+                                                // ),
                                               ]),
                                             ));
                                       })
@@ -465,7 +482,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                         ),
                         Expanded(
                           child: ValuesRelayCustom(NumberFormat('###,##0.00').format(
-                              provider.getFromSelectedItemReminderAmount(
+                              provider.getFromSelectedItemReminderAmountRelay(
                                       _toCurrentItemSelected) +
                                   _value)),
                         ),

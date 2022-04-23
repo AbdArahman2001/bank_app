@@ -85,8 +85,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                           // color: Colors.green,
                         ),
                       ),
-                      Expanded(
-                          child: CloseButtonCustom()),
+                      CloseButtonCustom(),
                     ],
                   ),
                 ),
@@ -193,8 +192,8 @@ class _CalculateScreenState extends State<CalculateScreen> {
                               color: AppColors.MAIN_COLOR,
                             ),
                           ),
-                          Text(
-                            " ${NumberFormat('###,##0.00').format(double.parse(provider.equation))}",
+                          Text( formatedEquation(),
+                            
                             style: TextStyle(
                               fontSize: 13,
                               fontFamily: "Segoe UI",
@@ -246,6 +245,23 @@ class _CalculateScreenState extends State<CalculateScreen> {
         ],
       ),
     );
+  }
+
+  formatedEquation() {
+    var last = provider.equation[provider.equation.length - 1];
+    var splitted = provider.equation.split('+');
+    String result = "";
+    int count = 0;
+    splitted.forEach((element) {
+      print(" anas || ${element}");
+      if(count < splitted.length - 1){
+        result += NumberFormat('###,##0.00').format(double.parse(element)) + "+";
+      }else if(element != ""){
+        result += NumberFormat('###,##0.00').format(double.parse(element));
+      }
+      count++;
+    });
+    return result;
   }
 }
 

@@ -17,6 +17,9 @@ class _CustomDropdownTextfeildScreenState
 
 
   TextEditingController controller = new TextEditingController();
+
+  FocusNode focusNode = FocusNode();
+
   HomeProvider provider;
 
   String selectedItem = "";
@@ -69,9 +72,12 @@ class _CustomDropdownTextfeildScreenState
 
   @override
   Widget build(BuildContext context) {
+    FocusScope.of(context).requestFocus(focusNode);
 
     provider = Provider.of<HomeProvider>(context);
     controller.text = provider.tresutl;
+    controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+
     return Form(
       key: _formKey,
       child: Container(
@@ -103,6 +109,7 @@ class _CustomDropdownTextfeildScreenState
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.only(top: 2, bottom: 2),
                   child: TextFormField(
+                    focusNode: focusNode,
                     onTap: (){
                       controller.text.length == 0 ? false : true;
                     },
@@ -201,6 +208,7 @@ class _CustomDropdownTextfeildScreenState
                           return GestureDetector(
                             onTap: (){
                               controller.text = arabicExpenses[index].tr();
+                              controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
                             },
                             child: Card(
                               child: ListTile(
