@@ -117,8 +117,10 @@ class _CustomDropdownTextfeildScreenState
                        // controller.text.length == 0 || controller.text.length > 3  ? false : true;
                        return  controller.text.length  > 17 ? 'Name must be less than 15 characters'.tr() : null;
                     },
+                    maxLength: 15,
                     onChanged: (v){
-                      controller.text.length == 0 ? false : true;
+                      // controller.text.length == 0 ? false : true;
+
                     },
 
                     // validator: (value) {
@@ -133,6 +135,7 @@ class _CustomDropdownTextfeildScreenState
                     maxLines: 1,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
+                      counterText: '',
                       suffixIcon: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

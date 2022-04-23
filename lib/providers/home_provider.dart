@@ -360,6 +360,10 @@ class HomeProvider extends ChangeNotifier {
         (after.length > 1 && (after[1].length > 1 || number == ".")) ||
         (tNumber[tNumber.length - 1] == '.' && number == "." )) {
       print("dot is here");
+      print((after.length < 2 && number != "." && after[0].length > 7));
+      print(after.length > 1 && (after[1].length > 1 || number == "."));
+      print(tNumber[tNumber.length - 1] == '.' && number == "." );
+
     } else {
       print("default case is here");
       tNumber = tNumber + number;
@@ -627,6 +631,21 @@ class HomeProvider extends ChangeNotifier {
       saveList();
     notifyListeners();
   }
+  void addAdditionalValueRelay(double addedValue, int currentItemSelected1, {bool save = true}) {
+    if (currentItemSelected1 == 1) {
+      monthList.saveAmount += addedValue;
+    }
+    // else if (currentItemSelected1 == 1) {
+    //   monthList.cashAmount += addedValue;
+    // }
+    else {
+      monthList.expences[currentItemSelected1 - 2].amount += addedValue;
+      reCalcExpSum();
+    }
+    if(save)
+      saveList();
+    notifyListeners();
+  }
 
   double getFromSelectedItemReminderAmount(int selectedItem) {
     double diff;
@@ -661,8 +680,8 @@ class HomeProvider extends ChangeNotifier {
 
   void transfareAmount(
       int fromCurrentItemSelected, int toCurrentItemSelected, double value) {
-    addAdditionalValue(value * -1, fromCurrentItemSelected,save: false);
-    addAdditionalValue(value, toCurrentItemSelected,save: false);
+    addAdditionalValueRelay(value * -1, fromCurrentItemSelected,save: false);
+    addAdditionalValueRelay(value, toCurrentItemSelected,save: false);
     saveList();
     notifyListeners();
   }

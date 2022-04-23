@@ -242,8 +242,9 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                       0,
                                       "The value to be carried over".tr(),
                                       0,
-                                      0,
-                                      false);
+                                      provider.getFromSelectedItemReminderAmountRelay(
+                                          _fromCurrentItemSelected),
+                                      true);
                                 }).then((value) {
                               if (value == null) {
                               } else if (double.parse(value) >
@@ -264,7 +265,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                               color: Color(0XFFC83E5B),
                                               child: Center(
                                                 child: Text(
-                                                  'vailable for a relay'.tr(),
+                                                  'The input value is greater than the value available for a relay'.tr(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 20,
@@ -510,9 +511,41 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                provider.transfareAmount(_fromCurrentItemSelected,
-                                    _toCurrentItemSelected, _value);
-                                Navigator.pop(context);
+                                if(_fromCurrentItemSelected == 0 || _toCurrentItemSelected == 0){
+                                  showDialog(
+                                      barrierColor: Colors.transparent,
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          child: Column(
+                                            children: [
+                                              Spacer(),
+                                              Container(
+                                                width:
+                                                MediaQuery.of(context).size.width,
+                                                height: 60,
+                                                color: Color(0XFFC83E5B),
+                                                child: Center(
+                                                  child: Text(
+                                                    'You must choose the item'.tr(),
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontFamily: "Segoe UI"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                }else{
+                                  provider.transfareAmount(_fromCurrentItemSelected,
+                                      _toCurrentItemSelected, _value);
+                                  Navigator.pop(context);
+                                }
                               },
                               child: Center(
                                 child: Container(

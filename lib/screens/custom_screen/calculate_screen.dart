@@ -38,6 +38,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
     super.dispose();
     provider.result = "0";
     provider.equation = "0";
+    provider.tNumber = "0";
   }
 
   @override
@@ -253,11 +254,18 @@ class _CalculateScreenState extends State<CalculateScreen> {
     String result = "";
     int count = 0;
     splitted.forEach((element) {
-      print(" anas || ${element}");
-      if(count < splitted.length - 1){
-        result += NumberFormat('###,##0.00').format(double.parse(element)) + "+";
-      }else if(element != ""){
-        result += NumberFormat('###,##0.00').format(double.parse(element));
+      print(" element || ${element}");
+      var dotSplit = element.split(".");
+      print("split || ${dotSplit.length}");
+      if(!( element.contains(".") && dotSplit.length > 1 && dotSplit[1] == "")) {
+        if (count < splitted.length - 1) {
+          result +=
+              NumberFormat('###,##0.00').format(double.parse(element)) + "+";
+        } else if (element != "") {
+          result += NumberFormat('###,##0.00').format(double.parse(element));
+        }
+      }else{
+        result += element;
       }
       count++;
     });
