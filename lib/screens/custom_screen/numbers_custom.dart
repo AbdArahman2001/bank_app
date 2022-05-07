@@ -21,6 +21,7 @@ Function function;
         child: Center(
           child: Text(
             text,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,

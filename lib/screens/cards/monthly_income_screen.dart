@@ -25,7 +25,8 @@ class MonthlyIncomeScreen extends StatefulWidget {
   _MonthlyIncomeScreenState createState() => _MonthlyIncomeScreenState();
 }
 
-class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
+class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerProviderStateMixin {
+  AnimationController animationController;
   FocusNode myFocusNode;
   HomeProvider provider;
   SelectedRow _character = SelectedRow.yes;
@@ -67,11 +68,19 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
   void initState() {
     super.initState();
     myFocusNode = FocusNode();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    )
+      ..forward()
+      ..repeat(reverse: true);
   }
 
   @override
   void dispose() {
     myFocusNode.dispose();
+    animationController.dispose();
+
     for (final controller in _textCont) {
       controller.dispose();
     }
@@ -95,7 +104,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
       appBar: AppBar(
         bottom: PreferredSize(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10),
+            padding: EdgeInsets.fromLTRB(10.0, 4.0, 10.0, 4),
             child: Text.rich(
               TextSpan(
                 text:
@@ -248,7 +257,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                     Text(
                                       "Enter your total monthly income".tr(),
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.w900,
                                         fontFamily: "Segoe UI",
                                         color: Colors.black,
@@ -294,46 +303,47 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                           }
                                         });
                                       },
-                                      child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/addadd.png"),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/images/addadd.png"),
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Container(
-                                      height: 29,
-                                      width: 93,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: Colors.grey.shade200,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: AppColors.MAIN_COLOR,
-                                              spreadRadius: 1),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: provider
-                                                    .monthList.salaryAmount ==
-                                                0
-                                            ? Text("Enter the value + ".tr(),
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: 'Tajawal',
-                                                    color: Colors.red))
-                                            : Text(
+                                          SizedBox(
+                                            width: 2,
+                                          ),
+                                          Container(
+                                            height: 29,
+                                            width: 93,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: Colors.grey.shade200,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: AppColors.MAIN_COLOR,
+                                                    spreadRadius: 1),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: provider
+                                                  .monthList.salaryAmount ==
+                                                  0
+                                                  ? Text("Enter the value + ".tr(),
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily: 'Tajawal',
+                                                      color: Colors.red))
+                                                  : Text(
                                                 NumberFormat('###,##0.00')
                                                     .format(provider.monthList
-                                                        .salaryAmount),
+                                                    .salaryAmount),
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400,
@@ -341,18 +351,22 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                                   color: AppColors.Drawer_COLOR,
                                                 ),
                                               ),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    )
+                                    ),
+
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "The remainder of the total monthly income"
+                                        "Excess of total monthly incomee"
                                             .tr(),
                                         style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w900,
                                           fontFamily: "Segoe UI",
                                           color: Colors.black,
@@ -362,31 +376,90 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Container(
-                                      height: 29,
-                                      width: 93,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: Colors.grey.shade200,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: AppColors.MAIN_COLOR,
-                                              spreadRadius: 1),
+                                    GestureDetector(
+                                      onTap: (){
+                                        final snackBar = SnackBar(
+                                            backgroundColor:
+                                            AppColors.Snack_Bar_COLOR,
+                                            content: Text(
+                                              "It is necessary to schedule all the salary until the remainder is zero"
+                                                  .tr(),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: "Segoe UI"),
+                                            ));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 29,
+                                            width: 93,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: Colors.grey.shade200,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: AppColors.MAIN_COLOR,
+                                                    spreadRadius: 1),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                NumberFormat('###,##0.00').format(
+                                                    provider.getRemainingAmount()),
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Segoe UI",
+                                                  color: AppColors.Drawer_COLOR,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          AnimatedBuilder(
+                                            animation: animationController,
+                                            builder: (context, child) {
+                                              return Container(
+                                                decoration: ShapeDecoration(
+                                                  color: Colors.red.withOpacity(0.5),
+                                                  shape: CircleBorder(),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(
+                                                    6.0 * animationController.value,
+                                                  ),
+                                                  child: child,
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                              decoration: ShapeDecoration(
+                                                color: Colors.white,
+                                                shape: CircleBorder(),
+                                              ),
+                                              child: Container(
+                                                width: 20,
+                                                height: 20,
+                                                child: Image.asset(
+                                                  'assets/images/error_red.png',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      child: Center(
-                                        child: Text(
-                                          NumberFormat('###,##0.00').format(
-                                              provider.getRemainingAmount()),
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: "Segoe UI",
-                                            color: AppColors.Drawer_COLOR,
-                                          ),
-                                        ),
-                                      ),
-                                    )
+                                    ),
+
+
                                   ],
                                 ),
                               ],
@@ -1730,7 +1803,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                     ),
                     Container(
                       // padding: EdgeInsets.only(left: 16, right: 16),
-                      height: 75,
+                      height: 100,
                       // color: Colors.red,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1804,6 +1877,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: 5,),
                                   Text(
                                     "Add Item".tr(),
                                     style: TextStyle(
@@ -1913,6 +1987,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen> {
                         ],
                       ),
                     ),
+
                     // SizedB
                   ],
                 ),

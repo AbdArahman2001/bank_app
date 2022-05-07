@@ -78,153 +78,153 @@ class _DrawerScreenState extends State<DrawerScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    TitleDrawerCustom(
-                      function: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return YesNoNewMonthDialog();
-                            }).then((value) async {
-                          if (value is bool && value) {
-                            await provider.newMonth();
-                            UserPreferences.instance
-                                .saveRoutName(MonthlyIncomeScreen.routeName);
-                            Navigator.pushReplacementNamed(
-                                context, MonthlyIncomeScreen.routeName);
-                          } else {
-                            Navigator.pop(context);
-                          }
-                        });
-                      },
-                      text: "A new financial month".tr(),
-                      imageicon: Image(
-                        color: AppColors.Drawer_COLOR,
-                        image: AssetImage(
-                            'assets/images/Economic_sustainability.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TitleDrawerCustom(
-                      function: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return MoneyCashDialog();
-                            });
-                      },
-                      text: "Add an extra amount".tr(),
-                      imageicon: Image(
-                        color: AppColors.Drawer_COLOR,
-                        image: AssetImage('assets/images/cash (2).png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     // TitleDrawerCustom(
                     //   function: () {
                     //     showDialog(
                     //         context: context,
                     //         builder: (BuildContext context) {
-                    //           return FinancialStatusUpdateDialog();
-                    //         });
+                    //           return YesNoNewMonthDialog();
+                    //         }).then((value) async {
+                    //       if (value is bool && value) {
+                    //         await provider.newMonth();
+                    //         UserPreferences.instance
+                    //             .saveRoutName(MonthlyIncomeScreen.routeName);
+                    //         Navigator.pushReplacementNamed(
+                    //             context, MonthlyIncomeScreen.routeName);
+                    //       } else {
+                    //         Navigator.pop(context);
+                    //       }
+                    //     });
                     //   },
-                    //   text: "تحديث الحالة المالية \n التوازن المالي",
+                    //   text: "A new financial month".tr(),
                     //   imageicon: Image(
                     //     color: AppColors.Drawer_COLOR,
-                    //     image: AssetImage('assets/images/refresh.png'),
+                    //     image: AssetImage(
+                    //         'assets/images/Economic_sustainability.png'),
                     //   ),
                     // ),
                     // SizedBox(
                     //   height: 10,
                     // ),
-                    TitleDrawerCustom(
-                      function: () {
-                        // Navigator.pop(context);
-                        if (Provider.of<HomeProvider>(context, listen: false)
-                            .monthList
-                            .expences.length > 0) {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return FinancialRelayCustom();
-                              });
-                        }else{
-                          showDialog(
-                              barrierColor: Colors.transparent,
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  child: Column(
-                                    children: [
-                                      Spacer(),
-                                      Container(
-                                        width: MediaQuery.of(context).size.width,
-                                        height: 60,
-                                        color: Color(0XFFC83E5B),
-                                        child: Center(
-                                          child: Text(
-                                            'There are no other items to carry over the value'.tr(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Segoe UI"),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              });
-                          // snack bar
-                          // var snackBar = SnackBar(
-                          //     backgroundColor:
-                          //     AppColors.Snack_Bar_COLOR,
-                          //     content: Text(
-                          //       "There are no other items to carry over the value".tr(),
-                          //       textAlign: TextAlign.center,
-                          //       style: TextStyle(
-                          //           fontSize: 20,
-                          //           color: Colors.white,
-                          //           fontWeight: FontWeight.w500,
-                          //           fontFamily: "Segoe UI"),
-                          //     ));
-                          // ScaffoldMessenger.of(context)
-                          //     .showSnackBar(snackBar);
-                        }
-                      },
-                      text: "Financial deportation".tr(),
-                      imageicon: Image(
-                        color: AppColors.Drawer_COLOR,
-                        image: AssetImage(
-                            'assets/images/financial_investments_dollars_payment_icon_188478.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TitleDrawerCustom(
-                      function: () {
-                        // Navigator.pop(context);
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return StatisticsDialog();
-                            });
-                      },
-                      text: "Statistic".tr(),
-                      imageicon: Image(
-                        color: AppColors.Drawer_COLOR,
-                        image: AssetImage('assets/images/stastistic.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // TitleDrawerCustom(
+                    //   function: () {
+                    //     showDialog(
+                    //         context: context,
+                    //         builder: (BuildContext context) {
+                    //           return MoneyCashDialog();
+                    //         });
+                    //   },
+                    //   text: "Add an extra amount".tr(),
+                    //   imageicon: Image(
+                    //     color: AppColors.Drawer_COLOR,
+                    //     image: AssetImage('assets/images/cash (2).png'),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // // TitleDrawerCustom(
+                    // //   function: () {
+                    // //     showDialog(
+                    // //         context: context,
+                    // //         builder: (BuildContext context) {
+                    // //           return FinancialStatusUpdateDialog();
+                    // //         });
+                    // //   },
+                    // //   text: "تحديث الحالة المالية \n التوازن المالي",
+                    // //   imageicon: Image(
+                    // //     color: AppColors.Drawer_COLOR,
+                    // //     image: AssetImage('assets/images/refresh.png'),
+                    // //   ),
+                    // // ),
+                    // // SizedBox(
+                    // //   height: 10,
+                    // // ),
+                    // TitleDrawerCustom(
+                    //   function: () {
+                    //     // Navigator.pop(context);
+                    //     if (Provider.of<HomeProvider>(context, listen: false)
+                    //         .monthList
+                    //         .expences.length > 0) {
+                    //       showDialog(
+                    //           context: context,
+                    //           builder: (BuildContext context) {
+                    //             return FinancialRelayCustom();
+                    //           });
+                    //     }else{
+                    //       showDialog(
+                    //           barrierColor: Colors.transparent,
+                    //           context: context,
+                    //           builder: (BuildContext context) {
+                    //             return Container(
+                    //               child: Column(
+                    //                 children: [
+                    //                   Spacer(),
+                    //                   Container(
+                    //                     width: MediaQuery.of(context).size.width,
+                    //                     height: 60,
+                    //                     color: Color(0XFFC83E5B),
+                    //                     child: Center(
+                    //                       child: Text(
+                    //                         'There are no other items to carry over the value'.tr(),
+                    //                         textAlign: TextAlign.center,
+                    //                         style: TextStyle(
+                    //                             fontSize: 20,
+                    //                             color: Colors.white,
+                    //                             fontWeight: FontWeight.w500,
+                    //                             fontFamily: "Segoe UI"),
+                    //                       ),
+                    //                     ),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             );
+                    //           });
+                    //       // snack bar
+                    //       // var snackBar = SnackBar(
+                    //       //     backgroundColor:
+                    //       //     AppColors.Snack_Bar_COLOR,
+                    //       //     content: Text(
+                    //       //       "There are no other items to carry over the value".tr(),
+                    //       //       textAlign: TextAlign.center,
+                    //       //       style: TextStyle(
+                    //       //           fontSize: 20,
+                    //       //           color: Colors.white,
+                    //       //           fontWeight: FontWeight.w500,
+                    //       //           fontFamily: "Segoe UI"),
+                    //       //     ));
+                    //       // ScaffoldMessenger.of(context)
+                    //       //     .showSnackBar(snackBar);
+                    //     }
+                    //   },
+                    //   text: "Financial deportation".tr(),
+                    //   imageicon: Image(
+                    //     color: AppColors.Drawer_COLOR,
+                    //     image: AssetImage(
+                    //         'assets/images/financial_investments_dollars_payment_icon_188478.png'),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // TitleDrawerCustom(
+                    //   function: () {
+                    //     // Navigator.pop(context);
+                    //     showDialog(
+                    //         context: context,
+                    //         builder: (BuildContext context) {
+                    //           return StatisticsDialog();
+                    //         });
+                    //   },
+                    //   text: "Statistic".tr(),
+                    //   imageicon: Image(
+                    //     color: AppColors.Drawer_COLOR,
+                    //     image: AssetImage('assets/images/stastistic.png'),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                     TitleDrawerCustom(
                       function: () => showDialog(
                           context: context,
@@ -395,6 +395,24 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             SizedBox(height: 5,),
                           ]
                       ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TitleDrawerCustom(
+        //               function: () =>
+        //                   Navigator.pushNamed(
+        // context,
+        // VideoStoryScreen.routeName,
+        // ),
+                      text: "Explanation video of the application".tr(),
+                      imageicon: Image(
+                        color: AppColors.Drawer_COLOR,
+                        image: AssetImage('assets/images/video.png'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     // SizedBox(
                     //   height: 10,

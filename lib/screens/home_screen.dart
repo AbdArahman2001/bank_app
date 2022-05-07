@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>  {
   @override
   void initState() {
     super.initState();
@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Spacer(),
                     Container(
                       // padding: EdgeInsets.only(left: 16, right: 16),
-                      height: 60,
+                      height: 100,
                       // color: Colors.red,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

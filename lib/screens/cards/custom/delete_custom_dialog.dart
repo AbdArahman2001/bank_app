@@ -49,27 +49,7 @@ class DeleteCustomDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  height: 36,
-                  width: 114,
-                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: RaisedButton(
-                    color: AppColors.MAIN_COLOR,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Text(
-                      "Delete".tr(),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 21,
-                          fontFamily: "Segoe UI",
-                          fontWeight: FontWeight.w600),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context,true);
-                    },
-                  ),
-                ),
+
                 SizedBox(
                   height: 36,
                   width: 114,
@@ -91,7 +71,28 @@ class DeleteCustomDialog extends StatelessWidget {
                         Navigator.pop(context,false);
 
                       }),
-                )
+                ),
+                SizedBox(
+                  height: 36,
+                  width: 114,
+                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: RaisedButton(
+                    color: AppColors.MAIN_COLOR,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      "Delete".tr(),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 21,
+                          fontFamily: "Segoe UI",
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context,true);
+                    },
+                  ),
+                ),
               ],
             ),
             // SizedBox(height: 8,),

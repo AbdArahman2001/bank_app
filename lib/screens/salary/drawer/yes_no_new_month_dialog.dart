@@ -1,3 +1,4 @@
+import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,32 @@ class YesNoNewMonthDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+
+                SizedBox(
+                  height: 36,
+                  width: 114,
+                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: RaisedButton(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(color: AppColors.MAIN_COLOR),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Text(
+                        "No".tr(),
+                        style: TextStyle(
+                            color: AppColors.MAIN_COLOR,
+                            fontSize: 22,
+                            fontFamily: "Segoe UI",
+                            fontWeight: FontWeight.w600),
+                      ),
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, TableOfSaralyScreen.routeName);
+
+                        // Navigator.pop(context,false);
+
+                      }),
+                ),
                 SizedBox(
                   height: 36,
                   width: 114,
@@ -72,28 +99,6 @@ class YesNoNewMonthDialog extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 36,
-                  width: 114,
-                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: RaisedButton(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          side: BorderSide(color: AppColors.MAIN_COLOR),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Text(
-                        "No".tr(),
-                        style: TextStyle(
-                            color: AppColors.MAIN_COLOR,
-                            fontSize: 22,
-                            fontFamily: "Segoe UI",
-                            fontWeight: FontWeight.w600),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context,false);
-
-                      }),
-                )
               ],
             ),
             // SizedBox(height: 8,),

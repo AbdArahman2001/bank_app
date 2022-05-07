@@ -71,48 +71,48 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                         CloseButtonCustom(),
                       ],
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              "Deportation from:".tr(),
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: "Segoe UI",
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                        // StarRedCustom(
-                        //   isHidden: true,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     SizedBox(
-                        //       width: 5,
-                        //     ),
-                        //     Text(
-                        //       "Deportation from:".tr(),
-                        //       textAlign: TextAlign.start,
-                        //       style: TextStyle(
-                        //         fontSize: 14,
-                        //         fontFamily: "Segoe UI",
-                        //         fontWeight: FontWeight.w600,
-                        //         color: Colors.black,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                      ],
-                    ),
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         SizedBox(
+                    //           width: 5,
+                    //         ),
+                    //         Text(
+                    //           "Deportation from:".tr(),
+                    //           textAlign: TextAlign.start,
+                    //           style: TextStyle(
+                    //             fontSize: 14,
+                    //             fontFamily: "Segoe UI",
+                    //             fontWeight: FontWeight.w600,
+                    //             color: Colors.black,
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     // StarRedCustom(
+                    //     //   isHidden: true,
+                    //     // ),
+                    //     // Row(
+                    //     //   children: [
+                    //     //     SizedBox(
+                    //     //       width: 5,
+                    //     //     ),
+                    //     //     Text(
+                    //     //       "Deportation from:".tr(),
+                    //     //       textAlign: TextAlign.start,
+                    //     //       style: TextStyle(
+                    //     //         fontSize: 14,
+                    //     //         fontFamily: "Segoe UI",
+                    //     //         fontWeight: FontWeight.w600,
+                    //     //         color: Colors.black,
+                    //     //       ),
+                    //     //     ),
+                    //     //   ],
+                    //     // ),
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 14,
                     ),
@@ -123,105 +123,157 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                           width: 5,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 38,
-                            // width: 180,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: AppColors.Drawer_COLOR, spreadRadius: 1),
-                              ],
-                            ),
-                            child: Center(
-                              child: Theme(
-                                data: Theme.of(context).copyWith(
-                                  canvasColor: AppColors.Back_Ground_COLOR,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Deportation from:".tr(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Segoe UI",
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              Container(
+                                height: 38,
+                                // width: 180,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: AppColors.Drawer_COLOR, spreadRadius: 1),
+                                  ],
                                 ),
-                                child: DropdownButton<String>(
-                                  items: _currencies
-                                      .where((element) => ( element[1] == 'Choose item name'.tr() ||
-                                          element[1] !=
-                                          _currencies[_toCurrentItemSelected][1]) )
-                                      .toList()
-                                      .asMap()
-                                      .map((i, List<String> dropDownStringItem) {
-                                        return MapEntry(
-                                            i,
-                                            DropdownMenuItem<String>(
-                                              value: i == 0 ? "0" : (_toCurrentItemSelected == 0 ||
-                                                  i < _toCurrentItemSelected) ?
-                                              i.toString() : (i + 1).toString(),
-                                              child: Row(children: [
-                                                 Text(i == 0 ? " ${dropDownStringItem[1].tr()}": " ${(dropDownStringItem[0])
-                                                     .toString()}- ${dropDownStringItem[1].tr()}",
-                                                     style: TextStyle(
-                                                       fontSize: 14,
-                                                       fontFamily: "Segoe UI",
-                                                       fontWeight: FontWeight.w600,
-                                                       color: AppColors.Drawer_COLOR,
+                                child: Center(
+                                  child: Theme(
+                                    data: Theme.of(context).copyWith(
+                                      canvasColor: AppColors.Back_Ground_COLOR,
+                                    ),
+                                    child: DropdownButton<String>(
+                                      items: _currencies
+                                          .where((element) => ( element[1] == 'Choose item name'.tr() ||
+                                              element[1] !=
+                                              _currencies[_toCurrentItemSelected][1]) )
+                                          .toList()
+                                          .asMap()
+                                          .map((i, List<String> dropDownStringItem) {
+                                            return MapEntry(
+                                                i,
+                                                DropdownMenuItem<String>(
+                                                  value: i == 0 ? "0" : (_toCurrentItemSelected == 0 ||
+                                                      i < _toCurrentItemSelected) ?
+                                                  i.toString() : (i + 1).toString(),
+                                                  child: Row(children: [
+                                                     Text(i == 0 ? " ${dropDownStringItem[1].tr()}": " ${(dropDownStringItem[0])
+                                                         .toString()}- ${dropDownStringItem[1].tr()}",
+                                                         style: TextStyle(
+                                                           fontSize: 14,
+                                                           fontFamily: "Segoe UI",
+                                                           fontWeight: FontWeight.w600,
+                                                           color: AppColors.Drawer_COLOR,
+                                                         ),
                                                      ),
-                                                 ),
-                                                // Text(
-                                                //   (dropDownStringItem[0])
-                                                //       .toString()
-                                                //       .tr(),
-                                                //   style: TextStyle(
-                                                //     fontSize: 14,
-                                                //     fontFamily: "Segoe UI",
-                                                //     fontWeight: FontWeight.w600,
-                                                //     color: AppColors.Drawer_COLOR,
-                                                //   ),
-                                                // ),
-                                                // Text(
-                                                //   "-",
-                                                //   style: TextStyle(
-                                                //     fontSize: 14,
-                                                //     fontFamily: "Segoe UI",
-                                                //     fontWeight: FontWeight.w600,
-                                                //     color: AppColors.Drawer_COLOR,
-                                                //   ),
-                                                // ),
-                                                // SizedBox(
-                                                //   width: 1,
-                                                // ),
-                                                // Text(
-                                                //   dropDownStringItem[1].tr(),
-                                                //   style: TextStyle(
-                                                //     fontSize: 14,
-                                                //     fontFamily: "Segoe UI",
-                                                //     fontWeight: FontWeight.w600,
-                                                //     color: AppColors.Drawer_COLOR,
-                                                //   ),
-                                                // ),
-                                              ]),
-                                            ));
-                                      })
-                                      .values
-                                      .toList(),
-                                  onChanged: (String newValueSelected) {
-                                    setState(() {
-                                      int parsed = int.tryParse(newValueSelected);
-                                      this._fromCurrentItemSelected =
-                                          parsed != null ? parsed : 0;
-                                      _value = 0;
-                                    });
-                                  },
-                                  value: _fromCurrentItemSelected.toString(),
+                                                    // Text(
+                                                    //   (dropDownStringItem[0])
+                                                    //       .toString()
+                                                    //       .tr(),
+                                                    //   style: TextStyle(
+                                                    //     fontSize: 14,
+                                                    //     fontFamily: "Segoe UI",
+                                                    //     fontWeight: FontWeight.w600,
+                                                    //     color: AppColors.Drawer_COLOR,
+                                                    //   ),
+                                                    // ),
+                                                    // Text(
+                                                    //   "-",
+                                                    //   style: TextStyle(
+                                                    //     fontSize: 14,
+                                                    //     fontFamily: "Segoe UI",
+                                                    //     fontWeight: FontWeight.w600,
+                                                    //     color: AppColors.Drawer_COLOR,
+                                                    //   ),
+                                                    // ),
+                                                    // SizedBox(
+                                                    //   width: 1,
+                                                    // ),
+                                                    // Text(
+                                                    //   dropDownStringItem[1].tr(),
+                                                    //   style: TextStyle(
+                                                    //     fontSize: 14,
+                                                    //     fontFamily: "Segoe UI",
+                                                    //     fontWeight: FontWeight.w600,
+                                                    //     color: AppColors.Drawer_COLOR,
+                                                    //   ),
+                                                    // ),
+                                                  ]),
+                                                ));
+                                          })
+                                          .values
+                                          .toList(),
+                                      onChanged: (String newValueSelected) {
+                                        setState(() {
+                                          int parsed = int.tryParse(newValueSelected);
+                                          this._fromCurrentItemSelected =
+                                              parsed != null ? parsed : 0;
+                                          _value = 0;
+                                        });
+                                      },
+                                      value: _fromCurrentItemSelected.toString(),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Expanded(
-                          child: ValuesRelayCustom(NumberFormat('###,##0.00').format(
-                              provider.getFromSelectedItemReminderAmountRelay(
-                                      _fromCurrentItemSelected) -
-                                  _value)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Remaining:".tr(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Segoe UI",
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              ValuesRelayCustom(NumberFormat('###,##0.00').format(
+                                  provider.getFromSelectedItemReminderAmountRelay(
+                                          _fromCurrentItemSelected) -
+                                      _value)),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5,
@@ -232,7 +284,6 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
                         GestureDetector(
                           onTap: () {
                             showDialog(
@@ -359,133 +410,167 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 13,
-                    ),
+                    SizedBox(height: 26),
+
                     Row(
-                      children: [
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "Deportation to:".tr(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: "Segoe UI",
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 14,
-                    ),
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
                           width: 5,
                         ),
                         Expanded(
-                          child: Container(
-                            height: 38,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: AppColors.Drawer_COLOR, spreadRadius: 1),
-                              ],
-                            ),
-                            child: Center(
-                              child: Theme(
-                                data: Theme.of(context).copyWith(
-                                  canvasColor: AppColors.Back_Ground_COLOR,
+                          child: Column(
+
+                            children: [
+                              Row(
+                                children: [
+
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Deportation to:".tr(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Segoe UI",
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              // SizedBox(
+                              //   height: 14,
+                              // ),
+                              Container(
+                                height: 38,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: AppColors.Drawer_COLOR, spreadRadius: 1),
+                                  ],
                                 ),
-                                child: DropdownButton<String>(
-                                  items: _currencies
-                                      .where((element) => element[1] == 'Choose item name'.tr() ||
-                                          element !=
-                                          _currencies[_fromCurrentItemSelected])
-                                      .toList()
-                                      .asMap()
-                                      .map((i, List<String> dropDownStringItem) {
-                                        return MapEntry(
-                                            i,
-                                            DropdownMenuItem<String>(
-                                              value: i == 0 ? "0" : (_fromCurrentItemSelected == 0 || i < _fromCurrentItemSelected) ?
-                                              i.toString() : (i + 1).toString(),
-                                              child: Row(children: [
-                                                Text(i == 0 ? " ${dropDownStringItem[1].tr()}": " ${(dropDownStringItem[0])
-                                                    .toString()}- ${dropDownStringItem[1].tr()}",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily: "Segoe UI",
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppColors.Drawer_COLOR,
-                                                  ),
-                                                ),
-                                                // Text(" "),
-                                                // Text(
-                                                //   (dropDownStringItem[0])
-                                                //       .toString()
-                                                //       .tr(),
-                                                //   style: TextStyle(
-                                                //     fontSize: 14,
-                                                //     fontFamily: "Segoe UI",
-                                                //     fontWeight: FontWeight.w600,
-                                                //     color: AppColors.Drawer_COLOR,
-                                                //   ),
-                                                // ),
-                                                // Text(
-                                                //   "-",
-                                                //   style: TextStyle(
-                                                //     fontSize: 14,
-                                                //     fontFamily: "Segoe UI",
-                                                //     fontWeight: FontWeight.w600,
-                                                //     color: AppColors.Drawer_COLOR,
-                                                //   ),
-                                                // ),
-                                                // SizedBox(
-                                                //   width: 1,
-                                                // ),
-                                                // Text(
-                                                //   dropDownStringItem[1].tr(),
-                                                //   style: TextStyle(
-                                                //     fontSize: 14,
-                                                //     fontFamily: "Segoe UI",
-                                                //     fontWeight: FontWeight.w600,
-                                                //     color: AppColors.Drawer_COLOR,
-                                                //   ),
-                                                // ),
-                                              ]),
-                                            ));
-                                      })
-                                      .values
-                                      .toList(),
-                                  onChanged: (String newValueSelected) {
-                                    setState(() {
-                                      int parsed = int.tryParse(newValueSelected);
-                                      this._toCurrentItemSelected =
-                                          parsed != null ? parsed : 0;
-                                    });
-                                  },
-                                  value: _toCurrentItemSelected.toString(),
+                                child: Center(
+                                  child: Theme(
+                                    data: Theme.of(context).copyWith(
+                                      canvasColor: AppColors.Back_Ground_COLOR,
+                                    ),
+                                    child: DropdownButton<String>(
+                                      items: _currencies
+                                          .where((element) => element[1] == 'Choose item name'.tr() ||
+                                              element !=
+                                              _currencies[_fromCurrentItemSelected])
+                                          .toList()
+                                          .asMap()
+                                          .map((i, List<String> dropDownStringItem) {
+                                            return MapEntry(
+                                                i,
+                                                DropdownMenuItem<String>(
+                                                  value: i == 0 ? "0" : (_fromCurrentItemSelected == 0 || i < _fromCurrentItemSelected) ?
+                                                  i.toString() : (i + 1).toString(),
+                                                  child: Row(children: [
+                                                    Text(i == 0 ? " ${dropDownStringItem[1].tr()}": " ${(dropDownStringItem[0])
+                                                        .toString()}- ${dropDownStringItem[1].tr()}",
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: "Segoe UI",
+                                                        fontWeight: FontWeight.w600,
+                                                        color: AppColors.Drawer_COLOR,
+                                                      ),
+                                                    ),
+                                                    // Text(" "),
+                                                    // Text(
+                                                    //   (dropDownStringItem[0])
+                                                    //       .toString()
+                                                    //       .tr(),
+                                                    //   style: TextStyle(
+                                                    //     fontSize: 14,
+                                                    //     fontFamily: "Segoe UI",
+                                                    //     fontWeight: FontWeight.w600,
+                                                    //     color: AppColors.Drawer_COLOR,
+                                                    //   ),
+                                                    // ),
+                                                    // Text(
+                                                    //   "-",
+                                                    //   style: TextStyle(
+                                                    //     fontSize: 14,
+                                                    //     fontFamily: "Segoe UI",
+                                                    //     fontWeight: FontWeight.w600,
+                                                    //     color: AppColors.Drawer_COLOR,
+                                                    //   ),
+                                                    // ),
+                                                    // SizedBox(
+                                                    //   width: 1,
+                                                    // ),
+                                                    // Text(
+                                                    //   dropDownStringItem[1].tr(),
+                                                    //   style: TextStyle(
+                                                    //     fontSize: 14,
+                                                    //     fontFamily: "Segoe UI",
+                                                    //     fontWeight: FontWeight.w600,
+                                                    //     color: AppColors.Drawer_COLOR,
+                                                    //   ),
+                                                    // ),
+                                                  ]),
+                                                ));
+                                          })
+                                          .values
+                                          .toList(),
+                                      onChanged: (String newValueSelected) {
+                                        setState(() {
+                                          int parsed = int.tryParse(newValueSelected);
+                                          this._toCurrentItemSelected =
+                                              parsed != null ? parsed : 0;
+                                        });
+                                      },
+                                      value: _toCurrentItemSelected.toString(),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+
+                            ],
                           ),
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Expanded(
-                          child: ValuesRelayCustom(NumberFormat('###,##0.00').format(
-                              provider.getFromSelectedItemReminderAmountRelay(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Remaining:".tr(),
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: "Segoe UI",
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 14,
+                              ),
+                              ValuesRelayCustom(NumberFormat('###,##0.00').format(
+                                  provider.getFromSelectedItemReminderAmountRelay(
                                       _toCurrentItemSelected) +
-                                  _value)),
+                                      _value)),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5,
@@ -495,6 +580,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     SizedBox(
                       height: 17,
                     ),
+                    /// /// ///
                     Container(
                       // padding: EdgeInsets.only(left: 16, right: 16),
                       height: 60,

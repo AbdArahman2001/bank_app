@@ -35,7 +35,7 @@ class ReminderCustomDialog extends StatelessWidget {
             ),
 
                Text(
-                 "There is an amount remaining from the source of the monthly income, would you like to add it to the savings?".tr(),
+                 "There is an undistributed surplus amount from the total monthly income, would you like to add it to the savings".tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -50,27 +50,7 @@ class ReminderCustomDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  height: 36,
-                  width: 114,
-                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: RaisedButton(
-                    color: AppColors.MAIN_COLOR,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Text(
-                      "Yes".tr(),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontFamily: "Segoe UI",
-                          fontWeight: FontWeight.w600),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context,true);
-                    },
-                  ),
-                ),
+
                 SizedBox(
                   height: 36,
                   width: 114,
@@ -92,7 +72,28 @@ class ReminderCustomDialog extends StatelessWidget {
                         Navigator.pop(context,false);
 
                       }),
-                )
+                ),
+                SizedBox(
+                  height: 36,
+                  width: 114,
+                  // margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: RaisedButton(
+                    color: AppColors.MAIN_COLOR,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Text(
+                      "Yes".tr(),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontFamily: "Segoe UI",
+                          fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context,true);
+                    },
+                  ),
+                ),
               ],
             ),
             // SizedBox(height: 8,),
