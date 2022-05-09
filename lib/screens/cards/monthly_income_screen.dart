@@ -401,7 +401,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                             width: 93,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(5),
-                                              color: Colors.grey.shade200,
+                                              color: provider.getRemainingAmount() == 0 ?Colors.grey.shade200 : Colors.green.shade700,
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: AppColors.MAIN_COLOR,
@@ -416,45 +416,77 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400,
                                                   fontFamily: "Segoe UI",
-                                                  color: AppColors.Drawer_COLOR,
+                                                  color:  provider.getRemainingAmount() == 0  ? AppColors.Drawer_COLOR : Colors.white,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 4,
+                                          Visibility(
+                                            visible:  provider.getRemainingAmount() == 0? false : true,
+                                            child: SizedBox(
+                                              width: 15,
+                                            ),
                                           ),
-                                          AnimatedBuilder(
-                                            animation: animationController,
-                                            builder: (context, child) {
-                                              return Container(
-                                                decoration: ShapeDecoration(
-                                                  color: Colors.red.withOpacity(0.5),
-                                                  shape: CircleBorder(),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(
-                                                    6.0 * animationController.value,
-                                                  ),
-                                                  child: child,
-                                                ),
-                                              );
-                                            },
+                                          Visibility(
+                                            visible:  provider.getRemainingAmount() == 0? false : true,
                                             child: Container(
-                                              decoration: ShapeDecoration(
-                                                color: Colors.white,
-                                                shape: CircleBorder(),
-                                              ),
-                                              child: Container(
-                                                width: 20,
-                                                height: 20,
-                                                child: Image.asset(
-                                                  'assets/images/error_red.png',
-                                                  fit: BoxFit.cover,
+                                              width: 25,
+                                                height: 25,
+                                                padding: EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.red,
+                                                      blurRadius: 4,
+                                                      spreadRadius: 2,
+                                                      offset: Offset(0, 2),
+                                                    )
+                                                  ],
+                                                  // color: Colors.grey.shade300,
+                                                  color: Colors.red,
+                                                   borderRadius: BorderRadius.circular(50),
                                                 ),
-                                              ),
-                                            ),
+                                                child: Text(
+                                                  "!",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold
+                                                  ),
+                                                )),
                                           ),
+                                          // AnimatedBuilder(
+                                          //   animation: animationController,
+                                          //   builder: (context, child) {
+                                          //     return Container(
+                                          //       decoration: ShapeDecoration(
+                                          //         color: Colors.red.withOpacity(0.5),
+                                          //         shape: CircleBorder(),
+                                          //       ),
+                                          //       child: Padding(
+                                          //         padding: EdgeInsets.all(
+                                          //           6.0 * animationController.value,
+                                          //         ),
+                                          //         child: child,
+                                          //       ),
+                                          //     );
+                                          //   },
+                                          //   child: Container(
+                                          //     decoration: ShapeDecoration(
+                                          //       color: Colors.white,
+                                          //       shape: CircleBorder(),
+                                          //     ),
+                                          //     child: Container(
+                                          //       width: 20,
+                                          //       height: 20,
+                                          //       child: Image.asset(
+                                          //         'assets/images/error_red.png',
+                                          //         fit: BoxFit.cover,
+                                          //       ),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),

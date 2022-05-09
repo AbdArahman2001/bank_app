@@ -36,6 +36,10 @@ dependencies:
   share: ^2.0.4
   sqflite: ^2.0.2
   math_expressions: ^2.3.0
+  video_player: ^2.2.10
+  get: ^4.6.1
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -79,7 +83,7 @@ flutter:
   assets:
    - assets/images/
    - assets/translations/
-
+   - assets/videos/
 
   #   - images/a_dot_ham.jpeg
 

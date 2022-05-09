@@ -71,6 +71,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  padding: EdgeInsets.only(left: 8,right: 16),
                   height: 60,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

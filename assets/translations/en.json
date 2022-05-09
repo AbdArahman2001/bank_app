@@ -82,6 +82,8 @@
   "Entered value is approved": "Entered value is approved",
   "Decline": "Decline",
   "Undo": "Undo",
+  "Repeat": "Repeat",
+  "Close": "Close",
   "The allowance exceeded the residual value of this item": "The allowance exceeded the residual value of this item",
   "The input value is greater than the value available for a relay": "The input value is greater than the value available for a relay",
   "You must choose the item": "You must choose the item",

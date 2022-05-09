@@ -55,6 +55,8 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
           children: [
             Center(
               child: Container(
+                padding: EdgeInsets.only(left: 8, top: 8, right: 16),
+
                 height: MediaQuery.of(context).size.height / 2,
                  width: MediaQuery.of(context).size.width -24,
                 decoration: BoxDecoration(
@@ -119,9 +121,9 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
-                          width: 5,
-                        ),
+                        // SizedBox(
+                        //   width: 5,
+                        // ),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -275,9 +277,9 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
+                        // SizedBox(
+                        //   width: 5,
+                        // ),
                       ],
                     ),
                     SizedBox(height: 26),
@@ -572,9 +574,9 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
+                        // SizedBox(
+                        //   width: 5,
+                        // ),
                       ],
                     ),
                     SizedBox(
@@ -647,7 +649,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                     child: Icon(
                                       Icons.check,
                                       color: Colors.white,
-                                      size: 50,
+                                      size: 30,
                                     )
                                     // Image.asset("assets/images/check (1).png",color: Colors.green,))
                                     ),

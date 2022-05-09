@@ -1,18 +1,20 @@
 import 'package:bank_app_flutter/prefs/UserPreferences.dart';
+import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calender_custom.dart';
 import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/money_cash.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/statistics.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/title_drawer_custom.dart';
-import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/yes_no_new_month_dialog.dart';
+import 'package:bank_app_flutter/screens/video.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'financial_relay_custom.dart';
 import 'financial_status_update_dialog.dart';
 
@@ -262,10 +264,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           ),
                           children: [
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 provider.setLanguage(
-                                            SingingCharacter.Arabic, context);
-                                        Navigator.pop(context);
+                                    SingingCharacter.Arabic, context);
+                                Navigator.pop(context);
                               },
                               child: Row(
                                 children: [
@@ -287,10 +289,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 provider.setLanguage(
-                                            SingingCharacter.English, context);
-                                        Navigator.pop(context);
+                                    SingingCharacter.English, context);
+                                Navigator.pop(context);
                               },
                               child: Row(
                                 children: [
@@ -342,8 +344,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             //     Navigator.pop(context);
                             //   },
                             // ),
-                          ]
-                      ),
+                          ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -370,7 +371,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           ),
                           children: [
                             GestureDetector(
-                              child:Image(
+                              child: Image(
                                 image: AssetImage('assets/images/google.png'),
                                 height: 50,
                               ),
@@ -387,24 +388,24 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 image: AssetImage('assets/images/apple.png'),
                                 height: 50,
                               ),
-                              onTap: ()  {
+                              onTap: () {
                                 Share.share(
                                     "https://apps.apple.com/il/app/schedule-the-salary/id1603113357");
                               },
                             ),
-                            SizedBox(height: 5,),
-                          ]
-                      ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                          ]),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     TitleDrawerCustom(
-        //               function: () =>
-        //                   Navigator.pushNamed(
-        // context,
-        // VideoStoryScreen.routeName,
-        // ),
+                      function: () => Navigator.pushNamed(
+                        context,
+                        VideoScreen.routeName,
+                      ),
                       text: "Explanation video of the application".tr(),
                       imageicon: Image(
                         color: AppColors.Drawer_COLOR,

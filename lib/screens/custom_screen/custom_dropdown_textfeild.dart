@@ -280,7 +280,7 @@ class _CustomDropdownTextfeildScreenState
                                 child: Icon(
                                   Icons.check,
                                   color: Colors.white,
-                                  size: 50,
+                                  size: 30,
                                 )
                                 // Image.asset("assets/images/check (1).png",color: Colors.green,))
                                 ),
