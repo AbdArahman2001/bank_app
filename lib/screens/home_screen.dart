@@ -6,6 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'custom_screen/video_story.dart';
+
 class HomeScreen extends StatefulWidget {
   static final routeName = "homeScreen";
 
@@ -345,6 +347,12 @@ class _HomeScreenState extends State<HomeScreen>  {
                                       MonthlyIncomeScreen.routeName);
                                   Navigator.pushReplacementNamed(
                                       context, MonthlyIncomeScreen.routeName);
+                                  if(!UserPreferences.instance.isVideoInit()) {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                      return VideoStoryScreen(
+                                          'first'.tr());
+                                    }));
+                                  }
                                 }
                               },
                               child: Container(

@@ -3,6 +3,7 @@ import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calender_custom.dart';
 import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
+import 'package:bank_app_flutter/screens/custom_screen/video_story.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/money_cash.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/statistics.dart';
 import 'package:bank_app_flutter/screens/salary/drawer/title_drawer_custom.dart';
@@ -404,7 +405,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     TitleDrawerCustom(
                       function: () => Navigator.pushNamed(
                         context,
-                        VideoScreen.routeName,
+                        VideoStoryScreen.routeName,
                       ),
                       text: "Explanation video of the application".tr(),
                       imageicon: Image(

@@ -5,6 +5,7 @@ import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/screens/cards/custom/reminder_custom_dialog.dart';
 import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/custom_dropdown_textfeild.dart';
+import 'package:bank_app_flutter/screens/custom_screen/video_story.dart';
 import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
 import 'package:bank_app_flutter/utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -275,7 +276,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                   provider
                                                       .monthList.salaryAmount,
                                                   0,
-                                                  false);
+                                                  false,"Salary");
                                             }).then((value) {
                                           // TODO: show error message if amount not correct
                                           if (value == null) {
@@ -852,7 +853,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                                   .getRemainingAmount() +
                                                               provider.monthList
                                                                   .totalSave,
-                                                          false);
+                                                          false,"Saver");
                                                     }).then((value) {
                                                   // TODO: show error message if amount not correct
                                                   if (value == null) {
@@ -1373,7 +1374,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                                             .monthList
                                                                             .expences[i]
                                                                             .total,
-                                                                    false);
+                                                                    false,"Item");
                                                               }).then((value) {
                                                             // TODO: show error message if amount not correct
                                                             if (value == null) {
@@ -1964,6 +1965,14 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                           TableOfSaralyScreen.routeName);
                                       Navigator.pushReplacementNamed(context,
                                           TableOfSaralyScreen.routeName);
+
+                                      if(!UserPreferences.instance.isVideoInit()) {
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                          return VideoStoryScreen(
+                                              'second'.tr());
+                                        }));
+                                        UserPreferences.instance.saveIsVideo();
+                                      }
                                     }
                                   } else {
                                     var snackBar = SnackBar(

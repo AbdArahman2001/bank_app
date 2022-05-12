@@ -38,6 +38,14 @@ class UserPreferences {
     await _pref.setString(userData, json.encode(list));
     // print(UserAnswers.fromJson(json.decode(getQuizz())).quastions[0].toJson());
   }
+
+  bool isVideoInit() {
+    return _pref.containsKey(isVideo);
+  }
+  void saveIsVideo() {
+    _pref.setBool(isVideo, true);
+  }
+
   bool isRoutNameInit() {
     return _pref.containsKey(routName);
   }
@@ -67,5 +75,6 @@ class UserPreferences {
   static final String userData = "userData";
   static final String planList = "planList";
   static final String routName = "routName";
+  static final String isVideo = "isVideo";
 
 }

@@ -4,6 +4,7 @@ import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:bank_app_flutter/route_helper/route_helper.dart';
 import 'package:bank_app_flutter/screens/cards/cards_screen.dart';
 import 'package:bank_app_flutter/screens/custom_screen/name_expenses_custom_screen.dart';
+import 'package:bank_app_flutter/screens/custom_screen/video_story.dart';
 import 'package:bank_app_flutter/screens/salary/following_the_rules_screen.dart';
 import 'package:bank_app_flutter/screens/home_screen.dart';
 import 'package:bank_app_flutter/screens/launch_screen.dart';
@@ -86,6 +87,7 @@ class MyApp extends StatelessWidget {
         CardsScreen.routeName: (context) => CardsScreen(),
         NameExpensesCustomScreen.routeName: (context) => NameExpensesCustomScreen(),
         VideoScreen.routeName: (context) => VideoScreen(),
+        VideoStoryScreen.routeName: (context) => VideoStoryScreen('main'.tr()),
       },
       home: LaunchScreen(),
     );

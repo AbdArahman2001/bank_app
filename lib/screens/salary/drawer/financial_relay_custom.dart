@@ -297,7 +297,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                       0,
                                       provider.getFromSelectedItemReminderAmountRelay(
                                           _fromCurrentItemSelected),
-                                      true);
+                                      true,"Relay");
                                 }).then((value) {
                               if (value == null) {
                               } else if (double.parse(value) >

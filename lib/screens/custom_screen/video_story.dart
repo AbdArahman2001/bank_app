@@ -1,333 +1,290 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-//
-// class VideoStoryScreen extends StatefulWidget {
-//   static const String routeName = 'videoStoryScreen';
-//
-//   @override
-//   _VideoStoryScreenState createState() => _VideoStoryScreenState();
-// }
-//
-// class _VideoStoryScreenState extends State<VideoStoryScreen> {
-//   final storiesController = Get.put(StoriesController());
-//   String dataSource = "assets/videos/first_compressed.mp4";
-//   late VideoPlayerController _controller;
-//   late Future<void> _initializeVideoPlayerFuture;
-//
-//   double _volume = 100;
-//   bool _muted = false;
-//   bool isFullScreen = false;
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     _controller = VideoPlayerController.asset("assets/videos/${storiesController.story.value.video}.mp4")
-//       ..initialize().then((_) {
-//         setState(() {});
-//       });
-//   }
-//   @override
-//   void dispose() {
-//     // Ensure disposing of the VideoPlayerController to free up resources.
-//     _controller.dispose();
-//
-//     super.dispose();
-//   }
-//   @override
-//   Widget build(BuildContext context) {
-//     isFullScreen = false;
-//     // if(MediaQuery.of(context).orientation == Orientation.landscape){
-//     //   print("land scape");
-//     //   Future.delayed(
-//     //       Duration.zero,
-//     //           () =>showDialog(
-//     //       context: context, barrierColor: AppColors
-//     //       .MAIN_COLOR, builder: (BuildContext context) {
-//     //     return PortraitLandscapePlayerPage(
-//     //         controller: _controller);
-//     //   })
-//     //   );
-//     // }
-//     return MediaQuery.of(context).orientation == Orientation.landscape? PortraitLandscapePlayerPage(
-//         controller: _controller) : GetX<StoriesController>(
-//         builder: (controller) {
-//           return Scaffold(
-//             backgroundColor: AppColors.MAIN_COLOR,
-//             appBar: AppBar(
-//               leading: IconButton(
-//                 icon: Icon(Icons.arrow_back),
-//                 onPressed: () {
-//                   Navigator.pop(context);
-//                 },
-//               ),
-//               backgroundColor: AppColors.MAIN_COLOR,
-//               title: Center(
-//                 child: FittedBox(
-//                   fit: BoxFit.fitWidth,
-//                   child: Text(
-//                     controller.story.value.title.toString(),
-//                     textAlign: TextAlign.center,
-//                     style: TextStyle(
-//                         color: Colors.white,
-//                         fontSize: 25,
-//                         fontFamily: "Segoe UI",
-//                         fontWeight: FontWeight.bold),
-//                   ),
-//                 ),
-//               ),
-//               elevation: 0,
-//               // actions: [
-//               //   IconButton(
-//               //     icon: Icon(Icons.arrow_forward),
-//               //     onPressed: () {
-//               //       Navigator.pop(context);
-//               //     },
-//               //   ),
-//               // ],
-//             ),
-//             body: Container(
-//               padding: EdgeInsets.only(left: 16, right: 16),
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   // check the video is loaded
-//                   _controller.value.isInitialized
-//                       ? AspectRatio(
-//                     aspectRatio: _controller.value.aspectRatio,
-//                     child: VideoPlayer(_controller),
-//                   )
-//                       : GestureDetector(
-//                     onTap: (){
-//                       _controller = VideoPlayerController.asset("assets/videos/${storiesController.story.value.video}.mp4")
-//                         ..initialize().then((_) {
-//                           setState(() {});
-//                         });
-//                       _controller.play();
-//                     },
-//                         child: Container(
-//                     color: Colors.black,
-//                     width: MediaQuery
-//                           .of(context)
-//                           .size
-//                           .width,
-//                     height: 200,
-//                     child: Center(
-//                         child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             crossAxisAlignment: CrossAxisAlignment.center,
-//                             mainAxisSize: MainAxisSize.min,
-//                             children: [
-//                               CircularProgressIndicator(),
-//                               Text(
-//                                 "اضغط لتشغيل الفيديو",
-//                                 style: TextStyle(
-//                                     color: Colors.white,
-//                                     fontSize: 20,
-//                                     fontFamily: "Segoe UI",
-//                                     fontWeight: FontWeight.bold),
-//                               ),
-//                             ]),
-//                     ),
-//                   ),
-//                       ),
-//                   // lets add a video progress indicator
-//                   VideoProgressIndicator(
-//                     _controller,
-//                     allowScrubbing: true,
-//                     padding: EdgeInsets.all(0),
-//                   ),
-//                   // SizedBox(height: 5,),
-//                   // create the buttom controller
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                     children: [
-//                       // IconButton(
-//                       //   icon: const Icon(Icons.skip_previous),
-//                       //   onPressed: _controller.value.isPlaying
-//                       //       ? () => _controller.load(_ids[
-//                       //   (_ids.indexOf(_controller.metadata.videoId) -
-//                       //       1) %
-//                       //       _ids.length])
-//                       //       : null,
-//                       // ),
-//                       IconButton(
-//                         icon: Icon(
-//                           Icons.stop,
-//                         ),
-//                         onPressed: () {
-//                           _controller.pause();
-//                           _controller.seekTo(Duration(seconds: 0));
-//                           setState(() {});
-//                         }
-//                         ,
-//                       ),
-//                       IconButton(
-//                         icon: Icon(
-//                           _controller.value.isPlaying
-//                               ? Icons.pause
-//                               : Icons.play_arrow,
-//                         ),
-//                         onPressed: () {
-//                           _controller.value.isPlaying
-//                               ? _controller.pause()
-//                               : _controller.play();
-//                           setState(() {});
-//                         }
-//                         ,
-//                       ),
-//                       IconButton(
-//                         icon: Icon(_muted ? Icons.volume_off : Icons.volume_up),
-//                         onPressed: () {
-//                           _muted
-//                               ? _controller.setVolume(1.0)
-//                               : _controller.setVolume(0);
-//                           setState(() {
-//                             _muted = !_muted;
-//                           });
-//                         },
-//                       ),
-//                       IconButton(
-//                         icon: Icon(isFullScreen
-//                             ? Icons.fullscreen_exit
-//                             : Icons.fullscreen),
-//
-//                         onPressed: () {
-//                           isFullScreen
-//                               ? null
-//                               : showDialog(
-//                               context: context, barrierColor: AppColors
-//                               .MAIN_COLOR, builder: (BuildContext context) {
-//                             return PortraitLandscapePlayerPage(
-//                                 controller: _controller);
-//                           });
-//                           setState(() {
-//                             isFullScreen = !isFullScreen;
-//                           });
-//                         },
-//                       ),
-//                       // FullScreenButton(
-//                       //   controller: _controller,
-//                       //   color: Colors.black,
-//                       // ),
-//                       // IconButton(
-//                       //   icon: const Icon(Icons.skip_next),
-//                       //   onPressed: _controller.value.isPlaying
-//                       //       ? () => _controller.load(_ids[
-//                       //   (_ids.indexOf(_controller.metadata.videoId) +
-//                       //       1) %
-//                       //       _ids.length])
-//                       //       : null,
-//                       // ),
-//                     ],
-//                   ),
-//                   // Row(
-//                   //   mainAxisAlignment: MainAxisAlignment.center,
-//                   //   children: [
-//                   //     IconButton(
-//                   //       onPressed: () {},
-//                   //       icon: Icon(Icons.skip_previous),
-//                   //       color: Colors.white,
-//                   //     ),
-//                   //     IconButton(
-//                   //       onPressed: () {
-//                   //         print(_controller.value.isPlaying);
-//                   //         _controller.value.isPlaying
-//                   //             ? _controller.pause()
-//                   //             : _controller.play();
-//                   //       },
-//                   //       icon: Icon(Icons.play_arrow),
-//                   //       color: Colors.white,
-//                   //     ),
-//                   //     IconButton(
-//                   //       onPressed: () {},
-//                   //       icon: Icon(Icons.skip_next),
-//                   //       color: Colors.white,
-//                   //     ),
-//                   //   ],
-//                   // ),
-//                   SizedBox(
-//                     height: 20,
-//                   ),
-//                   Expanded(
-//                     child: GridView(
-//                       shrinkWrap: true,
-//                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                         crossAxisCount: 2,
-//                         mainAxisSpacing: 10,
-//                         crossAxisSpacing: 40,
-//                       ),
-//                       children: [
-//                         AppStackHome(
-//                           isLocked: false,
-//                           changeScreen: () {
-//                             if (_controller.value.isPlaying) _controller
-//                                 .pause();
-//                             setState(() {});
-//                             Navigator.pushNamed(
-//                               context,
-//                               MeaningsScreen.routeName,
-//                             );
-//                           },
-//                           image: Image.asset(
-//                             'assets/images/meaning.png',
-//                             // width: 175,
-//                             // height: 164,
-//                           ),
-//                         ),
-//                         AppStackHome(
-//                           isLocked: false,
-//                           changeScreen: () {
-//                             if (_controller.value.isPlaying) _controller
-//                                 .pause();
-//                             setState(() {});
-//                             Navigator.pushNamed(
-//                               context,
-//                               OppositeScreen.routeName,
-//                             );
-//                           },
-//                           image: Image.asset(
-//                             'assets/images/opposite.png',
-//                           ),
-//                         ),
-//                         AppStackHome(
-//                           isLocked: false,
-//                           changeScreen: () {
-//                             if (_controller.value.isPlaying) _controller
-//                                 .pause();
-//                             setState(() {});
-//                             Navigator.pushNamed(
-//                               context,
-//                               OneThingsScreen.routeName,
-//                             );
-//                           },
-//                           image: Image.asset(
-//                             'assets/images/one_things.png',
-//                           ),
-//                         ),
-//                         AppStackHome(
-//                           isLocked: false,
-//                           changeScreen: () {
-//                             if (_controller.value.isPlaying) _controller
-//                                 .pause();
-//                             setState(() {});
-//                             Navigator.pushNamed(
-//                               context,
-//                               QuestionsNofakerScreen.routeName,
-//                             );
-//                           },
-//                           image: Image.asset(
-//                             'assets/images/question_nofaker.png',
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           );
-//         }
-//     );
-//   }
-// }
+import 'package:bank_app_flutter/utlies/app_colors.dart';
+import 'package:chewie/chewie.dart';
+import 'package:easy_localization/src/public_ext.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+class VideoStoryScreen extends StatefulWidget {
+  static const String routeName = 'videoStoryScreen';
+  String video_name;
+  VideoStoryScreen(this.video_name);
+
+  @override
+  _VideoStoryScreenState createState() => _VideoStoryScreenState();
+}
+
+class _VideoStoryScreenState extends State<VideoStoryScreen> {
+  VideoPlayerController _videoPlayerController1;
+  ChewieController _chewieController;
+
+  @override
+  void initState() {
+    super.initState();
+    initializePlayer();
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController1.dispose();
+
+    _chewieController?.dispose();
+    super.dispose();
+  }
+
+  Future<void> initializePlayer() async {
+    _videoPlayerController1 =
+        VideoPlayerController.asset('assets/videos/${widget.video_name}.mp4');
+
+    await _videoPlayerController1.initialize();
+    _createChewieController();
+    setState(() {});
+  }
+
+  void _createChewieController() {
+    // final subtitles = [
+    //     Subtitle(
+    //       index: 0,
+    //       start: Duration.zero,
+    //       end: const Duration(seconds: 10),
+    //       text: 'Hello from subtitles',
+    //     ),
+    //     Subtitle(
+    //       index: 0,
+    //       start: const Duration(seconds: 10),
+    //       end: const Duration(seconds: 20),
+    //       text: 'Whats up? :)',
+    //     ),
+    //   ];
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController1,
+      autoPlay: true,
+      // allowFullScreen: true,
+      looping: true,
+      fullScreenByDefault: false,
+
+      additionalOptions: (context) {
+        return <OptionItem>[
+          OptionItem(
+            onTap: toggleVideo,
+            iconData: Icons.live_tv_sharp,
+            title: 'Toggle Video Src',
+          ),
+        ];
+      },
+
+      subtitleBuilder: (context, dynamic subtitle) => Container(
+        padding: const EdgeInsets.all(10.0),
+        child: subtitle is InlineSpan
+            ? RichText(
+                text: subtitle,
+              )
+            : Text(
+                subtitle.toString(),
+                style: const TextStyle(color: Colors.black),
+              ),
+      ),
+
+      hideControlsTimer: const Duration(seconds: 1),
+
+      // Try playing around with some of these other options:
+
+      // showControls: false,
+      // materialProgressColors: ChewieProgressColors(
+      //   playedColor: Colors.red,
+      //   handleColor: Colors.blue,
+      //   backgroundColor: Colors.grey,
+      //   bufferedColor: Colors.lightGreen,
+      // ),
+      // placeholder: Container(
+      //   color: Colors.grey,
+      // ),
+      // autoInitialize: true,
+    );
+  }
+
+  int currPlayIndex = 0;
+
+  Future<void> toggleVideo() async {
+    await _videoPlayerController1.pause();
+    currPlayIndex = currPlayIndex == 0 ? 1 : 0;
+    await initializePlayer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          // child: Text(
+          //   "Explanation video of the application".tr(),
+          //   style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 20,
+          //       fontFamily: "Segoe UI",
+          //       fontWeight: FontWeight.bold),
+          // ),
+        ),
+        backgroundColor: AppColors.MAIN_COLOR,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Center(
+              child: _chewieController != null &&
+                      _chewieController
+                          .videoPlayerController.value.isInitialized
+                  ? Chewie(
+                      controller: _chewieController,
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 20),
+                        Text('Loading'.tr()),
+                      ],
+                    ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width / 3,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              color: Colors.grey.shade200,
+              // image: DecorationImage(
+              //   image: AssetImage("assets/images/okk.png"),
+              // ),
+            ),
+            child: TextButton(
+              onPressed: () {
+                _chewieController?.enterFullScreen();
+              },
+              child: Text(
+                'full screen'.tr(),
+                style: TextStyle(
+                    color: AppColors.MAIN_COLOR,
+                    fontSize: 20,
+                    fontFamily: "Segoe UI",
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Spacer(),
+          Container(
+            height: 100,
+            padding: EdgeInsets.only(left: 10,right: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        initializePlayer();
+                        // Navigator.pop(context);
+                      },
+                      child: Container(
+                        // height: 50,
+                         width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.green,
+                          // image: DecorationImage(
+                          //   image: AssetImage("assets/images/okk.png"),
+                          // ),
+                        ),
+                        // padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              child: Icon(
+                                Icons.repeat,
+                                color: Colors.white,
+                                size: 40.0,
+                              ),
+                              // width: 29,
+                              // height: 43,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Repeat".tr(),
+                              style: TextStyle(
+                                  // color: AppColors.MAIN_COLOR,
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontFamily: "Segoe UI",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: AppColors.MAIN_COLOR,
+                          // image: DecorationImage(
+                          //   image: AssetImage("assets/images/okk.png"),
+                          // ),
+                        ),
+                        // padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 40.0,
+                              ),
+                              // width: 29,
+                              // height: 43,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Close".tr(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontFamily: "Segoe UI",
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -897,7 +897,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                 .getRemainingAmount() +
                                                             provider
                                                                 .monthList.totalSave,
-                                                        true);
+                                                        true,"Expenses");
                                                   }).then((value) {
                                                 //TODO: show yes no to add reminder amount to save amount
                                                 if (value == null) {
@@ -1035,7 +1035,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                 .getRemainingAmount() +
                                                             provider
                                                                 .monthList.totalSave,
-                                                        true);
+                                                        true,"Expenses");
                                                   }).then((value) {
                                                 //TODO: show yes no to add reminder amount to save amount
                                                 if (value == null) {
@@ -1117,9 +1117,9 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                           ),
                           Container(
                             child: Text(
-                              "Enter the daily and monthly expenses".tr(),
+                              '\"${"Enter the daily and monthly expenses".tr()}\"',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: "Segoe UI",
                                 color: Colors.black,
@@ -1468,7 +1468,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                             .monthList
                                                                             .expences[i]
                                                                             .total,
-                                                                    true);
+                                                                    true,"Expenses");
                                                               }).then((value) {
                                                             //TODO: show yes no to add reminder amount to save amount
                                                             if (value == null) {
@@ -1652,7 +1652,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                         .expences[
                                                                             i]
                                                                         .total,
-                                                                true);
+                                                                true,"Expenses");
                                                           }).then((value) {
                                                         //TODO: show yes no to add reminder amount to save amount
                                                         if (value == null) {

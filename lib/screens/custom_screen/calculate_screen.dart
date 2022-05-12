@@ -15,13 +15,15 @@ class CalculateScreen extends StatefulWidget {
   double amount;
   double rmain;
   bool isRmain;
+  String totalStr;
 
-  CalculateScreen(int i, String t, double a, double r, bool ir) {
+  CalculateScreen(int i, String t, double a, double r, bool ir, String ts) {
     index = i == 0 ? "" : "${i}- ";
     type = t != null && t != "" ? t : "اسم البند".tr();
     amount = a;
     rmain = r;
     isRmain = ir;
+    totalStr = ts;
   }
 
   @override
@@ -186,7 +188,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                         children: [
                           Text(
                             " ${NumberFormat('###,##0.00').format(double.parse(provider.result))} " +
-                                "Expenses".tr(),
+                               "${"totall".tr()} ${widget.totalStr.tr()}",
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: "Segoe UI",

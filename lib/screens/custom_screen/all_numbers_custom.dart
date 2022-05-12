@@ -133,7 +133,7 @@ class AllNumbersCustom extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.25,
                   child: Column(
                     children: [
-                       Expanded(child: Numbers_Custom("+ \n ${"Add expense".tr()}", () => provider.addOp("+"))),
+                       Expanded(child: Numbers_Custom("+ \n ${"Sum".tr()}", () => provider.addOp("+"))),
 
                     ],
                   ),
