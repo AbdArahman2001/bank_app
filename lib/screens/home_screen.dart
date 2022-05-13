@@ -144,8 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // provider.setLanguage(
-                              //     SingingCharacter.English, context);
+                              provider.setLanguage(
+                                  SingingCharacter.Arabic, context);
                             },
                             child: Row(
                               children: [
@@ -168,8 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Spacer(),
                           GestureDetector(
                             onTap: () {
-                              // provider.setLanguage(
-                              //     SingingCharacter.Arabic, context);
+                              provider.setLanguage(
+                                  SingingCharacter.English, context);
+
                             },
                             child: Row(
                               children: [
