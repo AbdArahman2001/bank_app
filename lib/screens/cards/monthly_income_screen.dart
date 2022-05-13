@@ -338,14 +338,16 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
                                               child: provider.monthList
                                                           .salaryAmount ==
                                                       0
-                                                  ? Text(
-                                                      "Enter the value + ".tr(),
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily: 'Tajawal',
-                                                          color: Colors.red))
+                                                  ? Flexible(
+                                                    child: Text(
+                                                        "Enter the value + ".tr(),
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontFamily: 'Tajawal',
+                                                            color: Colors.red)),
+                                                  )
                                                   : Text(
                                                       NumberFormat('###,##0.00')
                                                           .format(provider

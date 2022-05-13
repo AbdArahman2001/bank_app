@@ -512,7 +512,6 @@ class HomeProvider extends ChangeNotifier {
     }
     await _dbEController.deleteAll();
     monthList.expences.forEach((element) async {
-
       print(element.toString());
       updated = await _dbEController.update(element);
       if (updated) {

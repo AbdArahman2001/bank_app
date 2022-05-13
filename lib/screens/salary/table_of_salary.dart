@@ -473,7 +473,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(left: 1,right: 1),
+                              padding: EdgeInsets.only(left: 3,right: 3),
                               child: Column(children: [
                                 SizedBox(
                                   height: 40,
@@ -897,16 +897,10 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                       return CalculateScreen(
                                                           1,
                                                           "Saver".tr(),
-                                                          provider.getRemainingAmount() +
                                                               provider
                                                                   .monthList.saveAmount,
-                                                          provider.getRemainingAmount() +
-                                                              provider.monthList
-                                                                  .saveAmount -
-                                                              provider
-                                                                  .getRemainingAmount() +
-                                                              provider
-                                                                  .monthList.totalSave,
+                                                          provider.monthList.saveAmount -
+                                                              provider.monthList.totalSave,
                                                           true,"Expenses");
                                                     }).then((value) {
                                                   //TODO: show yes no to add reminder amount to save amount
@@ -1013,8 +1007,9 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                     ),
                                   ),
                                 ),
+
                                 Container(
-                                  padding: EdgeInsets.only(left: 1,right: 1),
+                                  padding: EdgeInsets.only(left: 3,right: 3),
                                   child: Column(children: [
                                     // for (int i = 0;
                                     // i <
@@ -1036,16 +1031,10 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                     return CalculateScreen(
                                                         1,
                                                         "Saver".tr(),
-                                                        provider.getRemainingAmount() +
                                                             provider
                                                                 .monthList.saveAmount,
-                                                        provider.getRemainingAmount() +
-                                                            provider.monthList
-                                                                .saveAmount -
-                                                            provider
-                                                                .getRemainingAmount() +
-                                                            provider
-                                                                .monthList.totalSave,
+                                                        provider.monthList.saveAmount -
+                                                            provider.monthList.totalSave,
                                                         true,"Expenses");
                                                   }).then((value) {
                                                 //TODO: show yes no to add reminder amount to save amount
@@ -1083,14 +1072,22 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                               });
                                             },
                                             child:
-                                            // Icon(
-                                            //   Icons.cancel_outlined,
-                                            //   color: Colors.red,
-                                            //    // size: 10,
+
+                                            // Container(
+                                            //   height: 30,
+                                            //   width: 30,
+                                            //   decoration: BoxDecoration(
+                                            //     image: DecorationImage(
+                                            //
+                                            //       image: AssetImage(
+                                            //           "assets/images/addadd.png"),
+                                            //     ),
+                                            //   ),
                                             // ),
                                             Image(
                                               image: AssetImage(
-                                                  "assets/images/Plus.png",),color: Colors.red,
+                                                  "assets/images/addadd.png",),
+                                            //       "assets/images/Plus.png",),color: Colors.red,
                                             ),
                                           ),
                                         ),
@@ -1298,7 +1295,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 1,right: 1),
+                                padding: EdgeInsets.only(left: 3,right: 3),
                                 child: Column(children: [
                                   SizedBox(
                                     height: 40,
@@ -1623,7 +1620,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                           ),
                                         ),
                                         Container(
-                                          padding: EdgeInsets.only(left: 1,right: 1),
+                                          padding: EdgeInsets.only(left: 3,right: 3),
                                           child: Column(children: [
                                             for (int i = 0;
                                                 i <
@@ -1717,11 +1714,16 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                         //   color: Colors.red,
                                                         //    // size: 10,
                                                         // ),
-                                                        Image(
+                                                    Image(
                                                       image: AssetImage(
-                                                          "assets/images/Plus.png",),color: Colors.red,
-                                                          // width: 30,
+                                                        "assets/images/addadd.png",),
+                                                      //       "assets/images/Plus.png",),color: Colors.red,
                                                     ),
+                                                    //     Image(
+                                                    //   image: AssetImage(
+                                                    //       "assets/images/Plus.png",),color: Colors.red,
+                                                    //       // width: 30,
+                                                    // ),
                                                   ),
                                                 ),
                                               ),
@@ -2314,7 +2316,8 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
   void showToast() {
     final snackBar = SnackBar(
       duration: Duration(seconds: 6),
-      backgroundColor: AppColors.Snack_Bar_COLOR,
+      backgroundColor: AppColors.MAIN_COLOR,
+      //backgroundColor: AppColors.Snack_Bar_COLOR,
       content: Text(
         'Entered value is approved'.tr(),
         textAlign: TextAlign.center,

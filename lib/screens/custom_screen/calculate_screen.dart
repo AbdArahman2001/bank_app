@@ -24,6 +24,9 @@ class CalculateScreen extends StatefulWidget {
     rmain = r;
     isRmain = ir;
     totalStr = ts;
+    print("=====calc=====");
+    print("Index: ${index} \ntype: ${type} \namount: ${amount} \nrmain: ${rmain} \nisRmain: ${isRmain} \ntotalStr: ${totalStr} ");
+    print("==============");
   }
 
   @override
@@ -33,7 +36,6 @@ class CalculateScreen extends StatefulWidget {
 class _CalculateScreenState extends State<CalculateScreen> {
   HomeProvider provider;
   String text;
-
   @override
   void dispose() {
     // TODO: implement dispose
