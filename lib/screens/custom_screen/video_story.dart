@@ -68,7 +68,7 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
           OptionItem(
             onTap: toggleVideo,
             iconData: Icons.live_tv_sharp,
-            title: 'Toggle Video Src',
+           // title: 'Toggle Video Src',
           ),
         ];
       },
@@ -149,32 +149,32 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                     ),
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width / 3,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              color: Colors.grey.shade200,
-              // image: DecorationImage(
-              //   image: AssetImage("assets/images/okk.png"),
-              // ),
-            ),
-            child: TextButton(
-              onPressed: () {
-                _chewieController?.enterFullScreen();
-              },
-              child: Text(
-                'full screen'.tr(),
-                style: TextStyle(
-                    color: AppColors.MAIN_COLOR,
-                    fontSize: 20,
-                    fontFamily: "Segoe UI",
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
+          // Container(
+          //   width: MediaQuery.of(context).size.width / 3,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(50),
+          //     color: Colors.grey.shade200,
+          //     // image: DecorationImage(
+          //     //   image: AssetImage("assets/images/okk.png"),
+          //     // ),
+          //   ),
+          //   child: TextButton(
+          //     onPressed: () {
+          //       _chewieController?.enterFullScreen();
+          //     },
+          //     child: Text(
+          //       'full screen'.tr(),
+          //       style: TextStyle(
+          //           color: AppColors.MAIN_COLOR,
+          //           fontSize: 20,
+          //           fontFamily: "Segoe UI",
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //   ),
+          // ),
           Spacer(),
           Container(
-            height: 100,
+            height: 50,
             padding: EdgeInsets.only(left: 10,right: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,12 +184,13 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
-                        initializePlayer();
+                        _videoPlayerController1.seekTo(Duration());
+                        // initializePlayer();
                         // Navigator.pop(context);
                       },
                       child: Container(
-                        // height: 50,
-                         width: MediaQuery.of(context).size.width,
+                         height: 50,
+                        width: MediaQuery.of(context).size.width / 2.5,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: Colors.green,
@@ -198,7 +199,7 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                           // ),
                         ),
                         // padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Column(
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -206,20 +207,20 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                               child: Icon(
                                 Icons.repeat,
                                 color: Colors.white,
-                                size: 40.0,
+                                size: 25.0,
                               ),
                               // width: 29,
                               // height: 43,
                             ),
                             SizedBox(
-                              height: 5,
+                              width: 15,
                             ),
                             Text(
                               "Repeat".tr(),
                               style: TextStyle(
                                   // color: AppColors.MAIN_COLOR,
                                   color: Colors.white,
-                                  fontSize: 30,
+                                  fontSize: 20,
                                   fontFamily: "Segoe UI",
                                   fontWeight: FontWeight.bold),
                             ),
@@ -234,11 +235,12 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
+                        _videoPlayerController1.pause();
                         Navigator.pop(context);
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width,
-
+                        height: 50,
+                        width: MediaQuery.of(context).size.width / 2.5,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: AppColors.MAIN_COLOR,
@@ -247,7 +249,7 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                           // ),
                         ),
                         // padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Column(
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -255,19 +257,19 @@ class _VideoStoryScreenState extends State<VideoStoryScreen> {
                               child: Icon(
                                 Icons.close,
                                 color: Colors.white,
-                                size: 40.0,
+                                size: 25.0,
                               ),
                               // width: 29,
                               // height: 43,
                             ),
                             SizedBox(
-                              height: 5,
+                              width: 15,
                             ),
                             Text(
                               "Close".tr(),
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 30,
+                                  fontSize: 20,
                                   fontFamily: "Segoe UI",
                                   fontWeight: FontWeight.bold),
                             ),

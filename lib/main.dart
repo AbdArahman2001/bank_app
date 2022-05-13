@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
         MonthlyIncomeScreen.routeName: (context) => MonthlyIncomeScreen(),
         CardsScreen.routeName: (context) => CardsScreen(),
         NameExpensesCustomScreen.routeName: (context) => NameExpensesCustomScreen(),
-        VideoScreen.routeName: (context) => VideoScreen(),
+        //VideoScreen.routeName: (context) => VideoScreen(),
         VideoStoryScreen.routeName: (context) => VideoStoryScreen('main'.tr()),
       },
       home: LaunchScreen(),

@@ -26,7 +26,8 @@ class MonthlyIncomeScreen extends StatefulWidget {
   _MonthlyIncomeScreenState createState() => _MonthlyIncomeScreenState();
 }
 
-class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerProviderStateMixin {
+class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
+    with TickerProviderStateMixin {
   AnimationController animationController;
   FocusNode myFocusNode;
   HomeProvider provider;
@@ -276,7 +277,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                   provider
                                                       .monthList.salaryAmount,
                                                   0,
-                                                  false,"Salary");
+                                                  false,
+                                                  "Salary");
                                             }).then((value) {
                                           // TODO: show error message if amount not correct
                                           if (value == null) {
@@ -323,7 +325,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                             height: 29,
                                             width: 93,
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                               color: Colors.grey.shade200,
                                               boxShadow: [
                                                 BoxShadow(
@@ -332,40 +335,43 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                               ],
                                             ),
                                             child: Center(
-                                              child: provider
-                                                  .monthList.salaryAmount ==
-                                                  0
-                                                  ? Text("Enter the value + ".tr(),
-                                                  style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily: 'Tajawal',
-                                                      color: Colors.red))
+                                              child: provider.monthList
+                                                          .salaryAmount ==
+                                                      0
+                                                  ? Text(
+                                                      "Enter the value + ".tr(),
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily: 'Tajawal',
+                                                          color: Colors.red))
                                                   : Text(
-                                                NumberFormat('###,##0.00')
-                                                    .format(provider.monthList
-                                                    .salaryAmount),
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: "Segoe UI",
-                                                  color: AppColors.Drawer_COLOR,
-                                                ),
-                                              ),
+                                                      NumberFormat('###,##0.00')
+                                                          .format(provider
+                                                              .monthList
+                                                              .salaryAmount),
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: "Segoe UI",
+                                                        color: AppColors
+                                                            .Drawer_COLOR,
+                                                      ),
+                                                    ),
                                             ),
                                           )
                                         ],
                                       ),
                                     ),
-
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Excess of total monthly incomee"
-                                            .tr(),
+                                        "Excess of total monthly incomee".tr(),
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w900,
@@ -378,10 +384,10 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                       width: 10,
                                     ),
                                     GestureDetector(
-                                      onTap: (){
+                                      onTap: () {
                                         final snackBar = SnackBar(
                                             backgroundColor:
-                                            AppColors.Snack_Bar_COLOR,
+                                                AppColors.Snack_Bar_COLOR,
                                             content: Text(
                                               "It is necessary to schedule all the salary until the remainder is zero"
                                                   .tr(),
@@ -397,12 +403,51 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                       },
                                       child: Row(
                                         children: [
+                                          Visibility(
+                                            visible:
+                                                provider.getRemainingAmount() ==
+                                                        0
+                                                    ? false
+                                                    : true,
+                                            child: Container(
+                                                width: 28,
+                                                height: 28,
+                                                padding: EdgeInsets.all(5),
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.red,
+                                                      blurRadius: 4,
+                                                      // spreadRadius: 2,
+                                                      //  offset: Offset(0, 2),
+                                                    )
+                                                  ],
+                                                  // color: Colors.grey.shade300,
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                ),
+                                                child: Text(
+                                                  "!",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                          ),
+                                          SizedBox(
+                                            width: 3,
+                                          ),
                                           Container(
                                             height: 29,
                                             width: 93,
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5),
-                                              color: provider.getRemainingAmount() == 0 ?Colors.grey.shade200 : Colors.green.shade700,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              // color: provider.getRemainingAmount() == 0 ?Colors.grey.shade200 : Colors.green.shade700,
+                                              color: Colors.grey.shade200,
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: AppColors.MAIN_COLOR,
@@ -411,52 +456,29 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                             ),
                                             child: Center(
                                               child: Text(
-                                                NumberFormat('###,##0.00').format(
-                                                    provider.getRemainingAmount()),
+                                                NumberFormat('###,##0.00')
+                                                    .format(provider
+                                                        .getRemainingAmount()),
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400,
                                                   fontFamily: "Segoe UI",
-                                                  color:  provider.getRemainingAmount() == 0  ? AppColors.Drawer_COLOR : Colors.white,
+                                                  color: provider
+                                                              .getRemainingAmount() ==
+                                                          0
+                                                      ? AppColors.Drawer_COLOR
+                                                      : Color(0XFF008000),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          Visibility(
-                                            visible:  provider.getRemainingAmount() == 0? false : true,
-                                            child: SizedBox(
-                                              width: 15,
-                                            ),
-                                          ),
-                                          Visibility(
-                                            visible:  provider.getRemainingAmount() == 0? false : true,
-                                            child: Container(
-                                              width: 25,
-                                                height: 25,
-                                                padding: EdgeInsets.all(5),
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.red,
-                                                      blurRadius: 4,
-                                                      spreadRadius: 2,
-                                                      offset: Offset(0, 2),
-                                                    )
-                                                  ],
-                                                  // color: Colors.grey.shade300,
-                                                  color: Colors.red,
-                                                   borderRadius: BorderRadius.circular(50),
-                                                ),
-                                                child: Text(
-                                                  "!",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold
-                                                  ),
-                                                )),
-                                          ),
+                                          // Visibility(
+                                          //   visible:  provider.getRemainingAmount() == 0? false : true,
+                                          //   child: SizedBox(
+                                          //     width: 15,
+                                          //   ),
+                                          // ),
+
                                           // AnimatedBuilder(
                                           //   animation: animationController,
                                           //   builder: (context, child) {
@@ -491,8 +513,6 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                         ],
                                       ),
                                     ),
-
-
                                   ],
                                 ),
                               ],
@@ -853,7 +873,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                                   .getRemainingAmount() +
                                                               provider.monthList
                                                                   .totalSave,
-                                                          false,"Saver");
+                                                          false,
+                                                          "Saver");
                                                     }).then((value) {
                                                   // TODO: show error message if amount not correct
                                                   if (value == null) {
@@ -1374,7 +1395,8 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                                                             .monthList
                                                                             .expences[i]
                                                                             .total,
-                                                                    false,"Item");
+                                                                    false,
+                                                                    "Item");
                                                               }).then((value) {
                                                             // TODO: show error message if amount not correct
                                                             if (value == null) {
@@ -1842,44 +1864,54 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          /// /// previous /// ///
                           Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacementNamed(
-                                    context, HomeScreen.routeName);
-                              },
-                              child: Container(
-                                // color: Colors.green,
-                                margin: EdgeInsets.only(right: 20, left: 20),
-                                // width: 70,
-                                // height: 60,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      // width: 29,
-                                      // height: 43,
-                                      child: Icon(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(50)),
+                                      color: Colors.transparent,
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.pushReplacementNamed(
+                                            context, HomeScreen.routeName);
+                                      },
+                                      icon: Icon(
                                         Icons.arrow_back,
                                         color: AppColors.MAIN_COLOR,
                                         size: 30.0,
                                       ),
                                     ),
-                                    // SizedBox(height: 5,),
-                                    Text(
-                                      "Previous".tr(),
-                                      style: TextStyle(
-                                          color: AppColors.MAIN_COLOR,
-                                          fontSize: 13,
-                                          fontFamily: "Segoe UI",
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Previous".tr(),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: AppColors.MAIN_COLOR,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  // Text(
+                                  //   "Add Item".tr(),
+                                  //   style: TextStyle(
+                                  //       fontSize: 15,
+                                  //       color: AppColors.MAIN_COLOR,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
+                                ],
                               ),
+                              // color: Colors.yellow,
                             ),
                           ),
+                          /// /// add item /// ///
                           Expanded(
                             child: Container(
                               child: Column(
@@ -1910,7 +1942,9 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 5,),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text(
                                     "Add Item".tr(),
                                     style: TextStyle(
@@ -1930,101 +1964,246 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>  with TickerP
                               // color: Colors.yellow,
                             ),
                           ),
+                          /// /// next /// ///
                           Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                provider.validateMonthlyIncome().then((v) {
-                                  if (v is bool && v) {
-                                    if (provider.getRemainingAmount() > 0) {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return ReminderCustomDialog();
-                                          }).then((value) {
-                                        if (value is bool && value) {
-                                          provider.monthList.saveAmount +=
-                                              provider.getRemainingAmount();
-                                          Provider.of<HomeProvider>(context,
-                                                  listen: false)
-                                              .saveList(isPlan: true);
-                                          UserPreferences.instance.saveRoutName(
-                                              TableOfSaralyScreen.routeName);
-                                          Navigator.pushReplacementNamed(
-                                              context,
-                                              TableOfSaralyScreen.routeName);
-                                        }
-                                        ;
-                                      });
-                                    } else {
-                                      Provider.of<HomeProvider>(context,
-                                              listen: false)
-                                          .saveList(isPlan: true);
-                                      UserPreferences.instance.saveRoutName(
-                                          TableOfSaralyScreen.routeName);
-                                      UserPreferences.instance.saveRoutName(
-                                          TableOfSaralyScreen.routeName);
-                                      Navigator.pushReplacementNamed(context,
-                                          TableOfSaralyScreen.routeName);
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(50)),
+                                      color: Colors.transparent,
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        provider
+                                            .validateMonthlyIncome()
+                                            .then((v) {
+                                          if (v is bool && v) {
+                                            if (provider.getRemainingAmount() >
+                                                0) {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return ReminderCustomDialog();
+                                                  }).then((value) {
+                                                if (value is bool && value) {
+                                                  provider.monthList
+                                                          .saveAmount +=
+                                                      provider
+                                                          .getRemainingAmount();
+                                                  Provider.of<HomeProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .saveList(isPlan: true);
+                                                  UserPreferences.instance
+                                                      .saveRoutName(
+                                                          TableOfSaralyScreen
+                                                              .routeName);
+                                                  Navigator
+                                                      .pushReplacementNamed(
+                                                          context,
+                                                          TableOfSaralyScreen
+                                                              .routeName);
+                                                  if (!UserPreferences.instance
+                                                      .isVideoInit() || !UserPreferences.instance
+                                                      .getIsVideoInit()) {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (context) {
+                                                              return VideoStoryScreen(
+                                                                  'second'.tr());
+                                                            }));
+                                                    UserPreferences.instance
+                                                        .saveIsVideo();
+                                                  }
+                                                }
 
-                                      if(!UserPreferences.instance.isVideoInit()) {
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                                          return VideoStoryScreen(
-                                              'second'.tr());
-                                        }));
-                                        UserPreferences.instance.saveIsVideo();
-                                      }
-                                    }
-                                  } else {
-                                    var snackBar = SnackBar(
-                                        backgroundColor:
-                                            AppColors.Snack_Bar_COLOR,
-                                        content: Text(
-                                          v,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: "Segoe UI"),
-                                        ));
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                  }
-                                });
-                              },
-                              child: Container(
-                                // width: 70,
-                                // height: 60,
-                                // color: Colors.green,
-                                margin: EdgeInsets.only(left: 20, right: 20),
-                                // width: 70,
-                                // height: 60,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      child: Icon(
+                                                ;
+                                              });
+                                            } else {
+                                              Provider.of<HomeProvider>(context,
+                                                      listen: false)
+                                                  .saveList(isPlan: true);
+                                              UserPreferences.instance
+                                                  .saveRoutName(
+                                                      TableOfSaralyScreen
+                                                          .routeName);
+                                              UserPreferences.instance
+                                                  .saveRoutName(
+                                                      TableOfSaralyScreen
+                                                          .routeName);
+                                              Navigator.pushReplacementNamed(
+                                                  context,
+                                                  TableOfSaralyScreen
+                                                      .routeName);
+
+                                              if (!UserPreferences.instance
+                                                  .isVideoInit() || !UserPreferences.instance
+                                                  .getIsVideoInit()) {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) {
+                                                  return VideoStoryScreen(
+                                                      'second'.tr());
+                                                }));
+                                                UserPreferences.instance
+                                                    .saveIsVideo();
+                                              }
+                                              // UserPreferences.instance.clear();
+                                            }
+                                          } else {
+                                            var snackBar = SnackBar(
+                                                backgroundColor:
+                                                    AppColors.Snack_Bar_COLOR,
+                                                content: Text(
+                                                  v,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: "Segoe UI"),
+                                                ));
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          }
+
+                                        });
+                                      },
+                                      icon: Icon(
                                         Icons.arrow_forward,
                                         color: AppColors.MAIN_COLOR,
                                         size: 30.0,
                                       ),
-                                      // width: 29,
-                                      // height: 43,
                                     ),
-                                    Text(
-                                      "Next".tr(),
-                                      style: TextStyle(
-                                          color: AppColors.MAIN_COLOR,
-                                          fontSize: 13,
-                                          fontFamily: "Segoe UI",
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    "Next".tr(),
+                                    style: TextStyle(
+                                        color: AppColors.MAIN_COLOR,
+                                        fontSize: 15,
+                                        fontFamily: "Segoe UI",
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  // Text(
+                                  //   "Add Item".tr(),
+                                  //   style: TextStyle(
+                                  //       fontSize: 15,
+                                  //       color: AppColors.MAIN_COLOR,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
+                                ],
                               ),
+                              // color: Colors.yellow,
                             ),
                           ),
+                          // Expanded(
+                          //   child: GestureDetector(
+                          //     onTap: () {
+                          //       provider.validateMonthlyIncome().then((v) {
+                          //         if (v is bool && v) {
+                          //           if (provider.getRemainingAmount() > 0) {
+                          //             showDialog(
+                          //                 context: context,
+                          //                 builder: (BuildContext context) {
+                          //                   return ReminderCustomDialog();
+                          //                 }).then((value) {
+                          //               if (value is bool && value) {
+                          //                 provider.monthList.saveAmount +=
+                          //                     provider.getRemainingAmount();
+                          //                 Provider.of<HomeProvider>(context,
+                          //                         listen: false)
+                          //                     .saveList(isPlan: true);
+                          //                 UserPreferences.instance.saveRoutName(
+                          //                     TableOfSaralyScreen.routeName);
+                          //                 Navigator.pushReplacementNamed(
+                          //                     context,
+                          //                     TableOfSaralyScreen.routeName);
+                          //               }
+                          //               ;
+                          //             });
+                          //           } else {
+                          //             Provider.of<HomeProvider>(context,
+                          //                     listen: false)
+                          //                 .saveList(isPlan: true);
+                          //             UserPreferences.instance.saveRoutName(
+                          //                 TableOfSaralyScreen.routeName);
+                          //             UserPreferences.instance.saveRoutName(
+                          //                 TableOfSaralyScreen.routeName);
+                          //             Navigator.pushReplacementNamed(context,
+                          //                 TableOfSaralyScreen.routeName);
+                          //
+                          //             if (!UserPreferences.instance
+                          //                 .isVideoInit()) {
+                          //               Navigator.of(context).push(
+                          //                   MaterialPageRoute(
+                          //                       builder: (context) {
+                          //                 return VideoStoryScreen(
+                          //                     'second'.tr());
+                          //               }));
+                          //               UserPreferences.instance.saveIsVideo();
+                          //             }
+                          //           }
+                          //         } else {
+                          //           var snackBar = SnackBar(
+                          //               backgroundColor:
+                          //                   AppColors.Snack_Bar_COLOR,
+                          //               content: Text(
+                          //                 v,
+                          //                 textAlign: TextAlign.center,
+                          //                 style: TextStyle(
+                          //                     fontSize: 20,
+                          //                     color: Colors.white,
+                          //                     fontWeight: FontWeight.w500,
+                          //                     fontFamily: "Segoe UI"),
+                          //               ));
+                          //           ScaffoldMessenger.of(context)
+                          //               .showSnackBar(snackBar);
+                          //         }
+                          //       });
+                          //     },
+                          //     child: Container(
+                          //       // width: 70,
+                          //       // height: 60,
+                          //       // color: Colors.green,
+                          //       margin: EdgeInsets.only(left: 20, right: 20),
+                          //       // width: 70,
+                          //       // height: 60,
+                          //       child: Column(
+                          //         crossAxisAlignment: CrossAxisAlignment.end,
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           SizedBox(
+                          //             child: Icon(
+                          //               Icons.arrow_forward,
+                          //               color: AppColors.MAIN_COLOR,
+                          //               size: 30.0,
+                          //             ),
+                          //             // width: 29,
+                          //             // height: 43,
+                          //           ),
+                          //           Text(
+                          //             "Next".tr(),
+                          //             style: TextStyle(
+                          //                 color: AppColors.MAIN_COLOR,
+                          //                 fontSize: 13,
+                          //                 fontFamily: "Segoe UI",
+                          //                 fontWeight: FontWeight.bold),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

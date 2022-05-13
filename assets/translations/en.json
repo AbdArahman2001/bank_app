@@ -74,7 +74,7 @@
   "Remaining:": "Remaining:",
   "Grand total": "Grand total",
   "totall": "Total",
-  "Sum": "Sum",
+  "Sum": "\"Sum\"",
   "Relay": "Relay",
   "Added": "Added",
 
@@ -112,7 +112,9 @@
   "Name must be greater than two characters": "Name must be greater than two characters",
   "Next" : "Next",
   "Previous" : "Previous",
-  "Enter the value + " : "Enter the value + ",
+  "Enter the value + " : "Enter the value +",
+  "Enter the value" : "أدخل القيمة",
+
   "The amount is extra" : "The amount is extra",
   "There are no other items to carry over the value" : "There are no other items to carry over the value",
 

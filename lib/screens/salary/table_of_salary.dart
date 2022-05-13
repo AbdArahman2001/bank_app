@@ -726,7 +726,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                           //               child: Center(
                           //                 child: provider.monthList.totalSave ==
                           //                         0
-                          //                     ? Text("Enter the value + ".tr(),
+                          //                     ? Text("Enter the value".tr(),
                           //                         style: TextStyle(
                           //                             fontSize: 13,
                           //                             fontWeight:
@@ -798,42 +798,68 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: Table(
-                                    columnWidths: {
-                                      0: FlexColumnWidth(2),
-                                      1: FlexColumnWidth(3),
-                                      2: FlexColumnWidth(5),
-                                      3: FlexColumnWidth(5),
-                                      4: FlexColumnWidth(3),
-                                    },
-                                    border: TableBorder(
-                                        horizontalInside: BorderSide(
-                                            width: 1,
-                                            color: AppColors.Border_COLOR,
-                                            style: BorderStyle.solid),
-                                        verticalInside: BorderSide(
-                                            width: 1,
-                                            color: AppColors.Border_COLOR,
-                                            style: BorderStyle.solid)),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: AppColors.Border_COLOR),
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10)),
+                                    ),
+                                    child: Table(
+                                      columnWidths: {
+                                        0: FlexColumnWidth(2),
+                                        1: FlexColumnWidth(3),
+                                        2: FlexColumnWidth(5),
+                                        3: FlexColumnWidth(5),
+                                        4: FlexColumnWidth(3),
+                                      },
+                                      border: TableBorder(
+                                          horizontalInside: BorderSide(
+                                              width: 1,
+                                              color: AppColors.Border_COLOR,
+                                              style: BorderStyle.solid),
+                                          verticalInside: BorderSide(
+                                              width: 1,
+                                              color: AppColors.Border_COLOR,
+                                              style: BorderStyle.solid)),
 
-                                    // border:
-                                    //     TableBorder.all(color: AppColors.Border_COLOR),
-                                    children: [
+                                      // border:
+                                      //     TableBorder.all(color: AppColors.Border_COLOR),
+                                      children: [
 
-                                      TableRow(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              bottomRight: Radius.circular(10),
-                                              bottomLeft: Radius.circular(10)),
-                                          color: AppColors.bg_COLOR,
-                                        ),
-                                        children: [
-                                          TableCell(
-                                            child: SizedBox(
-                                              height: 50,
+                                        TableRow(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                bottomRight: Radius.circular(10),
+                                                bottomLeft: Radius.circular(10)),
+                                            color: AppColors.bg_COLOR,
+                                          ),
+                                          children: [
+                                            TableCell(
+                                              child: SizedBox(
+                                                height: 50,
+                                                child: Center(
+                                                  child: Text(
+                                                    "0",
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontFamily: 'Tajawal',
+                                                        color:
+                                                        AppColors.Text_Table_COLOR),
+                                                  ),
+                                                ),
+                                              ),
+                                              verticalAlignment:
+                                              TableCellVerticalAlignment.middle,
+                                            ),
+                                            TableCell(
                                               child: Center(
                                                 child: Text(
-                                                  "0",
+                                                  "Saver".tr(),
                                                   style: TextStyle(
                                                       fontSize: 13,
                                                       fontWeight: FontWeight.w500,
@@ -842,164 +868,149 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                       AppColors.Text_Table_COLOR),
                                                 ),
                                               ),
+                                              verticalAlignment:
+                                              TableCellVerticalAlignment.middle,
                                             ),
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment.middle,
-                                          ),
-                                          TableCell(
-                                            child: Center(
-                                              child: Text(
-                                                "Saver".tr(),
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: 'Tajawal',
-                                                    color:
-                                                    AppColors.Text_Table_COLOR),
-                                              ),
-                                            ),
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment.middle,
-                                          ),
-                                          TableCell(
-                                            child: Center(
-                                              child: Text(
-                                                NumberFormat('###,##0.00').format(
-                                                    provider.monthList.saveAmount -
-                                                        provider.monthList.totalSave),
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: 'Tajawal',
-                                                    color:
-                                                    AppColors.Text_Table_COLOR),
-                                              ),
-                                            ),
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment.middle,
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (BuildContext context) {
-                                                    return CalculateScreen(
-                                                        1,
-                                                        "Saver".tr(),
-                                                        provider.getRemainingAmount() +
-                                                            provider
-                                                                .monthList.saveAmount,
-                                                        provider.getRemainingAmount() +
-                                                            provider.monthList
-                                                                .saveAmount -
-                                                            provider
-                                                                .getRemainingAmount() +
-                                                            provider
-                                                                .monthList.totalSave,
-                                                        true,"Expenses");
-                                                  }).then((value) {
-                                                //TODO: show yes no to add reminder amount to save amount
-                                                if (value == null) {
-                                                } else if ((double.parse(value) +
-                                                    provider
-                                                        .monthList.totalSave) >
-                                                    provider.monthList.saveAmount) {
-                                                  final snackBar = SnackBar(
-                                                      backgroundColor:
-                                                      AppColors.Snack_Bar_COLOR,
-                                                      content: Text(
-                                                        'The allowance exceeded the residual value of this item'
-                                                            .tr(),
-                                                        textAlign: TextAlign.center,
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            fontFamily: "Segoe UI"),
-                                                      ));
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(snackBar);
-                                                } else {
-                                                  showToast();
-                                                  //  timerSnackbar(
-                                                  //    context: context,
-                                                  //    contentText: "A snackbar with live timer.",
-                                                  //    afterTimeExecute: () => print("Operation Execute."),
-                                                  //    second: 1,
-                                                  //  );
-                                                  provider.changeTotalSave(value);
-                                                }
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft: Radius.circular(10)),
-                                              ),
+                                            TableCell(
                                               child: Center(
-                                                child: provider.monthList.totalSave ==
-                                                    0
-                                                    ? Text("Enter the value + ".tr(),
+                                                child: Text(
+                                                  NumberFormat('###,##0.00').format(
+                                                      provider.monthList.saveAmount -
+                                                          provider.monthList.totalSave),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontFamily: 'Tajawal',
+                                                      color:
+                                                      AppColors.Text_Table_COLOR),
+                                                ),
+                                              ),
+                                              verticalAlignment:
+                                              TableCellVerticalAlignment.middle,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (BuildContext context) {
+                                                      return CalculateScreen(
+                                                          1,
+                                                          "Saver".tr(),
+                                                          provider.getRemainingAmount() +
+                                                              provider
+                                                                  .monthList.saveAmount,
+                                                          provider.getRemainingAmount() +
+                                                              provider.monthList
+                                                                  .saveAmount -
+                                                              provider
+                                                                  .getRemainingAmount() +
+                                                              provider
+                                                                  .monthList.totalSave,
+                                                          true,"Expenses");
+                                                    }).then((value) {
+                                                  //TODO: show yes no to add reminder amount to save amount
+                                                  if (value == null) {
+                                                  } else if ((double.parse(value) +
+                                                      provider
+                                                          .monthList.totalSave) >
+                                                      provider.monthList.saveAmount) {
+                                                    final snackBar = SnackBar(
+                                                        backgroundColor:
+                                                        AppColors.Snack_Bar_COLOR,
+                                                        content: Text(
+                                                          'The allowance exceeded the residual value of this item'
+                                                              .tr(),
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Colors.white,
+                                                              fontWeight:
+                                                              FontWeight.w500,
+                                                              fontFamily: "Segoe UI"),
+                                                        ));
+                                                    ScaffoldMessenger.of(context)
+                                                        .showSnackBar(snackBar);
+                                                  } else {
+                                                    showToast();
+                                                    //  timerSnackbar(
+                                                    //    context: context,
+                                                    //    contentText: "A snackbar with live timer.",
+                                                    //    afterTimeExecute: () => print("Operation Execute."),
+                                                    //    second: 1,
+                                                    //  );
+                                                    provider.changeTotalSave(value);
+                                                  }
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                      bottomLeft: Radius.circular(10)),
+                                                ),
+                                                child: Center(
+                                                  child: provider.monthList.totalSave ==
+                                                      0
+                                                      ? Text("Enter the value".tr(),
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                          FontWeight.w500,
+                                                          fontFamily: 'Tajawal',
+                                                          color: Colors.red))
+                                                      : Text(
+                                                    NumberFormat('###,##0.00')
+                                                        .format(provider
+                                                        .monthList.totalSave),
+                                                    textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                         fontSize: 13,
                                                         fontWeight:
                                                         FontWeight.w500,
                                                         fontFamily: 'Tajawal',
-                                                        color: Colors.red))
-                                                    : Text(
-                                                  NumberFormat('###,##0.00')
-                                                      .format(provider
-                                                      .monthList.totalSave),
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                      FontWeight.w500,
-                                                      fontFamily: 'Tajawal',
-                                                      color: AppColors
-                                                          .Text_Table_COLOR),
+                                                        color: AppColors
+                                                            .Text_Table_COLOR),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          TableCell(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft: Radius.circular(10)),
-                                              ),
-                                              width:
-                                              MediaQuery.of(context).size.width,
-                                              height: 50,
-                                              child: Center(
-                                                child: Text(
-                                                  (provider.monthList.saveAmount == 0
-                                                      ? 100
-                                                      : provider.monthList
-                                                      .totalSave /
-                                                      provider.monthList
-                                                          .saveAmount *
-                                                      100)
-                                                      .toStringAsFixed(0) +
-                                                      "%",
-                                                  style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontFamily: 'Tajawal',
-                                                      color:
-                                                      AppColors.Text_Table_COLOR),
+                                            TableCell(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                      bottomLeft: Radius.circular(10)),
+                                                ),
+                                                width:
+                                                MediaQuery.of(context).size.width,
+                                                height: 50,
+                                                child: Center(
+                                                  child: Text(
+                                                    (provider.monthList.saveAmount == 0
+                                                        ? 100
+                                                        : provider.monthList
+                                                        .totalSave /
+                                                        provider.monthList
+                                                            .saveAmount *
+                                                        100)
+                                                        .toStringAsFixed(0) +
+                                                        "%",
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontFamily: 'Tajawal',
+                                                        color:
+                                                        AppColors.Text_Table_COLOR),
+                                                  ),
                                                 ),
                                               ),
+                                              verticalAlignment:
+                                              TableCellVerticalAlignment.middle,
                                             ),
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment.middle,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 Container(
@@ -1533,7 +1544,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                             i]
                                                                         .total ==
                                                                     0
-                                                                ? Text("Enter the value + ".tr(),
+                                                                ? Text("Enter the value".tr(),
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             13,
@@ -1727,7 +1738,14 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 5,
+                    ),
+                    Container(
+                      height: 1.0,
+                      color: AppColors.Divider_COLOR,
+                    ),
+                    SizedBox(
+                      height: 20,
                     ),
                     Container(
                       height: 110,

@@ -42,6 +42,9 @@ class UserPreferences {
   bool isVideoInit() {
     return _pref.containsKey(isVideo);
   }
+  bool getIsVideoInit() {
+    return _pref.getBool(isVideo);
+  }
   void saveIsVideo() {
     _pref.setBool(isVideo, true);
   }

@@ -35,7 +35,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               child: Center(
                 child: Image(
                   image: AssetImage(
-                    'assets/images/logos.png',
+                    'assets/images/schedual.png',
                   ),
                   fit: BoxFit.contain,
                   height: 180,

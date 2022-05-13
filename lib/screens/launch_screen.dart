@@ -34,7 +34,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
         child: SizedBox(
                 height: 200,
                 width: 240,
-            child: Image.asset('assets/images/logos.png')),
+            child: Image.asset('assets/images/schedual.png')),
       ),
     );
   }
