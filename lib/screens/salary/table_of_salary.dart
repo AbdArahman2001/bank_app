@@ -848,8 +848,10 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.w500,
                                                         fontFamily: 'Tajawal',
-                                                        color:
-                                                        AppColors.Text_Table_COLOR),
+                                                        color: textColorIfRemindZero(provider.monthList.saveAmount -
+                                                            provider.monthList.totalSave),
+                                                        // AppColors.Text_Table_COLOR,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -864,8 +866,11 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                       fontSize: 13,
                                                       fontWeight: FontWeight.w500,
                                                       fontFamily: 'Tajawal',
-                                                      color:
-                                                      AppColors.Text_Table_COLOR),
+                                                    color: textColorIfRemindZero(provider.monthList.saveAmount -
+                                                        provider.monthList.totalSave),
+                                                      // color:
+                                                      // AppColors.Text_Table_COLOR,
+                                                  ),
                                                 ),
                                               ),
                                               verticalAlignment:
@@ -882,8 +887,11 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                       fontSize: 13,
                                                       fontWeight: FontWeight.w500,
                                                       fontFamily: 'Tajawal',
-                                                      color:
-                                                      AppColors.Text_Table_COLOR),
+                                                    color: textColorIfRemindZero(provider.monthList.saveAmount -
+                                                        provider.monthList.totalSave),
+                                                      // color:
+                                                      // AppColors.Text_Table_COLOR,
+                                                  ),
                                                 ),
                                               ),
                                               verticalAlignment:
@@ -946,13 +954,16 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                 child: Center(
                                                   child: provider.monthList.totalSave ==
                                                       0
-                                                      ? Text("Enter the value".tr(),
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                          FontWeight.w500,
-                                                          fontFamily: 'Tajawal',
-                                                          color: Colors.red))
+                                                      ? Center(
+                                                        child: Text("Enter the value".tr(),
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                            FontWeight.w500,
+                                                            fontFamily: 'Tajawal',
+                                                            color: Colors.red)),
+                                                      )
                                                       : Text(
                                                     NumberFormat('###,##0.00')
                                                         .format(provider
@@ -963,8 +974,11 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                         fontWeight:
                                                         FontWeight.w500,
                                                         fontFamily: 'Tajawal',
-                                                        color: AppColors
-                                                            .Text_Table_COLOR),
+                                                      color: textColorIfRemindZero(provider.monthList.saveAmount -
+                                                          provider.monthList.totalSave),
+                                                        // color: AppColors
+                                                        //     .Text_Table_COLOR,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -993,8 +1007,11 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.w500,
                                                         fontFamily: 'Tajawal',
-                                                        color:
-                                                        AppColors.Text_Table_COLOR),
+                                                      color: textColorIfRemindZero(provider.monthList.saveAmount -
+                                                          provider.monthList.totalSave),
+                                                        // color:
+                                                        // AppColors.Text_Table_COLOR,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1388,7 +1405,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                           : 10),
                                                     ),
                                                     color: i % 2 == 0
-                                                        ? AppColors.bg_COLOR
+                                                        ? AppColors.bg1_COLOR
                                                         : AppColors.bg_COLOR,
                                                   ),
                                                   children: [
@@ -1405,8 +1422,19 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                         .w500,
                                                                 fontFamily:
                                                                     'Tajawal',
-                                                                color: AppColors
-                                                                    .Text_Table_COLOR),
+                                                                color: textColorIfRemindZero(provider
+                                                                    .monthList
+                                                                    .expences[
+                                                                i]
+                                                                    .amount -
+                                                                    provider
+                                                                        .monthList
+                                                                        .expences[
+                                                                    i]
+                                                                        .total),
+                                                                //  color:AppColors
+                                                                //     .Text_Table_COLOR,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -1428,8 +1456,19 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                       .w500,
                                                               fontFamily:
                                                                   'Tajawal',
-                                                              color: AppColors
-                                                                  .Text_Table_COLOR),
+                                                            color: textColorIfRemindZero(provider
+                                                                .monthList
+                                                                .expences[
+                                                            i]
+                                                                .amount -
+                                                                provider
+                                                                    .monthList
+                                                                    .expences[
+                                                                i]
+                                                                    .total),
+                                                              // color: AppColors
+                                                              //     .Text_Table_COLOR
+                                                              ),
                                                         ),
                                                       ),
                                                       verticalAlignment:
@@ -1460,8 +1499,19 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                       .w500,
                                                               fontFamily:
                                                                   'Tajawal',
-                                                              color: AppColors
-                                                                  .Text_Table_COLOR),
+                                                            color: textColorIfRemindZero(provider
+                                                                .monthList
+                                                                .expences[
+                                                            i]
+                                                                .amount -
+                                                                provider
+                                                                    .monthList
+                                                                    .expences[
+                                                                i]
+                                                                    .total),
+                                                              // color: AppColors
+                                                              //     .Text_Table_COLOR,
+                                                          ),
                                                         ),
                                                       ),
                                                       verticalAlignment:
@@ -1562,17 +1612,31 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                             i]
                                                                         .total ==
                                                                     0
-                                                                ? Text("Enter the value".tr(),
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            13,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
-                                                                        fontFamily:
-                                                                            'Tajawal',
-                                                                        color: Colors
-                                                                            .red))
+                                                                ? Center(
+                                                                  child: Text("Enter the value".tr(),
+                                                                      textAlign: TextAlign.center,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              13,
+                                                                          fontWeight:
+                                                                              FontWeight
+                                                                                  .w500,
+                                                                          fontFamily:
+                                                                              'Tajawal',
+                                                                        color: textColorIfRemindZero(provider
+                                                                            .monthList
+                                                                            .expences[
+                                                                        i]
+                                                                            .amount -
+                                                                            provider
+                                                                                .monthList
+                                                                                .expences[
+                                                                            i]
+                                                                                .total),
+                                                                          // color: Colors
+                                                                          //     .red,
+                                                                      )),
+                                                                )
                                                                 : Text(
                                                                     NumberFormat('###,##0.00').format(provider
                                                                         .monthList
@@ -1590,8 +1654,19 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                                 .w500,
                                                                         fontFamily:
                                                                             'Tajawal',
-                                                                        color: AppColors
-                                                                            .Text_Table_COLOR),
+                                                                      color: textColorIfRemindZero(provider
+                                                                          .monthList
+                                                                          .expences[
+                                                                      i]
+                                                                          .amount -
+                                                                          provider
+                                                                              .monthList
+                                                                              .expences[
+                                                                          i]
+                                                                              .total),
+                                                                        // color: AppColors
+                                                                        //     .Text_Table_COLOR,
+                                                                    ),
                                                                   ),
                                                           ),
                                                         ),
@@ -1627,8 +1702,19 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                       .w500,
                                                               fontFamily:
                                                                   'Tajawal',
-                                                              color: AppColors
-                                                                  .Text_Table_COLOR),
+                                                            color: textColorIfRemindZero(provider
+                                                                .monthList
+                                                                .expences[
+                                                            i]
+                                                                .amount -
+                                                                provider
+                                                                    .monthList
+                                                                    .expences[
+                                                                i]
+                                                                    .total),
+                                                              // color: AppColors
+                                                              //     .Text_Table_COLOR,
+                                                          ),
                                                         ),
                                                       ),
                                                       verticalAlignment:
@@ -2366,4 +2452,8 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
   void _closeEndDrawer() {
     Navigator.of(context).pop();
   }
+
+  Color textColorIfRemindZero(double remind){
+    return remind == 0 ? Colors.red : AppColors.Text_Table_COLOR;
+}
 }
