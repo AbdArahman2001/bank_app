@@ -795,7 +795,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
                                               height: 40,
                                               child: Center(
                                                 child: Text(
-                                                  "Enter the savings amount"
+                                                  "Enter the savings"
                                                       .tr(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(

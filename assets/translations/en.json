@@ -114,6 +114,10 @@
   "Previous" : "Previous",
   "Enter the value + " : "Enter the value +",
   "Enter the value" : "Enter the value",
+  "Enter the savings": "Enter the savings",
+  "The remainder": "The remainder",
+  "Enter the expense": "Enter the expense",
+  "The rate": "The rate",
 
   "The amount is extra" : "The amount is extra",
   "There are no other items to carry over the value" : "There are no other items to carry over the value",

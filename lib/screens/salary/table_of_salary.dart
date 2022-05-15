@@ -312,7 +312,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                       color: AppColors.Divider_COLOR.withOpacity(0.31),
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 2),
+                      padding: EdgeInsets.only(left: 12, right: 12, top: 2),
                       child: Column(
                         children: [
                           // SizedBox(
@@ -376,7 +376,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
 
                                 columnWidths: {
                                   0: FlexColumnWidth(2),
-                                  1: FlexColumnWidth(3),
+                                  1: FlexColumnWidth(5),
                                   2: FlexColumnWidth(5),
                                   3: FlexColumnWidth(5),
                                   4: FlexColumnWidth(3),
@@ -425,7 +425,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                       TableCell(
                                         child: Center(
                                           child: Text(
-                                            "The remainder of the savings".tr(),
+                                            "The remainder".tr(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 13,
@@ -440,7 +440,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                       TableCell(
                                         child: Center(
                                           child: Text(
-                                            "Enter the expense amount".tr(),
+                                            "Enter the savings".tr(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 13,
@@ -455,7 +455,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                       TableCell(
                                         child: Center(
                                           child: Text(
-                                            "Exchange rate".tr(),
+                                            "The rate".tr(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 13,
@@ -790,11 +790,11 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: 16, top: 4),
+                      padding: EdgeInsets.only(left: 12, top: 4),
                       child: Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(right: 16),
+                            padding: EdgeInsets.only(right: 12),
                             child: Row(
                               children: [
                                 Expanded(
@@ -803,15 +803,15 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                       border: Border.all(
                                           color: AppColors.Border_COLOR),
                                       borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          topRight: Radius.circular(10),
+                                          // topLeft: Radius.circular(10),
+                                          // topRight: Radius.circular(10),
                                           bottomRight: Radius.circular(10),
                                           bottomLeft: Radius.circular(10)),
                                     ),
                                     child: Table(
                                       columnWidths: {
                                         0: FlexColumnWidth(2),
-                                        1: FlexColumnWidth(3),
+                                        1: FlexColumnWidth(5),
                                         2: FlexColumnWidth(5),
                                         3: FlexColumnWidth(5),
                                         4: FlexColumnWidth(3),
@@ -1008,7 +1008,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                   ),
                                 ),
 
-                                Container(
+                                Padding(
                                   padding: EdgeInsets.only(left: 3,right: 3),
                                   child: Column(children: [
                                     // for (int i = 0;
@@ -1017,7 +1017,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                     //         .length;
                                     // i++)
                                       SizedBox(
-                                        height: 40,
+                                        height: 50,
                                         width: MediaQuery.of(context)
                                             .size
                                             .width /
@@ -1109,7 +1109,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                     ),
 
                     Container(
-                      padding: EdgeInsets.only(left: 16, top: 4, right: 16),
+                      padding: EdgeInsets.only(left: 12, top: 4, right: 12),
                       child: Column(
                         children: [
                           Container(
@@ -1153,7 +1153,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                   ),
                                   columnWidths: {
                                     0: FlexColumnWidth(2),
-                                    1: FlexColumnWidth(3),
+                                    1: FlexColumnWidth(5),
                                     2: FlexColumnWidth(5),
                                     3: FlexColumnWidth(5),
                                     4: FlexColumnWidth(3),
@@ -1188,7 +1188,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                         TableCell(
                                           child: Center(
                                             child: Text(
-                                              "The expenses".tr(),
+                                              "Expenses".tr(),
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontSize: 13,
@@ -1203,7 +1203,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                         TableCell(
                                           child: Center(
                                             child: Text(
-                                              "The remainder of the expense".tr(),
+                                              "The remainder".tr(),
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontSize: 13,
@@ -1217,7 +1217,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                         ),
                                         TableCell(
                                           child: Text(
-                                            "Enter the expense amount".tr(),
+                                            "Enter the expense".tr(),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 13,
@@ -1277,7 +1277,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                         TableCell(
                                           child: Center(
                                             child: Text(
-                                              "Exchange rate".tr(),
+                                              "The rate".tr(),
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontSize: 13,
@@ -1298,7 +1298,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                 padding: EdgeInsets.only(left: 3,right: 3),
                                 child: Column(children: [
                                   SizedBox(
-                                    height: 40,
+                                    height: 50,
                                     width: MediaQuery.of(context).size.width / 20,
                                     child: Center(
                                       child: Container(),
@@ -1316,12 +1316,11 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.only(left: 16, top: 4),
+                              padding: EdgeInsets.only(left: 12, top: 4),
                               child: Column(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.only(right: 16),
-
+                                    padding: EdgeInsets.only(right: 12),
                                     // padding: EdgeInsets.only(left: 16, right: 16, top: 8),
                                     child: Row(
                                       children: [
@@ -1350,11 +1349,13 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                 bottomRight:
                                                     Radius.circular(10),
                                                 bottomLeft: Radius.circular(10),
+
                                               ),
+
                                             ),
                                             columnWidths: {
                                               0: FlexColumnWidth(2),
-                                              1: FlexColumnWidth(3),
+                                              1: FlexColumnWidth(5),
                                               2: FlexColumnWidth(5),
                                               3: FlexColumnWidth(5),
                                               4: FlexColumnWidth(3),
@@ -1367,13 +1368,33 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                   i++)
                                                 TableRow(
                                                   decoration: BoxDecoration(
-                                                    color:
-                                                        AppColors.App_Bar_COLOR,
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      bottomRight: Radius.circular(i <
+                                                          provider
+                                                              .monthList
+                                                              .expences
+                                                              .length -
+                                                              1
+                                                          ? 0
+                                                          : 10),
+                                                      bottomLeft: Radius.circular(i <
+                                                          provider
+                                                              .monthList
+                                                              .expences
+                                                              .length -
+                                                              1
+                                                          ? 0
+                                                          : 10),
+                                                    ),
+                                                    color: i % 2 == 0
+                                                        ? AppColors.bg_COLOR
+                                                        : AppColors.bg_COLOR,
                                                   ),
                                                   children: [
                                                     TableCell(
                                                       child: SizedBox(
-                                              height: 50,
+                                                        height: 50,
                                                         child: Center(
                                                           child: Text(
                                                             (i + 1).toString(),
@@ -1619,21 +1640,21 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                             ],
                                           ),
                                         ),
-                                        Container(
+                                        Padding(
                                           padding: EdgeInsets.only(left: 3,right: 3),
                                           child: Column(children: [
                                             for (int i = 0;
-                                                i <
-                                                    provider.monthList.expences
-                                                        .length;
-                                                i++)
-                                              SizedBox(
-                                                height: 40,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    20,
-                                                child: Center(
+                                            i <
+                                                provider.monthList.expences
+                                                    .length;
+                                            i++)
+                                            SizedBox(
+                                              height: 50,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                                  20,
+                                              child: Center(
                                                   child: GestureDetector(
                                                     onTap: () {
                                                       showDialog(
