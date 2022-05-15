@@ -256,16 +256,21 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      "Enter your total monthly income".tr(),
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: "Segoe UI",
-                                        color: Colors.black,
+                                    Expanded(
+                                      child: Text(
+                                        "Enter your total monthly income".tr(),
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: "Segoe UI",
+                                          color: Colors.black,
+                                        ),
                                       ),
                                     ),
-                                    Spacer(),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    // Spacer(),
                                     GestureDetector(
                                       onTap: () {
                                         showDialog(
@@ -323,7 +328,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
                                           ),
                                           Container(
                                             height: 29,
-                                            width: 93,
+                                            width: 100,
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(5),
@@ -338,9 +343,10 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
                                               child: provider.monthList
                                                           .salaryAmount ==
                                                       0
-                                                  ? Flexible(
+                                                  ? Center(
                                                     child: Text(
                                                         "Enter the value + ".tr(),
+                                                        textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:
@@ -444,7 +450,7 @@ class _MonthlyIncomeScreenState extends State<MonthlyIncomeScreen>
                                           ),
                                           Container(
                                             height: 29,
-                                            width: 93,
+                                            width: 100,
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(5),
