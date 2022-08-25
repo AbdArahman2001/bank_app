@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:pay/pay.dart';
 
 import '../utlies/app_colors.dart';
 
@@ -66,27 +65,27 @@ class _GooglePaymentScreenState extends State<GooglePaymentScreen> {
                   packagesGroupValue = value;
                   setState(() {});
                 }),
-            GooglePayButton(
-              width: 200,
-              height: 50,
-              paymentConfigurationAsset: "json/google_payment_profile.json",
-              paymentItems: [
-                PaymentItem(
-                    amount: "0.0",
-                    label: "label",
-                    type: PaymentItemType.item,
-                    status: PaymentItemStatus.final_price)
-              ],
-              style: GooglePayButtonStyle.flat,
-              type: GooglePayButtonType.pay,
-              margin: const EdgeInsets.only(top: 15.0),
-              onPaymentResult: (result) {
-                print("payment result: $result");
-              },
-              loadingIndicator: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            )
+            // GooglePayButton(
+            //   width: 200,
+            //   height: 50,
+            //   paymentConfigurationAsset: "json/google_payment_profile.json",
+            //   paymentItems: [
+            //     PaymentItem(
+            //         amount: "0.0",
+            //         label: "label",
+            //         type: PaymentItemType.item,
+            //         status: PaymentItemStatus.final_price)
+            //   ],
+            //   style: GooglePayButtonStyle.flat,
+            //   type: GooglePayButtonType.pay,
+            //   margin: const EdgeInsets.only(top: 15.0),
+            //   onPaymentResult: (result) {
+            //     print("payment result: $result");
+            //   },
+            //   loadingIndicator: const Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            // )
           ],
         ),
       ),

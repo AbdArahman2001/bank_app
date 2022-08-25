@@ -125,7 +125,7 @@ class DropDownField extends FormField<String> {
                   textAlign: TextAlign.start,
                   autofocus: false,
                   obscureText: false,
-                  maxLengthEnforced: true,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   maxLines: 1,
                   validator: (String newValue) {
                     if (required) {

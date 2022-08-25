@@ -65,130 +65,130 @@ class DropDownField extends FormField<String> {
 
   DropDownField(
       {Key key,
-        this.controller,
-        this.value,
-        this.required: false,
-        this.icon,
-        this.hintText,
-        this.hintStyle: const TextStyle(
-            fontWeight: FontWeight.normal, color: Colors.grey, fontSize: 18.0),
-        this.labelText,
-        this.labelStyle: const TextStyle(
-            fontWeight: FontWeight.normal, color: Colors.grey, fontSize: 18.0),
-        this.inputFormatters,
-        this.items,
-        this.textStyle: const TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.black, fontSize: 14.0),
-        this.setter,
-        this.onValueChanged,
-        this.itemsVisibleInDropdown: 3,
-        this.enabled: true,
-        this.strict: true})
+      this.controller,
+      this.value,
+      this.required: false,
+      this.icon,
+      this.hintText,
+      this.hintStyle: const TextStyle(
+          fontWeight: FontWeight.normal, color: Colors.grey, fontSize: 18.0),
+      this.labelText,
+      this.labelStyle: const TextStyle(
+          fontWeight: FontWeight.normal, color: Colors.grey, fontSize: 18.0),
+      this.inputFormatters,
+      this.items,
+      this.textStyle: const TextStyle(
+          fontWeight: FontWeight.bold, color: Colors.black, fontSize: 14.0),
+      this.setter,
+      this.onValueChanged,
+      this.itemsVisibleInDropdown: 3,
+      this.enabled: true,
+      this.strict: true})
       : super(
-    key: key,
-    // autovalidate: false,
-    initialValue: controller != null ? controller.text : (value ?? ''),
-    onSaved: setter,
-    builder: (FormFieldState<String> field) {
-      final DropDownFieldState state = field;
-      final ScrollController _scrollController = ScrollController();
-      final InputDecoration effectiveDecoration = InputDecoration(
-          border: InputBorder.none,
-          filled: true,
-          // icon: icon,
-          // suffixIcon: IconButton(
-          //     icon: Icon(Icons.arrow_drop_down,
-          //         size: 30.0, color: Colors.black),
-          //     onPressed: () {
-          //       SystemChannels.textInput.invokeMethod('TextInput.hide');
-          //       state.setState(() {
-          //         state._showdropdown = !state._showdropdown;
-          //       });
-          //     }),
-          hintStyle: hintStyle,
-          labelStyle: labelStyle,
-          hintText: hintText,
-          labelText: labelText);
+          key: key,
+          // autovalidate: false,
+          initialValue: controller != null ? controller.text : (value ?? ''),
+          onSaved: setter,
+          builder: (FormFieldState<String> field) {
+            final DropDownFieldState state = field;
+            final ScrollController _scrollController = ScrollController();
+            final InputDecoration effectiveDecoration = InputDecoration(
+                border: InputBorder.none,
+                filled: true,
+                // icon: icon,
+                // suffixIcon: IconButton(
+                //     icon: Icon(Icons.arrow_drop_down,
+                //         size: 30.0, color: Colors.black),
+                //     onPressed: () {
+                //       SystemChannels.textInput.invokeMethod('TextInput.hide');
+                //       state.setState(() {
+                //         state._showdropdown = !state._showdropdown;
+                //       });
+                //     }),
+                hintStyle: hintStyle,
+                labelStyle: labelStyle,
+                hintText: hintText,
+                labelText: labelText);
 
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: TextFormField(
-                  onTap: (){
-                    state.setState(() {
-                      // state._showdropdown = !state._showdropdown;
-                    });
-                  },
-                  // autovalidate: true,
-                  controller: state._effectiveController,
-                  decoration: effectiveDecoration.copyWith(
-                      errorText: field.errorText),
-                  style: textStyle,
-                  textAlign: TextAlign.start,
-                  autofocus: false,
-                  obscureText: false,
-                  maxLengthEnforced: true,
-                  maxLines: 1,
-                  validator: (String newValue) {
-                    if (required) {
-                      if (newValue == null || newValue.isEmpty)
-                        return 'This field cannot be empty!';
-                    }
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextFormField(
+                        onTap: () {
+                          state.setState(() {
+                            // state._showdropdown = !state._showdropdown;
+                          });
+                        },
+                        // autovalidate: true,
+                        controller: state._effectiveController,
+                        decoration: effectiveDecoration.copyWith(
+                            errorText: field.errorText),
+                        style: textStyle,
+                        textAlign: TextAlign.start,
+                        autofocus: false,
+                        obscureText: false,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                        maxLines: 1,
+                        validator: (String newValue) {
+                          if (required) {
+                            if (newValue == null || newValue.isEmpty)
+                              return 'This field cannot be empty!';
+                          }
 
-                    //Items null check added since there could be an initial brief period of time
-                    //when the dropdown items will not have been loaded
-                    if (items != null) {
-                      if (strict &&
-                          newValue.isNotEmpty &&
-                          !items.contains(newValue))
-                        return 'Invalid value in this field!';
-                    }
+                          //Items null check added since there could be an initial brief period of time
+                          //when the dropdown items will not have been loaded
+                          if (items != null) {
+                            if (strict &&
+                                newValue.isNotEmpty &&
+                                !items.contains(newValue))
+                              return 'Invalid value in this field!';
+                          }
 
-                    return null;
-                  },
-                  onSaved: setter,
-                  enabled: enabled,
-                  inputFormatters: inputFormatters,
+                          return null;
+                        },
+                        onSaved: setter,
+                        enabled: enabled,
+                        inputFormatters: inputFormatters,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        if (!enabled) return;
+                        state.clearValue();
+                      },
+                    )
+                  ],
                 ),
-              ),
-              IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  if (!enabled) return;
-                  state.clearValue();
-                },
-              )
-            ],
-          ),
-          // !state._showdropdown
-          //     ? Container()
-          //     :
-      Container(
-            alignment: Alignment.topCenter,
-            // height: itemsVisibleInDropdown *
-            //     48.0, //limit to default 3 items in dropdownlist view and then remaining scrolls
-        height: MediaQuery.of(field.context).size.height - 200,
-        width: MediaQuery.of(field.context).size.width,
-            child: ListView(
-              cacheExtent: 0.0,
-              scrollDirection: Axis.vertical,
-              controller: _scrollController,
-              padding: EdgeInsets.only(left: 40.0),
-              children: items.isNotEmpty
-                  ? ListTile.divideTiles(
-                  context: field.context,
-                  tiles: state._getChildren(state._items))
-                  .toList()
-                  : List(),
-            ),
-          ),
-        ],
-      );
-    },
-  );
+                // !state._showdropdown
+                //     ? Container()
+                //     :
+                Container(
+                  alignment: Alignment.topCenter,
+                  // height: itemsVisibleInDropdown *
+                  //     48.0, //limit to default 3 items in dropdownlist view and then remaining scrolls
+                  height: MediaQuery.of(field.context).size.height - 200,
+                  width: MediaQuery.of(field.context).size.width,
+                  child: ListView(
+                    cacheExtent: 0.0,
+                    scrollDirection: Axis.vertical,
+                    controller: _scrollController,
+                    padding: EdgeInsets.only(left: 40.0),
+                    children: items.isNotEmpty
+                        ? ListTile.divideTiles(
+                                context: field.context,
+                                tiles: state._getChildren(state._items))
+                            .toList()
+                        : List(),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
 
   @override
   DropDownFieldState createState() => DropDownFieldState();
