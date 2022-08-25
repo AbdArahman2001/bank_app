@@ -1,8 +1,8 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/values_relay_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../providers/home_provider.dart';
+import '../../../screens/custom_screen/calculate_screen.dart';
+import '../../../screens/custom_screen/close_button_custom.dart';
+import '../../../screens/custom_screen/values_relay_custom.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -166,6 +166,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                       canvasColor: AppColors.Back_Ground_COLOR,
                                     ),
                                     child: DropdownButton<String>(
+                                      underline: SizedBox.shrink(),
                                       items: _currencies
                                           .where((element) => ( element[1] == 'Choose item name'.tr() ||
                                               element[1] !=
@@ -464,6 +465,7 @@ class _FinancialRelayCustomState extends State<FinancialRelayCustom> {
                                       canvasColor: AppColors.Back_Ground_COLOR,
                                     ),
                                     child: DropdownButton<String>(
+                                      underline: SizedBox.shrink(),
                                       items: _currencies
                                           .where((element) => element[1] == 'Choose item name'.tr() ||
                                               element !=

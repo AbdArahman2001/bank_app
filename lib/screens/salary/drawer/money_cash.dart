@@ -1,7 +1,7 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../providers/home_provider.dart';
+import '../../../screens/custom_screen/calculate_screen.dart';
+import '../../../screens/custom_screen/close_button_custom.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +15,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
   List<String> expences;
 
   List<String> _currencies = [
+    "Choose item name".tr(),
     "Saver".tr(),
   ];
   double _addedValue = 0.0;
@@ -255,6 +256,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                                 canvasColor: AppColors.Back_Ground_COLOR,
                               ),
                               child: DropdownButton<String>(
+                                underline: SizedBox.shrink(),
                                 items: _currencies
                                     .asMap()
                                     .map((i, String dropDownStringItem) {
@@ -269,7 +271,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                                                   fontSize: 14,
                                                   fontFamily: "Segoe UI",
                                                   fontWeight: FontWeight.w600,
-                                                  color: AppColors.Drawer_COLOR,
+                                                  color: AppColors.Remove_COLOR,
                                                 ),
                                               ),
                                               Text(
@@ -278,7 +280,7 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                                                   fontSize: 14,
                                                   fontFamily: "Segoe UI",
                                                   fontWeight: FontWeight.w600,
-                                                  color: AppColors.Drawer_COLOR,
+                                                  color: AppColors.Remove_COLOR,
                                                 ),
                                               ),
                                               SizedBox(
@@ -290,9 +292,10 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                                                   fontSize: 14,
                                                   fontFamily: "Segoe UI",
                                                   fontWeight: FontWeight.w600,
-                                                  color: AppColors.Drawer_COLOR,
+                                                  color: AppColors.Remove_COLOR,
                                                 ),
                                               ),
+                                              SizedBox(width: 5,)
                                             ]),
                                           ));
                                     })
@@ -300,9 +303,11 @@ class _MoneyCashDialogState extends State<MoneyCashDialog> {
                                     .toList(),
                                 onChanged: (String newValueSelected) {
                                   setState(() {
+                                    print("-------- $newValueSelected");
                                     int parsed = int.tryParse(newValueSelected);
-                                    this._currentItemSelected1 =
-                                        parsed != null ? parsed : 0;
+                                    print("-------- $parsed");
+                                    this._currentItemSelected1 = parsed;
+
                                   });
                                 },
                                 value: _currentItemSelected1.toString(),

@@ -1,5 +1,5 @@
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../screens/custom_screen/close_button_custom.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:flutter/material.dart';
 
 enum SingingCharacter { Yes, No }

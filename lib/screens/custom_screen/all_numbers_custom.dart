@@ -1,9 +1,10 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/custom_screen/numbers_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
-import 'package:easy_localization/src/public_ext.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart' as EasyLocalization;
+import '../../providers/home_provider.dart';
+import '../../utlies/app_colors.dart';
+import 'numbers_custom.dart';
 
 class AllNumbersCustom extends StatelessWidget {
   HomeProvider provider;
@@ -175,6 +176,7 @@ class AllNumbersCustom extends StatelessWidget {
                       // Expanded(child: Numbers_Custom("-", () => provider.addOp("-"))),
                       Expanded(
                         child: GestureDetector(
+                          onLongPress: provider.clearNumber,
                           onTap: () {
                             provider.clearOnesNumber();
                           },

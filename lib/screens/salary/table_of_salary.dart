@@ -1,15 +1,14 @@
 import 'dart:ui' as ui;
 
-import 'package:bank_app_flutter/prefs/UserPreferences.dart';
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/app_drawer.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../prefs/UserPreferences.dart';
+import '../../../providers/home_provider.dart';
+import '../../../screens/cards/monthly_income_screen.dart';
+import '../../../screens/custom_screen/calculate_screen.dart';
+import '../../../screens/salary/drawer/app_drawer.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'drawer/financial_relay_custom.dart';
 import 'drawer/money_cash.dart';
 import 'drawer/statistics.dart';
@@ -1623,18 +1622,18 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                                                                                   .w500,
                                                                           fontFamily:
                                                                               'Tajawal',
-                                                                        color: textColorIfRemindZero(provider
-                                                                            .monthList
-                                                                            .expences[
-                                                                        i]
-                                                                            .amount -
-                                                                            provider
-                                                                                .monthList
-                                                                                .expences[
-                                                                            i]
-                                                                                .total),
-                                                                          // color: Colors
-                                                                          //     .red,
+                                                                        // color: textColorIfRemindZero(provider
+                                                                        //     .monthList
+                                                                        //     .expences[
+                                                                        // i]
+                                                                        //     .amount -
+                                                                        //     provider
+                                                                        //         .monthList
+                                                                        //         .expences[
+                                                                        //     i]
+                                                                        //         .total),
+                                                                          color: Colors
+                                                                              .red,
                                                                       )),
                                                                 )
                                                                 : Text(
@@ -1960,7 +1959,8 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
                               ),
                             ),
                           ),
-                          Expanded(
+                        // TODO Financial deportation
+                        /*  Expanded(
                             child: GestureDetector(
                               onTap: () async{
                                 // Navigator.pop(context);
@@ -2039,7 +2039,7 @@ class _TableOfSaralyScreenState extends State<TableOfSaralyScreen> {
 
                               ),
                             ),
-                          ),
+                          ),*/
                           Expanded(
                             child: GestureDetector(
                               onTap: () async{

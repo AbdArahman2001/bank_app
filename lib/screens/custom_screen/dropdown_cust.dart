@@ -125,7 +125,7 @@ class DropDownField extends FormField<String> {
                   textAlign: TextAlign.start,
                   autofocus: false,
                   obscureText: false,
-                  maxLengthEnforced: true,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
                   maxLines: 1,
                   validator: (String newValue) {
                     if (required) {
@@ -290,7 +290,7 @@ class DropDownFieldState extends FormFieldState<String> {
     // In the case where a controller has been passed in to this widget, we
     // register this change listener. In these cases, we'll also receive change
     // notifications for changes originating from within this class -- for
-    // example, the reset() method. In such cases, the FormField value will
+    // mushari, the reset() method. In such cases, the FormField value will
     // already have been set.
     if (_effectiveController.text != value)
       didChange(_effectiveController.text);

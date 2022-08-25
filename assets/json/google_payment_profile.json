@@ -1,0 +1,45 @@
+{
+  "provider": "google_pay",
+  "data": {
+    "environment": "Test",
+    "apiVersion": 2,
+    "apiVersionMinor": 0,
+    "allowedPaymentMethods": [
+      {
+        "type": "CARD",
+        "tokenizationSpecification": {
+          "type": "PAYMENT_GATEWAY",
+          "parameters": {
+            "gateway": "stripe",
+            "gatewayMerchantId": "mushari19941@gmail.com"
+          }
+        },
+        "parameters": {
+          "allowedCardNetworks": [
+            "VISA",
+            "MASTERCARD",
+            "AMEX",
+            "DISCOVER"
+          ],
+          "allowedAuthMethods": [
+            "PAN_ONLY",
+            "CRYPTOGRAM_3DS"
+          ],
+          "billingAddressRequired": true,
+          "billingAddressParameters": {
+            "format": "FULL",
+            "phoneNumberRequired": true
+          }
+        }
+      }
+    ],
+    "merchantInfo": {
+      "merchantId": "BCR2DN4TXTYY7SLX",
+      "merchantName": "Mushari ALZAhrani"
+    },
+    "transactionInfo": {
+      "countryCode": "US",
+      "currencyCode": "USD"
+    }
+  }
+}

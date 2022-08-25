@@ -1,7 +1,7 @@
-import 'package:bank_app_flutter/screens/custom_screen/add_remove_calculate.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/yes_no_custom_dialog.dart';
-import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../screens/custom_screen/add_remove_calculate.dart';
+import '../../../screens/salary/drawer/yes_no_custom_dialog.dart';
+import '../../../screens/salary/table_of_salary.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';

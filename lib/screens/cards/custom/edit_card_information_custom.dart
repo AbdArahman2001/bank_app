@@ -1,8 +1,10 @@
-import 'package:bank_app_flutter/screens/cards/custom/text_form_feild_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/star_red_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../screens/cards/custom/text_form_feild_custom.dart';
+
+import '../../../utlies/app_colors.dart';
+import '../../custom_screen/star_red_custom.dart';
 
 class EditCardInformationCustom extends StatefulWidget {
   @override

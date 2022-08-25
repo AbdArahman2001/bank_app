@@ -1,4 +1,4 @@
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../utlies/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TypeAddOrRemoveCustom extends StatelessWidget {

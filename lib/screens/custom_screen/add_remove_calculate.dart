@@ -1,12 +1,14 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/custom_screen/all_numbers_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/custom_button.dart';
-import 'package:bank_app_flutter/screens/custom_screen/star_red_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/type_add_or_remove_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+
 import 'package:flutter/material.dart';
+import '../../../screens/custom_screen/star_red_custom.dart';
+import '../../../screens/custom_screen/type_add_or_remove_custom.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/home_provider.dart';
+import '../../utlies/app_colors.dart';
+import 'all_numbers_custom.dart';
+import 'close_button_custom.dart';
+import 'custom_button.dart';
 
 class AddRemoveCalculate extends StatelessWidget {
   String text;

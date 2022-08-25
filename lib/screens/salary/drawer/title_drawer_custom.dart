@@ -1,10 +1,10 @@
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TitleDrawerCustom extends StatelessWidget {
-  String text;
-  Image imageicon;
-  Function function;
+  final String text;
+ final Image imageicon;
+  final Function function;
 
    TitleDrawerCustom({
     this.text,

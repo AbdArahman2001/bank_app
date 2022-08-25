@@ -1,21 +1,25 @@
-import 'package:bank_app_flutter/prefs/UserPreferences.dart';
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/calender_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/video_story.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/money_cash.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/statistics.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/title_drawer_custom.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/yes_no_new_month_dialog.dart';
-import 'package:bank_app_flutter/screens/video.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import 'package:bank/screens/salary/test_subscription_screen.dart';
+import 'package:bank/screens/subscription_screen.dart';
+
+import '../../../providers/home_provider.dart';
+import '../../../screens/cards/monthly_income_screen.dart';
+import '../../../screens/custom_screen/calender_custom.dart';
+import '../../../screens/custom_screen/close_button_custom.dart';
+import '../../../screens/custom_screen/video_story.dart';
+import '../../../screens/salary/drawer/money_cash.dart';
+import '../../../screens/salary/drawer/statistics.dart';
+import '../../../screens/salary/drawer/title_drawer_custom.dart';
+import '../../../screens/salary/drawer/yes_no_new_month_dialog.dart';
+import '../../../screens/video.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../account_info.dart';
+import '../../purchase_screen.dart';
 import 'financial_relay_custom.dart';
 import 'financial_status_update_dialog.dart';
 
@@ -350,6 +354,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     SizedBox(
                       height: 10,
                     ),
+                    TitleDrawerCustom(
+                      function: () => Navigator.of(context).pushNamed(AccountInfo.routeName),
+                      text: "account_info".tr(),
+                      imageicon: Image(
+                        color: AppColors.Drawer_COLOR,
+                        image: AssetImage('assets/images/account.png'),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       margin: EdgeInsets.only(left: 10, right: 10),
                       decoration: BoxDecoration(
@@ -378,7 +393,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               ),
                               onTap: () {
                                 Share.share(
-                                    "https://play.google.com/store/apps/details?id=com.mushari.gadwalratbak");
+                                    "https://play.google.com/store/apps/details?id=com.mushari.bank");
                               },
                             ),
                             SizedBox(
@@ -459,6 +474,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             SizedBox(
               height: 25,
             ),
+
           ],
         );
       }),

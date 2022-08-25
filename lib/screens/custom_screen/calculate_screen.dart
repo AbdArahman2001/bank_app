@@ -1,13 +1,15 @@
 import 'dart:ui' as ui;
 
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/custom_screen/all_numbers_custom.dart';
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/home_provider.dart';
+import '../../utlies/app_colors.dart';
+import 'all_numbers_custom.dart';
+import 'close_button_custom.dart';
 
 class CalculateScreen extends StatefulWidget {
   String index;
@@ -279,12 +281,12 @@ class _CalculateScreenState extends State<CalculateScreen> {
 }
 
 /// dialog ///
-/// import 'package:bank_app_flutter/providers/home_provider.dart';
-// import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
-// import 'package:bank_app_flutter/screens/custom_screen/all_numbers_custom.dart';
-// import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-// import 'package:bank_app_flutter/screens/custom_screen/custom_button.dart';
-// import 'package:bank_app_flutter/utlies/app_colors.dart';
+/// import 'package:bank/providers/home_provider.dart';
+// import 'package:bank/screens/cards/monthly_income_screen.dart';
+// import 'package:bank/screens/custom_screen/all_numbers_custom.dart';
+// import 'package:bank/screens/custom_screen/close_button_custom.dart';
+// import 'package:bank/screens/custom_screen/custom_button.dart';
+// import 'package:bank/utlies/app_colors.dart';
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 //

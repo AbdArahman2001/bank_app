@@ -1,5 +1,5 @@
-import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../screens/salary/table_of_salary.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 

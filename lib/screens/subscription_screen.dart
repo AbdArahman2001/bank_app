@@ -1,23 +1,27 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../providers/home_provider.dart';
+import '../../../screens/subscription_success.dart';
 import 'package:pay/pay.dart';
+import 'package:provider/provider.dart';
 
+import '../model/app_user.dart';
 import '../utlies/app_colors.dart';
 
-enum Packages { Monthly, Yearly, Absolute }
 
-class GooglePaymentScreen extends StatefulWidget {
-  static const routeName = "google_payment";
 
-  GooglePaymentScreen({Key key}) : super(key: key);
+class SubscriptionScreen extends StatefulWidget {
+  static const routeName = "subscription_screen";
+
+  SubscriptionScreen({Key key}) : super(key: key);
 
   @override
-  State<GooglePaymentScreen> createState() => _GooglePaymentScreenState();
+  State<SubscriptionScreen> createState() => _SubscriptionScreenState();
 }
 
-class _GooglePaymentScreenState extends State<GooglePaymentScreen> {
-  Packages packagesGroupValue = Packages.Monthly;
+class _SubscriptionScreenState extends State<SubscriptionScreen> {
+  SubscriptionPackage packagesGroupValue = SubscriptionPackage.Month;
 
   @override
   Widget build(BuildContext context) {
@@ -41,55 +45,118 @@ class _GooglePaymentScreenState extends State<GooglePaymentScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("free period was finish".tr()),
-            RadioListTile(
-                title: Text("Month"),
-                value: Packages.Monthly,
-                groupValue: packagesGroupValue,
-                onChanged: (value) {
-                  packagesGroupValue = value;
-                  setState(() {});
-                }),
-            RadioListTile(
-                title: Text("Year"),
-                value: Packages.Yearly,
-                groupValue: packagesGroupValue,
-                onChanged: (value) {
-                  packagesGroupValue = value;
-                  setState(() {});
-                }),
-            RadioListTile(
-                title: Text("Always"),
-                value: Packages.Absolute,
-                groupValue: packagesGroupValue,
-                onChanged: (value) {
-                  packagesGroupValue = value;
-                  setState(() {});
-                }),
-            GooglePayButton(
-              width: 200,
-              height: 50,
-              paymentConfigurationAsset: "json/google_payment_profile.json",
-              paymentItems: [
-                PaymentItem(
-                    amount: "0.0",
-                    label: "label",
-                    type: PaymentItemType.item,
-                    status: PaymentItemStatus.final_price)
-              ],
-              style: GooglePayButtonStyle.flat,
-              type: GooglePayButtonType.pay,
-              margin: const EdgeInsets.only(top: 15.0),
-              onPaymentResult: (result) {
-                print("payment result: $result");
-              },
-              loadingIndicator: const Center(
-                child: CircularProgressIndicator(),
+            Text(
+              // TODO change it
+              //"hello",
+            "free period was finish".tr(),
+            // Provider.of<HomeProvider>(context).currentUser.subscriptionDate == null? "free period was finish".tr():"subscription expired".tr(),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontFamily: "Segoe UI",
+                fontWeight: FontWeight.bold,
               ),
-            )
+            ),
+            RadioListTile(
+              title: Text(
+                "month_subscription".tr(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: "Segoe UI",
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              value: SubscriptionPackage.Month,
+              groupValue: packagesGroupValue,
+              onChanged: choosePackage,
+            ),
+            RadioListTile(
+              title: Text(
+                "year_subscription".tr(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: "Segoe UI",
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              value: SubscriptionPackage.Year,
+              groupValue: packagesGroupValue,
+              onChanged: choosePackage,
+            ),
+            RadioListTile(
+              title: Text("forever_subscription".tr(),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: "Segoe UI",
+                    fontWeight: FontWeight.w600,
+                  )),
+              value: SubscriptionPackage.Forever,
+              groupValue: packagesGroupValue,
+              onChanged: choosePackage,
+            ),
+            Platform.isAndroid
+                ? GooglePayButton(
+                    width: 200,
+                    height: 50,
+                    paymentConfigurationAsset:
+                        "json/google_payment_profile.json",
+                    paymentItems: [
+                      PaymentItem(
+                          amount: packagesGroupValue.getAmount().toString(),
+                          label: packagesGroupValue.getLabel(),
+                          type: PaymentItemType.item,
+                          status: PaymentItemStatus.final_price)
+                    ],
+                    style: GooglePayButtonStyle.white,
+                    type: GooglePayButtonType.pay,
+                    margin: const EdgeInsets.only(top: 15.0),
+                    onPaymentResult: (result) {
+                      print("payment result: $result");
+                      Navigator.of(context).pushReplacementNamed(SubscriptionSuccess.routeName);
+                    },
+                    loadingIndicator: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : ApplePayButton(
+                    width: 200,
+                    height: 50,
+                    paymentConfigurationAsset:
+                        "json/apple_payment_profile.json",
+                    paymentItems: [
+                      PaymentItem(
+                          amount: packagesGroupValue.getAmount().toString(),
+                          label: packagesGroupValue.getLabel(),
+                          type: PaymentItemType.item,
+                          status: PaymentItemStatus.final_price)
+                    ],
+                    style: ApplePayButtonStyle.black,
+                    type: ApplePayButtonType.buy,
+                    margin: const EdgeInsets.only(top: 15.0),
+                    onPaymentResult: (result) {
+                      print("payment result: $result");
+                    },
+                    loadingIndicator: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
           ],
         ),
       ),
     );
   }
+
+  choosePackage(SubscriptionPackage package) {
+    packagesGroupValue = package;
+    setState(() {});
+  }
+  void test(){
+
+  }
 }
+
+
+

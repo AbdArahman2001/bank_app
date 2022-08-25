@@ -1,9 +1,9 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/home_provider.dart';
 import 'dropdown_custom.dart';
 
 class NameExpensesCustomScreen extends StatefulWidget {

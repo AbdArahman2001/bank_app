@@ -1,16 +1,14 @@
-import 'package:bank_app_flutter/providers/cards_provider.dart';
-import 'package:bank_app_flutter/screens/cards/custom/add_card_information_custom.dart';
-import 'package:bank_app_flutter/screens/cards/custom/edit_card_information_custom.dart';
-import 'package:bank_app_flutter/screens/cards/monthly_income_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/star_red_custom.dart';
-import 'package:bank_app_flutter/screens/salary/table_of_salary.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
 
 import 'package:provider/provider.dart';
 
+import '../../providers/cards_provider.dart';
+import '../../utlies/app_colors.dart';
+import '../custom_screen/star_red_custom.dart';
+import '../salary/table_of_salary.dart';
 import 'custom/text_form_feild_custom.dart';
 
 class CardsScreen extends StatefulWidget {

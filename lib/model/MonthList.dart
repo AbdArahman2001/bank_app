@@ -1,5 +1,6 @@
-import 'package:bank_app_flutter/model/db_table.dart';
 import 'package:flutter/material.dart';
+
+import 'db_table.dart';
 class MonthList extends DbTable{
   int id;
   String lang;

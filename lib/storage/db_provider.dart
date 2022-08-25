@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bank_app_flutter/storage/queries.dart';
+import '../../../storage/queries.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';

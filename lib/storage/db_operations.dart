@@ -1,4 +1,4 @@
-import 'package:bank_app_flutter/model/db_table.dart';
+import '../../../model/db_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class DbOperations<T extends DbTable> {

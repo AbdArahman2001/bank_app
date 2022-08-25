@@ -1,5 +1,6 @@
-import 'package:bank_app_flutter/model/CardsResponce.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../model/CardsResponce.dart';
 
 class CardsProvider extends ChangeNotifier {
   CardsProvider() {

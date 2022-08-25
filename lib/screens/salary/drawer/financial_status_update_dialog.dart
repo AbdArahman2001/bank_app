@@ -1,9 +1,9 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/screens/custom_screen/calculate_screen.dart';
-import 'package:bank_app_flutter/screens/custom_screen/close_button_custom.dart';
-import 'package:bank_app_flutter/screens/salary/drawer/text_values_custom.dart';
-import 'package:bank_app_flutter/screens/salary/following_the_rules_screen.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+import '../../../providers/home_provider.dart';
+import '../../../screens/custom_screen/calculate_screen.dart';
+import '../../../screens/custom_screen/close_button_custom.dart';
+import '../../../screens/salary/drawer/text_values_custom.dart';
+import '../../../screens/salary/following_the_rules_screen.dart';
+import '../../../utlies/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

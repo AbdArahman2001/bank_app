@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:bank_app_flutter/model/MonthList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../model/MonthList.dart';
 
 class UserPreferences {
   static UserPreferences _instance;

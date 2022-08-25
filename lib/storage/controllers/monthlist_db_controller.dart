@@ -1,7 +1,7 @@
 
-import 'package:bank_app_flutter/model/MonthList.dart';
-import 'package:bank_app_flutter/storage/db_operations.dart';
-import 'package:bank_app_flutter/storage/db_provider.dart';
+import '../../../model/MonthList.dart';
+import '../../../storage/db_operations.dart';
+import '../../../storage/db_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MonthListDbController extends DbOperations<MonthList> {

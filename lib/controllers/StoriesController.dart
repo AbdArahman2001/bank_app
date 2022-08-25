@@ -1,5 +1,5 @@
 // import 'dart:convert';
-// import 'package:bank_app_flutter/model/Story.dart';
+// import 'package:bank/model/Story.dart';
 // import 'package:flutter/services.dart';
 // import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 //

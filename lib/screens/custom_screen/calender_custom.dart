@@ -1,8 +1,9 @@
-import 'package:bank_app_flutter/providers/home_provider.dart';
-import 'package:bank_app_flutter/utlies/app_colors.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../providers/home_provider.dart';
+import '../../utlies/app_colors.dart';
 import 'close_button_custom.dart';
 
 class CalenderCustom extends StatefulWidget {
