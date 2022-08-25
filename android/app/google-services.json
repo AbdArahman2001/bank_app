@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "77670646010",
+    "project_id": "bank-app-41b08",
+    "storage_bucket": "bank-app-41b08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77670646010:android:8bff6f026478ab43f68943",
+        "android_client_info": {
+          "package_name": "com.mushari.bank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77670646010-1c709jdi63f5rbdlsek7fptvn2t39mp4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mushari.bank",
+            "certificate_hash": "de6b58ddc1869c785345c58dcd4053e0f67bef34"
+          }
+        },
+        {
+          "client_id": "77670646010-6r1isqat090qj6bhe2835buima5m6nme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPDqM2WYG5Qz70hxCsnsxU_KEesW_FTXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77670646010-6r1isqat090qj6bhe2835buima5m6nme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
