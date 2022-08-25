@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>338902900151-osa73m0gp7m90j7tkopksh12k8n395ic.apps.googleusercontent.com</string>
+	<string>77670646010-vlgpolq9ab790e0m5b0oeup9jupfh36f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.338902900151-osa73m0gp7m90j7tkopksh12k8n395ic</string>
+	<string>com.googleusercontent.apps.77670646010-vlgpolq9ab790e0m5b0oeup9jupfh36f</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>338902900151-r7efacvkh2o668qfc2v6d4m1kq8bkp3m.apps.googleusercontent.com</string>
+	<string>77670646010-1c709jdi63f5rbdlsek7fptvn2t39mp4.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAVm3rd6lVEeM_isReiOrSRawClL_xiyRI</string>
+	<string>AIzaSyDaC3tl274UEHMz1k_omZomVb_sRNR648w</string>
 	<key>GCM_SENDER_ID</key>
-	<string>338902900151</string>
+	<string>77670646010</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>io.flutter.flutter.app</string>
+	<string>com.example.bankAppFlutter</string>
 	<key>PROJECT_ID</key>
-	<string>jadwel-ratbak</string>
+	<string>bank-app-41b08</string>
 	<key>STORAGE_BUCKET</key>
-	<string>jadwel-ratbak.appspot.com</string>
+	<string>bank-app-41b08.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:338902900151:ios:7d4949ceca815d16161c32</string>
+	<string>1:77670646010:ios:db7ea3d21d3e0eeef68943</string>
 </dict>
 </plist>
